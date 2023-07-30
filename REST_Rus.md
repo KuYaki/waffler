@@ -1,4 +1,4 @@
-# Source Search
+## Source Search
 
 **Путь**: POST source/search
 
@@ -60,7 +60,7 @@
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
 
-# Source Score
+## Source Score
 
 **Путь**: POST /source/score
 
@@ -117,7 +117,7 @@
 - `400 Bad Request`: Если параметры запроса неверные или отсутствуют.
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
-# Source Info
+## Source Info
 
 **Путь**: POST /source/info
 
@@ -182,7 +182,7 @@
 - `400 Bad Request`: Если параметры запроса неверные или отсутствуют.
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
-# User Auth
+## User Auth
 
 **Путь**: POST /user/auth
 
@@ -229,7 +229,7 @@
 - `401 Unauthorized`: Если имя пользователя или пароль неверные, или если `refresh_token` недействителен.
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
-# User Register
+## User Register
 
 **Путь**: POST /user/register
 
@@ -268,7 +268,7 @@
 - `409 Conflict`: Если имя пользователя уже существует.
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
-# User Info
+## User Info
 
 **Путь**: GET /user/info
 
@@ -308,7 +308,7 @@
 - `401 Unauthorized`: Если `access_token` недействителен.
 - `500 Internal Server Error`: Если произошла внутренняя ошибка сервера.
 
-# User Save
+## User Save
 
 **Путь**: POST /user/save
 
