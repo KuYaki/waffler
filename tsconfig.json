@@ -1,28 +1,66 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
+    "compilerOptions": {
+        "allowSyntheticDefaultImports"    : true,
+        "esModuleInterop"                 : true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule"               : true,
+        // "verbatimModuleSyntax"          : "preserve",
+        "preserveValueImports"            : false,
+        "isolatedModules"                 : true,
+        "skipLibCheck"                    : true,
+        "sourceMap"                       : true,
+        "allowJs"                         : true,
+
+        // Strict Checks
+        "alwaysStrict"                : true,
+        "noImplicitAny"               : true,
+        "strictNullChecks"            : false,
+        "strictPropertyInitialization": false,
+        "strictFunctionTypes"         : true,
+        "noImplicitThis"              : false,
+        "strictBindCallApply"         : true,
+
+        //  Linter Checks
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess"          : true,
+        "noImplicitReturns"                 : true,
+        "noFallthroughCasesInSwitch"        : true,
+        "noUnusedLocals"                    : false,
+        "noUnusedParameters"                : true,
+        "allowUnreachableCode"              : true,
+        "allowUnusedLabels"                 : true,
+
+        // Base strict check
+        "noImplicitUseStrict"           : false,
+        "suppressExcessPropertyErrors"  : false,
+        "suppressImplicitAnyIndexErrors": false,
+        "noStrictGenericChecks"         : false,
+
+
+    "baseUrl": ".",
+    "types": [
+      "webpack-env"
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
