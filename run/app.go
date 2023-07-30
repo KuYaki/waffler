@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/yaroslavvasilenko/waffler/config"
-	"github.com/yaroslavvasilenko/waffler/internal/infrastructure/router"
 	"github.com/yaroslavvasilenko/waffler/internal/infrastructure/server"
+	"github.com/yaroslavvasilenko/waffler/internal/modules"
+	"github.com/yaroslavvasilenko/waffler/internal/router"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 	"net/http"
@@ -15,7 +16,6 @@ import (
 
 const (
 	NoError = iota
-	InternalError
 	GeneralError
 )
 
@@ -83,10 +83,10 @@ func (a *App) Run() int {
 
 // Bootstrap - init application
 func (a *App) Bootstrap() Runner {
-
+	controller := modules.NewControllers(a.logger)
 	// init router
 	var r *chi.Mux
-	r = router.NewRouter()
+	r = router.NewApiRouter(controller)
 	// server configuration
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%s", a.conf.Server.Port),
