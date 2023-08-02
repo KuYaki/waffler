@@ -3,8 +3,6 @@
 
     import InputText from 'primevue/inputtext';
 
-
-
     //////////////// Defines ///////////////
 
     const props = defineProps({
