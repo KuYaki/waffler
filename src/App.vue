@@ -1,8 +1,18 @@
+<script setup lang="ts">
+    import MainPage from '@/views/MainPage.vue'
+
+</script>
+
 <template>
-    hello waffler!
+    <div class="app">
+        <MainPage/>
+    </div>
   <router-view/>
 </template>
 
-<style>
+<style scoped>
+    .app{
+
+    }
 
 </style>
