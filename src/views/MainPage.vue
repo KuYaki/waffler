@@ -3,6 +3,7 @@
 
     import InputSearch    from '@/components/input/InputSearch.vue'
     import SourceDropdown from '@/components/dropdown/SourceDropdown.vue';
+    import ToggleTheme    from '@/components/input/ToggleTheme.vue';
 
 
     const searchValue = ref('some links')
@@ -13,6 +14,8 @@
         <InputSearch v-model:value = 'searchValue'/>
         {{ searchValue }}
         <SourceDropdown/>
+
+        <ToggleTheme/>
     </div>
 </template>
 
@@ -23,6 +26,5 @@
         align-items          : center;
         margin               : auto;
         max-width            : 600px;
-        background-color     : pink;
     }
 </style>
