@@ -34,8 +34,7 @@
     <InputText
         type="text"
         :value="value"
-        @input="onChange(($event.target as HTMLInputElement).value)"
-        size="small"/>
+        @input="onChange(($event.target as HTMLInputElement).value)"/>
 
 </template>
 

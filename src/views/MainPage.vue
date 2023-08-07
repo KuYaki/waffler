@@ -1,21 +1,23 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
-    import InputSearch    from '@/components/input/InputSearch.vue'
+    import InputText      from '@/components/input/InputText.vue'
     import SourceDropdown from '@/components/dropdown/SourceDropdown.vue';
     import ToggleTheme    from '@/components/input/ToggleTheme.vue';
-
+    import SignInTab      from '@/views/tabs/SignInTab.vue'
 
     const searchValue = ref('some links')
 </script>
 
 <template>
     <div class="main_page">
-        <InputSearch v-model:value = 'searchValue'/>
+        <InputText v-model:value = 'searchValue'/>
         {{ searchValue }}
         <SourceDropdown/>
-
         <ToggleTheme/>
+        <SignInTab/>
+
+
     </div>
 </template>
 
