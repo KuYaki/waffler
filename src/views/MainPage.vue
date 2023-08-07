@@ -6,6 +6,7 @@
     import SingleChoiceDropdown from '@/components/dropdown/SingleChoiceDropdown.vue'
     import ToggleTheme          from '@/components/input/ToggleTheme.vue';
     import SignInTab            from '@/views/tabs/SignInTab.vue'
+    import Avatar               from '@/components/avatar/Avatar.vue'
     import Divider              from 'primevue/divider';
 
     const searchValue = ref('some links')
@@ -22,6 +23,9 @@
 
         <Divider align="center">SingleChoiceDropdown Dropdown</Divider>
         <SingleChoiceDropdown/>
+
+        <Divider align="center"> Avatar </Divider>
+        <Avatar/>
 
         <Divider align="center"> Theme toggle </Divider>
         <ToggleTheme/>
