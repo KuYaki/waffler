@@ -8,6 +8,7 @@
     import SignInTab            from '@/views/tabs/SignInTab.vue'
     import Avatar               from '@/components/avatar/Avatar.vue'
     import Divider              from 'primevue/divider';
+    import ProfileTable         from '@/components/table/ProfileTable.vue';
 
     const searchValue = ref('some links')
 </script>
@@ -29,6 +30,9 @@
 
         <Divider align="center"> Theme toggle </Divider>
         <ToggleTheme/>
+
+        <Divider align="center"> Profile table </Divider>
+        <ProfileTable/>
 
         <Divider align="center">SignInTab</Divider>
         <SignInTab/>
