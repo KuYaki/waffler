@@ -57,9 +57,9 @@
         <DataTable
             :value="products"
             removableSort
-            paginator
+            scrollable
+            scrollHeight="400px"
             :rows="5"
-            :rowsPerPageOptions="[5, 10]"
             tableStyle="min-width: 100%">
             <Column field="theme" style="width: 75%"></Column>
             <Column field="score" header="Score" sortable style="width: 25%"></Column>
