@@ -38,11 +38,12 @@
 
 <style scoped>
     .sign_in{
+        margin: auto;
         display        : grid;
         align-items    : center;
-        row-gap: 10px;
+        row-gap        : 10px;
         justify-content: center;
-        width: 100%;
+        width          : 100%;
         max-width      : max-content;
         padding        : 30px;
     }

@@ -11,8 +11,6 @@
 </template>
 
 <style scoped>
-    .app{
 
-    }
 
 </style>
