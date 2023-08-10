@@ -4,10 +4,8 @@
 </script>
 
 <template>
-    <div class="app">
-        <MainPage/>
-    </div>
-  <router-view/>
+    <!-- <MainPage/> -->
+    <router-view/>
 </template>
 
 <style >

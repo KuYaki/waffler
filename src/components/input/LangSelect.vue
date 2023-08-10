@@ -2,30 +2,58 @@
     import { t, getLocale, setLocale }   from '@/util/locale';
     import { ref } from 'vue';
 
-    import SelectButton from 'primevue/selectbutton';
+    import Listbox from 'primevue/listbox';
+    import Button from 'primevue/button';
 
-    const value = ref(getLocale())
-    const langs = ref(['RU', 'EN'])
+    const currentLang = ref(getLocale())
+    const langs = ref( ['RU','EN'] )
+
+    let showList = ref(false)
 
     const changeLang = () => {
-        setLocale(value.value)
+        setLocale(currentLang.value)
+        hideLangList()
     }
+
+    const toggleShowLang = () => showList.value = !showList.value
+    const hideLangList   = () => showList.value = false
 
 </script>
 
 <template>
-    <SelectButton
-        v-model="value"
-        :options="langs"
-        @change="changeLang"
-        aria-labelledby="basic" />
-
-    <br>
-
-    {{ value }}
-    {{ t('waffler') }}
+    <div class="lang_select">
+        <Button
+            @click="toggleShowLang"
+            label="Primary"
+            text >
+                <i class="pi pi-language" style="font-size: 25px"></i>
+        </Button>
+        <!-- <transition name ='fade'> -->
+            <span class="list" v-if="showList">
+                <Listbox
+                    :options="langs"
+                    v-model="currentLang"
+                    @change="changeLang"/>
+            </span>
+        <!-- </transition> -->
+    </div>
 </template>
 
 <style>
+    .fade-leave-active {
+        transition-duration: .2s;
+    }
+
+    .lang_select{
+        position: relative;
+        padding: 0 5px;
+    }
+
+    .list {
+        position: absolute;
+        top     : 50px;
+        left    : 8px;
+        z-index: 1000;
+    }
 
 </style>
