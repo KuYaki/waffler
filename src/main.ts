@@ -6,6 +6,7 @@ import PrimeVue from 'primevue/config';
 import i18n from './util/locale';
 import './registerServiceWorker'
 import 'primeicons/primeicons.css'
+// import 'primeflex/primeflex.scss';
 
 
 const app = createApp(App)
