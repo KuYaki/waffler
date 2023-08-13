@@ -8,7 +8,7 @@
     const props = defineProps({
         value: {
             type: String,
-            default: 'Any Link'
+            default: ""
         }
     })
 

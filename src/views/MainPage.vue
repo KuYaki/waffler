@@ -5,9 +5,15 @@
     import Navbar        from '@/views/navbar/Navbar.vue'
     import SearchParam   from '@/views/search_params/SearchParams.vue'
     import MainPageTable from '@/components/table/MainPageTable.vue';
+    import AddTokenDlg   from '@/views/dialog/AddTokenDlg.vue';
     import Button        from 'primevue/button';
+    import Dialog        from 'primevue/dialog';
 
+    const visible = ref(true)
 
+    const openAddNewTokendDlg = () =>{
+        visible.value = true
+    }
 </script>
 
 <template>
@@ -20,14 +26,25 @@
             <Button
                 icon="pi pi-plus"
                 rounded
-                aria-label="Filter" />
+                aria-label="Filter"
+                @click="openAddNewTokendDlg"/>
         </MainPageTable>
+
+        <Dialog
+            v-model:visible="visible"
+            modal
+            header=" "
+            :style="{ width: '90vw', maxWidth:'500px' }">
+
+            <AddTokenDlg/>
+
+       </Dialog>
     </div>
 </template>
 
 <style scoped>
     .main_page{
-        background-color     : pink;
+        /* background-color     : pink; */
         display              : grid;
         grid-template-columns: 100%;
         align-items          : center;
