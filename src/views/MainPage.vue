@@ -5,6 +5,7 @@
     import Navbar        from '@/views/navbar/Navbar.vue'
     import SearchParam   from '@/views/search_params/SearchParams.vue'
     import MainPageTable from '@/components/table/MainPageTable.vue';
+    import Button        from 'primevue/button';
 
 
 </script>
@@ -15,7 +16,12 @@
     <div class="main_page">
         <InputText/>
         <SearchParam/>
-        <MainPageTable/>
+        <MainPageTable>
+            <Button
+                icon="pi pi-plus"
+                rounded
+                aria-label="Filter" />
+        </MainPageTable>
     </div>
 </template>
 

@@ -41,7 +41,7 @@ const loadCarsLazy = (event:any) => {
 
 
 <template>
-    <div class="card">
+    <div class="main_table">
         <DataTable
             :value="virtualCars"
             scrollable
@@ -102,5 +102,30 @@ const loadCarsLazy = (event:any) => {
                     </template>
             </Column>
         </DataTable>
+
+        <div class="slot">
+            <slot></slot>
+        </div>
     </div>
 </template>
+
+<style scoped>
+
+    .main_table{
+        position: relative;
+    }
+
+    .slot{
+        position: absolute;
+        bottom  : 20px;
+        right   : 30px;
+    }
+
+    @media (max-width: 500px) {
+        .slot{
+            bottom  : 30px;
+            right   : 20px;
+        }
+    }
+
+</style>
