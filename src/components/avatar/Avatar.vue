@@ -1,5 +1,10 @@
 <script setup lang="ts">
     import Avatar from 'primevue/avatar'
+    import router from '@/router';
+
+    const goToRegistration = () =>{
+        router.push('/sign_in')
+    }
 
 </script>
 
@@ -10,7 +15,8 @@
             class="mr-2"
             size="large"
             style="background-color: #2196f3; color: #ffffff"
-            shape="circle" />
+            shape="circle"
+            @click = "goToRegistration" />
     </div>
 
 </template>

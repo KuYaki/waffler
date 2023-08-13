@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-import TestPage from '@/views/TestPage.vue'
-import MainPage from '@/views/MainPage.vue'
+import TestPage     from '@/views/TestPage.vue'
+import MainPage     from '@/views/MainPage.vue'
+import SignInTab from '@/views/tabs/SignInTab.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'main',
     component: MainPage
+  },
+  {
+    path: '/sign_in',
+    name: 'signIn',
+    component: SignInTab
   },
 //   {
 //     path: '/about',

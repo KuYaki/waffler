@@ -9,7 +9,7 @@
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
 
-    const visible = ref(true)
+    const visible = ref(false)
 
     const openAddNewTokendDlg = () =>{
         visible.value = true
