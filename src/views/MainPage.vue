@@ -11,7 +11,7 @@
     import Dialog        from 'primevue/dialog';
 
     const isAddTokenDlgOpen = ref(false)
-    const isSignInDlgOpen   = ref(true)
+    const isSignInDlgOpen   = ref(false)
 
 
     const openAddNewTokendDlg = () =>{
@@ -22,7 +22,6 @@
         isSignInDlgOpen.value = true
     }
 
-    const test=()=> console.log('blur')
 </script>
 
 <template>

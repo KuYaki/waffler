@@ -32,8 +32,6 @@
         viewMode.value = 'regMode'
     }
 
-    const test = ()=>{ console.log('BLUR')}
-
 </script>
 
 <template>
@@ -43,8 +41,14 @@
             class="pi pi-angle-left"
             @click="switchToSignInMode"
         ></i>
-        <p v-if ="viewMode == 'signInMode'">SIGN IN Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-        <p v-if="viewMode == 'regMode'">REG  Lorem ipsum dolor sit amet.</p>
+        <p
+            v-if ="viewMode == 'signInMode'">
+                SIGN IN Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        </p>
+        <p
+            v-if="viewMode == 'regMode'">
+                REG  Lorem ipsum dolor sit amet.
+        </p>
         <InputText
             v-model:value="login"/>
 
