@@ -5,6 +5,13 @@
     import LangSelect           from '@/components/input/LangSelect.vue';
     import Avatar               from '@/components/avatar/Avatar.vue'
 
+    const emit = defineEmits<{
+        (e:'openSignIn'):void
+    }>();
+
+    const openSignInDlg = () =>{
+        emit('openSignIn')
+    }
 
 </script>
 
@@ -12,7 +19,8 @@
     <div class="navbar">
         <ToggleTheme/>
         <LangSelect/>
-        <Avatar/>
+        <Avatar
+            @click = "openSignInDlg"/>
     </div>
 </template>
 
