@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, type PropType } from 'vue';
 import { Service } from '@/components/table/Servise';
 
 import DataTable from 'primevue/datatable';
 import Column    from 'primevue/column';
 import Skeleton  from 'primevue/skeleton';
+
+const props = defineProps({
+    properties :{
+        type: Object as PropType<Array<{label:string}>>,
+        default:[]
+    }
+})
 
 onMounted(() => {
     cars.value = Array.from({ length: 100000 }).map((_, i) => Service.generate(i + 1));
@@ -80,17 +87,18 @@ const loadCarsLazy = (event:any) => {
                     </template>
             </Column>
             <Column
+                v-for="property in properties"
                 sortable
-                field="waffler"
-                header="Waffler"
-                style="width: 15%">
+                :field  = property.label
+                :header = property.label
+                style  = "width: 15%">
                     <template #loading>
                         <div>
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
             </Column>
-            <Column
+            <!-- <Column
                 sortable
                 field="racizm"
                 header="Racizm"
@@ -100,7 +108,7 @@ const loadCarsLazy = (event:any) => {
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
-            </Column>
+            </Column> -->
         </DataTable>
 
         <div class="slot">

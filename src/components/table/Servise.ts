@@ -8,8 +8,8 @@ export const Service = {
             id,
             name: this.generateName(),
             source: this.generateSouce(),
-            waffler: this.generatePercent(),
-            racizm: this.generatePercent()
+            Waffler: this.generatePercent(),
+            Rasizm: this.generatePercent()
         };
     },
 

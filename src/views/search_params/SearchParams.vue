@@ -1,16 +1,34 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, type Ref } from 'vue';
+
+    import  DropdownData  from '@/data/component/dropdown'
 
     import MultiSelect from "primevue/multiselect";
 
-    const selectedCities = ref();
-    const cities = ref([
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome',     code: 'RM' },
-        { name: 'London',   code: 'LDN'},
-        { name: 'Istanbul', code: 'IST'},
-        { name: 'Paris',    code: 'PRS'}
-    ]);
+    //////////////////// Defines /////////////////////////
+
+    // const props = defineProps({})
+
+    const emit = defineEmits<{
+        ( e: 'changeProperties', value:{label:string}[]): void,
+    }>();
+
+
+
+    //////////////////// Vars ////////////////////////////
+
+    const selectedProperties:Ref<{label:string}[]> = ref()
+    const selectedSorces     = ref()
+
+    const sources    = ref(DropdownData.source )
+    const properties = ref(DropdownData.property)
+
+
+    /////////////////// Messages ////////////////////////
+
+    const onChangeProperties = ( ) => {
+        emit('changeProperties', selectedProperties.value)
+    }
 
 </script>
 
@@ -18,20 +36,21 @@
     <div class="params">
 
         <MultiSelect
-            v-model="selectedCities"
+            v-model="selectedSorces"
             display="chip"
-            :options="cities"
+            :options="sources"
             optionLabel="name"
             placeholder="Select Cities"
             :maxSelectedLabels="2" />
 
         <MultiSelect
-            v-model="selectedCities"
+            v-model="selectedProperties"
             display="chip"
-            :options="cities"
-            optionLabel="name"
-            placeholder="Select Cities"
-            :maxSelectedLabels="2" />
+            :options="properties"
+            optionLabel="label"
+            placeholder="Properties"
+            :maxSelectedLabels="2"
+            @update:modelValue="onChangeProperties" />
 
     </div>
 </template>

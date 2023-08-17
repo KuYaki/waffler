@@ -14,8 +14,9 @@
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
-    const isProfileDlgOpen  = ref(true)
+    const isProfileDlgOpen  = ref(false)
 
+    const properties = ref()
 
     const openAddNewTokendDlg = () =>{
         isAddTokenDlgOpen.value = true
@@ -29,6 +30,11 @@
         isProfileDlgOpen.value = true
     }
 
+    const onUpdateProperties = ( value:any[] ) => {
+        properties.value = value
+        console.log('prop', properties.value)
+    }
+
 </script>
 
 <template>
@@ -38,8 +44,12 @@
 
     <div class="main_page">
         <InputText />
-        <SearchParam/>
-        <MainPageTable>
+        <SearchParam
+            @change-properties="onUpdateProperties"
+        />
+        <MainPageTable
+            :properties="properties"
+        >
             <Button
                 icon="pi pi-plus"
                 rounded
