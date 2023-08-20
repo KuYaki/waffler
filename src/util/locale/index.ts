@@ -12,7 +12,7 @@ type RU = "RU"
 type localeType = EN | RU
 
 const i18n = createI18n<[MessageSchemaEN | MessageSchemaRU], localeType>({
-    locale: 'RU',
+    locale: 'EN',
     legacy: true,
     messages: {
         'EN': enUS,
