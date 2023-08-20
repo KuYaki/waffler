@@ -4,6 +4,7 @@
 
     import Listbox from 'primevue/listbox';
     import Button from 'primevue/button';
+    import Dropdown from 'primevue/dropdown';
 
     const currentLang = ref(getLocale())
     const langs = ref( ['RU','EN'] )
@@ -17,26 +18,35 @@
 
     }
 
-    const toggleShowLang = () => showList.value = !showList.value
+    // const toggleShowLang = () => showList.value = !showList.value
+    const showLAngList = () =>showList.value = true
     const hideLangList   = () => showList.value = false
 
 </script>
 
 <template>
-    <div class="lang_select">
+    <div
+        class="lang_select"
+        @mouseleave = hideLangList>
+
         <Button
-            @click="toggleShowLang"
+            @mouseover="showLAngList"
             label="Primary"
             text >
+
                 <i class="pi pi-language" style="font-size: 25px"></i>
+
         </Button>
         <!-- <transition name ='fade'> -->
-            <span class="list" v-if="showList">
-                <Listbox
-                    :options="langs"
-                    v-model="currentLang"
-                    @change="changeLang"/>
-            </span>
+        <span class="list" v-if="showList">
+
+            <Listbox
+                :options="langs"
+                v-model="currentLang"
+                @mouseover = showLAngList
+                @change="changeLang"/>
+
+        </span>
         <!-- </transition> -->
     </div>
 </template>
