@@ -1,33 +1,46 @@
 <script setup lang="ts">
-    import { ref, type Ref } from 'vue';
+    import { ref, onMounted, type Ref } from 'vue';
 
     import  DropdownData  from '@/data/component/dropdown'
-
     import MultiSelect from "primevue/multiselect";
+
+    import type { TDropdown } from './types'
 
     //////////////////// Defines /////////////////////////
 
     // const props = defineProps({})
 
     const emit = defineEmits<{
-        ( e: 'changeProperties', value:{label:string}[]): void,
+        ( e: 'changeSource',     value:TDropdown[]): void,
+        ( e: 'changeProperties', value:TDropdown[]): void,
     }>();
 
+
+    //////////////////// Hooks //////////////////////////
+
+    onMounted(()=>{
+        onChangeSource()
+        onChangeProperties()
+    })
 
 
     //////////////////// Vars ////////////////////////////
 
-    const selectedProperties:Ref<{label:string}[]> = ref()
-    const selectedSorces     = ref()
+    const selectedSources   :Ref<TDropdown[]> = ref(DropdownData.source)
+    const selectedProperties:Ref<TDropdown[]> = ref(DropdownData.property)
 
-    const sources    = ref(DropdownData.source )
-    const properties = ref(DropdownData.property)
+    const sources    = ref( DropdownData.source )
+    const properties = ref( DropdownData.property)
 
 
     /////////////////// Messages ////////////////////////
 
-    const onChangeProperties = ( ) => {
+    const onChangeProperties = () => {
         emit('changeProperties', selectedProperties.value)
+    }
+
+    const onChangeSource = () => {
+        emit('changeSource', selectedSources.value)
     }
 
 </script>
@@ -36,12 +49,13 @@
     <div class="params">
 
         <MultiSelect
-            v-model="selectedSorces"
+            v-model="selectedSources"
             display="chip"
             :options="sources"
-            optionLabel="name"
-            placeholder="Select Cities"
-            :maxSelectedLabels="2" />
+            optionLabel="label"
+            placeholder="Sources"
+            :maxSelectedLabels="2"
+            @update:modelValue="onChangeSource" />
 
         <MultiSelect
             v-model="selectedProperties"

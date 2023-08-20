@@ -6,7 +6,7 @@ class DropdownData {
     ]
 
     source = [
-        { label: 'YouTube' },
+        { label: 'YouTube'  },
         { label: 'Telegram' }
     ]
 

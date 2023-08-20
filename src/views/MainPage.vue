@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, type Ref } from 'vue';
 
     import Navbar        from '@/views/navbar/Navbar.vue'
     import SearchParam   from '@/views/search_params/SearchParams.vue'
@@ -12,11 +12,20 @@
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
 
+    import { TDropdown } from './search_params/types';
+
+
+    //////////////////////// Vars ///////////////////////////
+
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
     const isProfileDlgOpen  = ref(false)
 
-    const properties = ref()
+    const properties: Ref<TDropdown[]> = ref()
+    const sources   : Ref<TDropdown[]> = ref()
+
+
+    ///////////////////// Messages //////////////////////////
 
     const openAddNewTokendDlg = () =>{
         isAddTokenDlgOpen.value = true
@@ -30,9 +39,13 @@
         isProfileDlgOpen.value = true
     }
 
-    const onUpdateProperties = ( value:any[] ) => {
+
+    const onUpdateSources = ( value:TDropdown[] ) => {
+        sources.value = value
+    }
+
+    const onUpdateProperties = ( value:TDropdown[] ) => {
         properties.value = value
-        console.log('prop', properties.value)
     }
 
 </script>
@@ -45,6 +58,7 @@
     <div class="main_page">
         <InputText />
         <SearchParam
+            @change-source="onUpdateSources"
             @change-properties="onUpdateProperties"
         />
         <MainPageTable
