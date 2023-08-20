@@ -1,16 +1,17 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
+    import { t } from '@/util/locale';
+
+    import DropdownData from '@/data/component/dropdown'
+
     import Profile   from '@/components/avatar/Profile.vue'
     import Dropdown  from 'primevue/dropdown';
     import Button    from 'primevue/button';
     import ProfileTable from '@/components/table/ProfileTable.vue';
 
-    const currentField = ref( { name: 'Waffler',  code: 'W' });
-    const fields = ref([
-        { name: 'Waffler',  code: 'W' },
-        { name: 'Racizm',   code: 'R' },
-    ]);
+
+    const currentField = ref( DropdownData.property[0]);
 
     const loading = ref(false)
 
@@ -30,15 +31,15 @@
             <Dropdown
                 v-model="currentField"
                 display="chip"
-                :options="fields"
-                optionLabel="name"/>
+                :options="DropdownData.property"
+                optionLabel="label"/>
 
         </div>
 
         <ProfileTable />
 
         <Button
-            label="Primary"
+            :label="t('profile_page.parse')"
             :loading="loading"
             @click="load"
             outlined />

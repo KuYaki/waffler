@@ -1,3 +1,5 @@
 export type TDropdown = {
-    label:string
+    label       : string,
+    key         : string
+    tableHeader?: string
 }

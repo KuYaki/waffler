@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { t, getLocale, setLocale }   from '@/util/locale';
+    import { getLocale, setLocale }   from '@/util/locale';
     import { ref } from 'vue';
 
     import Listbox from 'primevue/listbox';
@@ -11,8 +11,10 @@
     let showList = ref(false)
 
     const changeLang = () => {
+
         setLocale(currentLang.value)
         hideLangList()
+
     }
 
     const toggleShowLang = () => showList.value = !showList.value

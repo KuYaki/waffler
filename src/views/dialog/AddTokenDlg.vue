@@ -1,7 +1,10 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
-    import InputText from '@/components/input/InputText.vue';
+    import { t } from '@/util/locale';
+
+    // import InputText from '@/components/input/InputText.vue';
+    import InputText from 'primevue/inputtext';
     import Profile   from '@/components/avatar/Profile.vue'
     import Dropdown from 'primevue/dropdown';
     import Button   from 'primevue/button';
@@ -23,17 +26,21 @@
 
 <template>
     <div class="token">
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, sint.</span>
-        <InputText/>
+        <span>{{ t('add_token_page.info') }}</span>
+        <InputText
+            :placeholder="t('add_token_page.link')"
+        />
         <Profile/>
         <Dropdown
             v-model="currentField"
             display="chip"
             :options="fields"
             optionLabel="name"/>
-        <InputText/>
+        <InputText
+            :placeholder="t('add_token_page.token')"
+        />
         <Button
-            label="Primary"
+            :label="t('add_token_page.parse')"
             :loading="loading"
             @click="load"
             outlined />

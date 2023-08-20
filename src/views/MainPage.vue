@@ -1,6 +1,10 @@
 <script setup lang="ts">
     import { ref, type Ref } from 'vue';
 
+    import { t }  from '@/util/locale';
+
+    import PlaceholderData from '@/data/component/input'
+
     import Navbar        from '@/views/navbar/Navbar.vue'
     import SearchParam   from '@/views/search_params/SearchParams.vue'
     import MainPageTable from '@/components/table/MainPageTable.vue';
@@ -8,7 +12,8 @@
     import SignInDlg     from '@/views/dialog/SignInDlg.vue'
     import ProfileDlg     from '@/views/dialog/ProfileDlg.vue';
 
-    import InputText     from '@/components/input/InputText.vue';
+    // import InputText     from '@/components/input/InputText.vue';
+    import InputText     from 'primevue/inputtext';
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
 
@@ -19,7 +24,7 @@
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
-    const isProfileDlgOpen  = ref(false)
+    const isProfileDlgOpen  = ref(true)
 
     const properties: Ref<TDropdown[]> = ref()
     const sources   : Ref<TDropdown[]> = ref()
@@ -56,7 +61,9 @@
     />
 
     <div class="main_page">
-        <InputText />
+        <InputText
+            :placeholder='t(PlaceholderData.mainSearch)'
+        />
         <SearchParam
             @change-source="onUpdateSources"
             @change-properties="onUpdateProperties"

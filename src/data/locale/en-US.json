@@ -1,3 +1,29 @@
 {
-    "waffler":"Waffler"
+    "main_page":{
+        "main_search": "Name or Link",
+        "waffler"    : "Waffler",
+        "rasizm"     : "Rasizm",
+        "name"       : "Name",
+        "source"     : "Source"
+    },
+    "sign_in_page":{
+        "sign_in_info"    : "Please sing in to save your preferences",
+        "auth_fail"       : "Authentication fail, feel free to register new account",
+        "login"           : "Login",
+        "password"        : "Password",
+        "devider"         : "OR",
+        "sign_in"         : "Sign in",
+        "registration"    : "Registration",
+        "sign_in_google"  : "Sign in with Google",
+        "sign_in_facebook": "Sign in with Facebook"
+    },
+    "add_token_page":{
+        "info" : "Download most recent messages to check if the person or channel behaviuor",
+        "link" : "Link",
+        "token": "GPT Token",
+        "parse": "Parse"
+    },
+    "profile_page":{
+        "parse":"Parse most recent"
+    }
 }

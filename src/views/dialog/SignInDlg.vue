@@ -1,8 +1,13 @@
 <script setup lang="ts">
     import { ref, Ref, onMounted } from 'vue';
+    import { t } from '@/util/locale';
 
-    import InputText     from '@/components/input/InputText.vue';
-    import InputPassword from '@/components/input/InputPassword.vue';
+    import PlaceholderData  from '@/data/component/input'
+
+    // import InputText     from '@/components/input/InputText.vue';
+    // import InputPassword from '@/components/input/InputPassword.vue';
+    import InputText     from 'primevue/inputtext';
+    import Password      from 'primevue/password';
     import Button        from 'primevue/button';
     import Divider       from 'primevue/divider';
 
@@ -11,8 +16,8 @@
 
     let viewMode: Ref<'signInMode' | 'regMode'> = ref('signInMode')
 
-    const login    = ref('admin')
-    const password = ref('password')
+    const login    = ref('')
+    const password = ref('')
 
 
     ////////////////////////// Hooks ////////////////////////////////
@@ -43,37 +48,45 @@
         ></i>
         <p
             v-if ="viewMode == 'signInMode'">
-                SIGN IN Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+               {{ t('sign_in_page.sign_in_info') }}
         </p>
         <p
             v-if="viewMode == 'regMode'">
-                REG  Lorem ipsum dolor sit amet.
+                {{ t('sign_in_page.auth_fail') }}
         </p>
-        <InputText
-            v-model:value="login"/>
 
-        <InputPassword
-            v-model:value="password"/>
+        <InputText
+            v-model="login"
+            :placeholder="t(PlaceholderData.login)"
+        />
+        <Password
+            toggleMask
+            :modelValue="password"
+            :placeholder="t(PlaceholderData.password)"
+            :feedback="false"/>
 
         <Button
             v-if ="viewMode == 'signInMode'"
-            label="Sign in"
+            :label="t('sign_in_page.sign_in')"
             severity="success"
             @click="switchToRegMode"/>
 
         <Button
             v-if="viewMode == 'regMode'"
-            label="Registration"
+            :label="t('sign_in_page.registration')"
             severity="danger" />
 
-        <Divider align="center"><b>OR</b></Divider>
+        <Divider
+            align="center">
+                <b>{{ t('sign_in_page.devider') }}</b>
+            </Divider>
 
         <Button
-            label="Sign in with Google"
+            :label="t('sign_in_page.sign_in_google')"
             severity="help" />
 
         <Button
-            label="Sign in with Facebook"
+            :label="t('sign_in_page.sign_in_facebook')"
             severity="info" />
     </div>
 </template>

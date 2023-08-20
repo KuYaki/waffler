@@ -1,5 +1,7 @@
 <script setup lang="ts">
-    import { ref, onMounted, type Ref } from 'vue';
+    import { ref, onMounted, onUpdated, type Ref, computed } from 'vue';
+
+    import { t } from '@/util/locale';
 
     import  DropdownData  from '@/data/component/dropdown'
     import MultiSelect from "primevue/multiselect";
@@ -23,15 +25,21 @@
         onChangeProperties()
     })
 
-
     //////////////////// Vars ////////////////////////////
+    const propertyDecorator = ( ):TDropdown[] =>{
+        let arr:TDropdown[] = JSON.parse(JSON.stringify(DropdownData.property))
+
+        arr.forEach(el => el.label = t(el.label) )
+
+        return arr;
+    }
+
 
     const selectedSources   :Ref<TDropdown[]> = ref(DropdownData.source)
     const selectedProperties:Ref<TDropdown[]> = ref(DropdownData.property)
 
-    const sources    = ref( DropdownData.source )
-    const properties = ref( DropdownData.property)
-
+    const sources    = ref( DropdownData.source  )
+    const properties = ref( DropdownData.property )
 
     /////////////////// Messages ////////////////////////
 

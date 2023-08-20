@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted, type PropType } from 'vue';
 import { Service } from '@/components/table/Servise';
+import { t } from '@/util/locale'
 
 import DataTable from 'primevue/datatable';
 import Column    from 'primevue/column';
 import Skeleton  from 'primevue/skeleton';
 
+import type { TDropdown } from '@/views/search_params/types';
+
 const props = defineProps({
     properties :{
-        type: Object as PropType<Array<{label:string}>>,
+        type: Object as PropType<Array<TDropdown>>,
         default:[]
     }
 })
@@ -67,7 +70,7 @@ const loadCarsLazy = (event:any) => {
             <Column
                 sortable
                 field="name"
-                header="Name"
+                :header="t('main_page.name')"
                 style="width: 30%">
                     <template #loading>
                         <div>
@@ -78,7 +81,7 @@ const loadCarsLazy = (event:any) => {
             <Column
                 sortable
                 field="source"
-                header="Source"
+                :header="t('main_page.source')"
                 style="width: 10%">
                     <template #loading>
                         <div>
@@ -89,8 +92,8 @@ const loadCarsLazy = (event:any) => {
             <Column
                 v-for="property in properties"
                 sortable
-                :field  = property.label
-                :header = property.label
+                :field  = property.key
+                :header = t(property.tableHeader)
                 style  = "width: 15%">
                     <template #loading>
                         <div>
