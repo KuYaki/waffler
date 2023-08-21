@@ -24,10 +24,13 @@
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
-    const isProfileDlgOpen  = ref(true)
+    const isProfileDlgOpen  = ref(false)
 
     const properties: Ref<TDropdown[]> = ref()
+    const propertyList: Ref<TDropdown[]> = ref()
+
     const sources   : Ref<TDropdown[]> = ref()
+    const sourceList: Ref<TDropdown[]> = ref()
 
 
     ///////////////////// Messages //////////////////////////
@@ -45,12 +48,15 @@
     }
 
 
-    const onUpdateSources = ( value:TDropdown[] ) => {
-        sources.value = value
+    const onUpdateSources = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+        sources.value    = curentsValues
+        sourceList.value = list
     }
 
-    const onUpdateProperties = ( value:TDropdown[] ) => {
-        properties.value = value
+    const onUpdateProperties = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+        properties.value   = curentsValues
+        propertyList.value = list
+        console.log('list', list)
     }
 
 </script>
@@ -69,7 +75,8 @@
             @change-properties="onUpdateProperties"
         />
         <MainPageTable
-            :properties="properties"
+            :current-properties="properties"
+            :list-properties="propertyList"
         >
             <Button
                 icon="pi pi-plus"

@@ -13,8 +13,8 @@
     // const props = defineProps({})
 
     const emit = defineEmits<{
-        ( e: 'changeSource',     value:TDropdown[]): void,
-        ( e: 'changeProperties', value:TDropdown[]): void,
+        ( e: 'changeSource',     currentValue:TDropdown[], list:TDropdown[]): void,
+        ( e: 'changeProperties', currentValue:TDropdown[], list:TDropdown[]): void,
     }>();
 
 
@@ -25,30 +25,24 @@
         onChangeProperties()
     })
 
+
     //////////////////// Vars ////////////////////////////
-    const propertyDecorator = ( ):TDropdown[] =>{
-        let arr:TDropdown[] = JSON.parse(JSON.stringify(DropdownData.property))
 
-        arr.forEach(el => el.label = t(el.label) )
-
-        return arr;
-    }
-
-
-    const selectedSources   :Ref<TDropdown[]> = ref(DropdownData.source)
-    const selectedProperties:Ref<TDropdown[]> = ref(DropdownData.property)
+    const selectedSources   :Ref<TDropdown[]> = ref([])
+    const selectedProperties:Ref<TDropdown[]> = ref([DropdownData.property[0]])
 
     const sources    = ref( DropdownData.source  )
     const properties = ref( DropdownData.property )
 
+
     /////////////////// Messages ////////////////////////
 
     const onChangeProperties = () => {
-        emit('changeProperties', selectedProperties.value)
+        emit( 'changeProperties', selectedProperties.value, DropdownData.property )
     }
 
     const onChangeSource = () => {
-        emit('changeSource', selectedSources.value)
+        emit( 'changeSource', selectedSources.value, DropdownData.source )
     }
 
 </script>

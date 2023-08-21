@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, type PropType } from 'vue';
+import { ref, onMounted, computed, type PropType } from 'vue';
 import { Service } from '@/components/table/Servise';
 import { t } from '@/util/locale'
 
@@ -9,21 +9,48 @@ import Skeleton  from 'primevue/skeleton';
 
 import type { TDropdown } from '@/views/search_params/types';
 
+
+///////////////////// Defines ///////////////////////////
+
 const props = defineProps({
-    properties :{
+    currentProperties :{
         type: Object as PropType<Array<TDropdown>>,
         default:[]
-    }
+    },
+    listProperties :{
+        type: Object as PropType<Array<TDropdown>>,
+        default:[]
+    },
 })
+
+
+///////////////////// Hooks /////////////////////////////
 
 onMounted(() => {
     cars.value = Array.from({ length: 100000 }).map((_, i) => Service.generate(i + 1));
 });
 
-const cars = ref();
-const virtualCars = ref(Array.from({ length: 100000 }));
-const lazyLoading = ref(false);
+
+//////////////////// Vars ///////////////////////////////
+
+const cars            = ref();
+
+const virtualCars     = ref(Array.from({ length: 100000 }));
+
+const lazyLoading     = ref(false);
+
 const loadLazyTimeout = ref();
+
+
+/////////////////////Computed ///////////////////////////
+
+const properties = computed(()=>{
+    if( props.currentProperties.length == 0 ) return props.listProperties
+    else return props.currentProperties
+})
+
+
+//////////////////// Messages ///////////////////////////
 
 const loadCarsLazy = (event:any) => {
     !lazyLoading.value && (lazyLoading.value = true);
@@ -47,8 +74,9 @@ const loadCarsLazy = (event:any) => {
         lazyLoading.value = false;
     }, Math.random() * 1000 + 250);
 };
-</script>
 
+
+</script>
 
 <template>
     <div class="main_table">
