@@ -75,6 +75,11 @@ const loadCarsLazy = (event:any) => {
     }, Math.random() * 1000 + 250);
 };
 
+const test = (node:any)=>{
+    alert(JSON.stringify(node.data))
+}
+
+const sortByFields = (field:string)=> alert("sort by " + field)
 
 </script>
 
@@ -82,9 +87,9 @@ const loadCarsLazy = (event:any) => {
     <div class="main_table">
         <DataTable
             :value="virtualCars"
-            scrollable
-            removableSort
-            scrollHeight="70vh"
+            scrollable 
+            scrollHeight="65vh"
+            @row-click="test"
             tableStyle="max-width: 100%; "
             :virtualScrollerOptions="{
                 lazy: true,
@@ -95,51 +100,56 @@ const loadCarsLazy = (event:any) => {
                 loading: lazyLoading,
                 numToleratedItems: 10
             }">
+
             <Column
-                sortable
                 field="name"
-                :header="t('main_page.name')"
                 style="width: 30%">
                     <template #loading>
                         <div>
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
+                    <template #header>
+                        <span
+                            class="name"
+                            @click="sortByFields('name')"
+                        >
+                            {{ t('main_page.name') }}</span>
+                     </template>
             </Column>
             <Column
-                sortable
                 field="source"
-                :header="t('main_page.source')"
                 style="width: 10%">
                     <template #loading>
                         <div>
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
+                    <template #header>
+                        <span
+                            class="source"
+                            @click="sortByFields('source')"
+                        >
+                            {{ t('main_page.source') }}</span>
+                     </template>
             </Column>
             <Column
                 v-for="property in properties"
-                sortable
                 :field  = property.key
-                :header = t(property.tableHeader)
                 style  = "width: 15%">
                     <template #loading>
                         <div>
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
+                    <template #header>
+                        <span
+                            class="source"
+                            @click="sortByFields(property.key)"
+                        >
+                            {{ t(property.tableHeader) }}</span>
+                     </template>
             </Column>
-            <!-- <Column
-                sortable
-                field="racizm"
-                header="Racizm"
-                style="width: 15%">
-                    <template #loading>
-                        <div>
-                            <Skeleton width="40%" height="1rem" />
-                        </div>
-                    </template>
-            </Column> -->
         </DataTable>
 
         <div class="slot">
