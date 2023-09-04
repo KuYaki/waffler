@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, type Ref } from 'vue';
+    import { ref, computed, type Ref } from 'vue';
 
     import { t }  from '@/util/locale';
 
@@ -18,6 +18,7 @@
     import Dialog        from 'primevue/dialog';
 
     import { TDropdown } from './search_params/types';
+    import { createMainTableColumns } from '@/model/MainTable'
 
 
     //////////////////////// Vars ///////////////////////////
@@ -26,11 +27,21 @@
     const isSignInDlgOpen   = ref(false)
     const isProfileDlgOpen  = ref(false)
 
-    const properties: Ref<TDropdown[]> = ref()
-    const propertyList: Ref<TDropdown[]> = ref()
+    const properties: Ref<TDropdown[]> = ref([])
+    const propertyList: Ref<TDropdown[]> = ref([])
 
     const sources   : Ref<TDropdown[]> = ref()
     const sourceList: Ref<TDropdown[]> = ref()
+    
+    const sortedMainTableIdx = ref(0)
+
+
+    ///////////////////// Function /////////////////////////
+
+
+    /////////////////////// Computed ///////////////////////
+
+    const columnsMainTable = computed(() => createMainTableColumns(properties.value, propertyList.value, sortedMainTableIdx.value  ))
 
 
     ///////////////////// Messages //////////////////////////
@@ -49,15 +60,18 @@
 
 
     const onUpdateSources = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+
         sources.value    = curentsValues
         sourceList.value = list
     }
 
     const onUpdateProperties = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+
         properties.value   = curentsValues
         propertyList.value = list
-        console.log('list', list)
     }
+
+    const onSorted = ( idx:number ) => sortedMainTableIdx.value =idx
 
 </script>
 
@@ -75,14 +89,15 @@
             @change-properties="onUpdateProperties"
         />
         <MainPageTable
-            :current-properties="properties"
-            :list-properties="propertyList"
+            :columns="columnsMainTable"
+            @sorted="onSorted"
         >
             <Button
                 icon="pi pi-plus"
                 rounded
                 aria-label="Filter"
-                @click="openAddNewTokendDlg"/>
+                @click="openAddNewTokendDlg" />
+
         </MainPageTable>
 
         <Dialog

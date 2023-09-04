@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed, type PropType } from 'vue';
+import { ref, onMounted, onUpdated, computed, toRefs, type PropType } from 'vue';
 import { Service } from '@/components/table/Servise';
 import { t } from '@/util/locale'
 
@@ -7,26 +7,28 @@ import DataTable from 'primevue/datatable';
 import Column    from 'primevue/column';
 import Skeleton  from 'primevue/skeleton';
 
-import type { TDropdown } from '@/views/search_params/types';
+import { ColumnMainTable } from '@/model/MainTable'
 
 
 ///////////////////// Defines ///////////////////////////
 
 const props = defineProps({
-    currentProperties :{
-        type: Object as PropType<Array<TDropdown>>,
+    columns :{
+        type: Object as PropType<Array<ColumnMainTable>>,
         default:[]
-    },
-    listProperties :{
-        type: Object as PropType<Array<TDropdown>>,
-        default:[]
-    },
+    }
 })
+
+const emit = defineEmits<{
+    ( e: 'sorted', idx: number): void,
+}>();
 
 
 ///////////////////// Hooks /////////////////////////////
 
 onMounted(() => {
+
+
     cars.value = Array.from({ length: 100000 }).map((_, i) => Service.generate(i + 1));
 });
 
@@ -41,13 +43,10 @@ const lazyLoading     = ref(false);
 
 const loadLazyTimeout = ref();
 
+const { columns } = toRefs( props )
 
 /////////////////////Computed ///////////////////////////
 
-const properties = computed(()=>{
-    if( props.currentProperties.length == 0 ) return props.listProperties
-    else return props.currentProperties
-})
 
 
 //////////////////// Messages ///////////////////////////
@@ -75,11 +74,17 @@ const loadCarsLazy = (event:any) => {
     }, Math.random() * 1000 + 250);
 };
 
-const test = (node:any)=>{
+const test = ( node:any ) => {
     alert(JSON.stringify(node.data))
 }
 
-const sortByFields = (field:string)=> alert("sort by " + field)
+const sortByFields = (column:ColumnMainTable, idx:number) => {
+
+    alert ("sort by " + column.field )
+
+    emit('sorted', idx)
+}
+
 
 </script>
 
@@ -87,7 +92,7 @@ const sortByFields = (field:string)=> alert("sort by " + field)
     <div class="main_table">
         <DataTable
             :value="virtualCars"
-            scrollable 
+            scrollable
             scrollHeight="65vh"
             @row-click="test"
             tableStyle="max-width: 100%; "
@@ -101,59 +106,38 @@ const sortByFields = (field:string)=> alert("sort by " + field)
                 numToleratedItems: 10
             }">
 
+
             <Column
-                field="name"
-                style="width: 30%">
+                v-for="(column, i ) in columns"
+                :field  = column.field
+                :style = '{ width: column.width }' >
+
                     <template #loading>
                         <div>
                             <Skeleton width="40%" height="1rem" />
                         </div>
                     </template>
+
                     <template #header>
                         <span
-                            class="name"
-                            @click="sortByFields('name')"
+                            class="column"
+                            @click="sortByFields(column, i)"
                         >
-                            {{ t('main_page.name') }}</span>
+                            <i
+                                v-if="column.sorted"
+                                class="pi pi-arrow-down"
+                                style="font-size: 15px"></i>
+
+                            {{ t(column.label) }}
+                        </span>
                      </template>
             </Column>
-            <Column
-                field="source"
-                style="width: 10%">
-                    <template #loading>
-                        <div>
-                            <Skeleton width="40%" height="1rem" />
-                        </div>
-                    </template>
-                    <template #header>
-                        <span
-                            class="source"
-                            @click="sortByFields('source')"
-                        >
-                            {{ t('main_page.source') }}</span>
-                     </template>
-            </Column>
-            <Column
-                v-for="property in properties"
-                :field  = property.key
-                style  = "width: 15%">
-                    <template #loading>
-                        <div>
-                            <Skeleton width="40%" height="1rem" />
-                        </div>
-                    </template>
-                    <template #header>
-                        <span
-                            class="source"
-                            @click="sortByFields(property.key)"
-                        >
-                            {{ t(property.tableHeader) }}</span>
-                     </template>
-            </Column>
+
         </DataTable>
 
         <div class="slot">
             <slot></slot>
+
         </div>
     </div>
 </template>
@@ -168,6 +152,11 @@ const sortByFields = (field:string)=> alert("sort by " + field)
         position: absolute;
         bottom  : 20px;
         right   : 30px;
+    }
+
+    .column{
+        cursor: pointer;
+        width: max-content;
     }
 
     @media (max-width: 500px) {
