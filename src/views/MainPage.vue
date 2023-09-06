@@ -66,12 +66,14 @@
     }
 
     const onUpdateProperties = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
-
+        sortedMainTableIdx.value = 2
         properties.value   = curentsValues
         propertyList.value = list
     }
 
-    const onSorted = ( idx:number ) => sortedMainTableIdx.value =idx
+    const onSorted = ( idx:number ) => {
+        sortedMainTableIdx.value = idx
+    }
 
 </script>
 
