@@ -13,7 +13,7 @@ export class http {
     apiClient:AxiosInstance
 
     constructor( ) {
-        this.apiClient = axios.create({baseURL: 'https://nic-corp.store'});
+        this.apiClient = axios.create({baseURL: 'https://146.190.21.212'});
     }
 
     request( isAuthentication:AUTHENTICATION = AUTHENTICATION.REQUARED ):AxiosInstance{
@@ -26,7 +26,7 @@ export class http {
         this.apiClient.defaults.headers.common['Content-Type'] = 'application/json';
 
         if( isAuthentication == AUTHENTICATION.REQUARED ) {
-            this.apiClient.defaults.headers.common['token'] = `${authentication().token}`
+            this.apiClient.defaults.headers.common['acces_token'] = `${authentication().access_token}`
         }
     }
 }

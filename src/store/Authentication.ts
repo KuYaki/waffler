@@ -24,7 +24,7 @@ export const AuthenticationStore = ( requestStatus: RequestStatus ) =>{
 
                 await AuthenticationService.login( credentials )
                     .then(( response: IResponse< Authentication > ) =>{
-                        this.authentication.singIn(response.data)
+                        this.authentication.singIn( credentials.username, response.data )
 
                         console.log("AuthenticationStore:singIn", response)
                     }).catch(( e: AxiosError ) => {

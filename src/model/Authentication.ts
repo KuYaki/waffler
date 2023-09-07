@@ -1,15 +1,17 @@
 export class Credentials {
-    username:''
-    password:''
+    username      : ''
+    password      : ''
 }
 
-export class Authentication{
-    userName:string = ''
-    token   :string = ''
+export class Authentication {
+    userName    :string  = ''
+    access_token :string = ''
+    refresh_token:string = ''
 
-    singIn( data:Authentication ) {
-        this.userName = data.userName
-        this.token    = data.token
+    singIn( userName:string , data:Authentication ) {
+        this.userName = userName
+        this.access_token = data.access_token
+        this.refresh_token = data.refresh_token
 
         this.saveLocaleStorage()
     }
@@ -29,9 +31,9 @@ export class Authentication{
     }
 
     isAuthenticated(): boolean {
-        console.log("Authentication:isAuthenticated", this.token.length)
+        console.log("Authentication:isAuthenticated", this.access_token.length)
 
-        return this.token.length ? true : false
+        return this.access_token.length ? true : false
     }
 
     clear() {
@@ -41,15 +43,17 @@ export class Authentication{
 
     init() {
         this.userName = '';
-        this.token    = '';
+        this.access_token    = '';
     }
 
     saveLocaleStorage() {
         localStorage.setItem('userName', (this.userName))
-        localStorage.setItem('token', this.token)
+        localStorage.setItem('access_token', this.access_token)
+        localStorage.setItem('refresh_token', this.refresh_token)
     }
 
     removeLocaleStorage() {
-        localStorage.removeItem('token')
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
     }
 }
