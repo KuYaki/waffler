@@ -8,7 +8,7 @@ export class Authentication {
     access_token :string = ''
     refresh_token:string = ''
 
-    singIn( userName:string , data:Authentication ) {
+    signIn( userName:string , data:Authentication ) {
         this.userName = userName
         this.access_token = data.access_token
         this.refresh_token = data.refresh_token
@@ -19,7 +19,7 @@ export class Authentication {
     signOut(){
         this.clear()
 
-        console.log("Authentication:singOut")
+        console.log("Authentication:signOut")
     }
 
     getUserName(): string{

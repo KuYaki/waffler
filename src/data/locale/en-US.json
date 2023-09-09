@@ -7,7 +7,7 @@
         "source"     : "Source"
     },
     "sign_in_page":{
-        "sign_in_info"    : "Please sing in to save your preferences",
+        "sign_in_info"    : "Please sign in to save your preferences",
         "auth_fail"       : "Authentication fail, feel free to register new account",
         "login"           : "Login",
         "password"        : "Password",

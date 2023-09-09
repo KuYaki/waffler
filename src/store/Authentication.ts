@@ -19,14 +19,14 @@ export const AuthenticationStore = ( requestStatus: RequestStatus ) =>{
         },
 
         actions: {
-            async singIn( credentials:Credentials ){
+            async signIn( credentials:Credentials ){
                 requestStatus.resetStatusError()
 
                 await AuthenticationService.login( credentials )
                     .then(( response: IResponse< Authentication > ) =>{
-                        this.authentication.singIn( credentials.username, response.data )
+                        this.authentication.signIn( credentials.username, response.data )
 
-                        console.log("AuthenticationStore:singIn", response)
+                        console.log("AuthenticationStore:signIn", response)
                     }).catch(( e: AxiosError ) => {
 
                         if (e.response === undefined) {
@@ -34,17 +34,36 @@ export const AuthenticationStore = ( requestStatus: RequestStatus ) =>{
                         } else {
                             requestStatus.setErrorStatus(e.response !.status);
                         }
-                        console.log("AuthenticationStore:singIn", e);
+                        console.log("AuthenticationStore:signIn", e);
                     })
             },
 
-            async singOut () {
+            async register ( credentials:Credentials ){
+                requestStatus.resetStatusError()
+
+                await AuthenticationService.register(credentials)
+                    .then(( response: IResponse< Authentication > ) =>{
+                        this.authentication.signIn( credentials.username, response.data )
+
+                        console.log("AuthenticationStore:register", response)
+                    }).catch(( e: AxiosError ) => {
+
+                        if (e.response === undefined) {
+                            requestStatus.setNetworkError();
+                        } else {
+                            requestStatus.setErrorStatus(e.response !.status);
+                        }
+                        console.log("AuthenticationStore:register", e);
+                    })
+            },
+
+            async signOut () {
                 await AuthenticationService.logout()
                     .then(() => {
                         this.authentication.signOut()
                     })
                     .catch((e:Error)=>{
-                        console.error("Authentication:singOut", e);
+                        console.error("Authentication:signOut", e);
                     })
             }
 

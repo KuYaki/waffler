@@ -1,24 +1,31 @@
 <script setup lang="ts">
     import { ref, Ref, onMounted } from 'vue';
-    import { t } from '@/util/locale';
+    import { t }                   from '@/util/locale';
+
+    import { Credentials }    from '@/model/Authentication';
+    import { signIn, register, authentication } from "@/helper/UseAuthenStore"
+
 
     import PlaceholderData  from '@/data/component/input'
 
-    // import InputText     from '@/components/input/InputText.vue';
-    // import InputPassword from '@/components/input/InputPassword.vue';
     import InputText     from 'primevue/inputtext';
     import Password      from 'primevue/password';
     import Button        from 'primevue/button';
     import Divider       from 'primevue/divider';
 
 
+    ////////////////////////// Defines /////////////////////////////
+
+    const emit = defineEmits<{
+        (e: 'authorized'): void,
+    }>();
+
+
     ////////////////////////// Vars ////////////////////////////////
 
     let viewMode: Ref<'signInMode' | 'regMode'> = ref('signInMode')
 
-    const login    = ref('')
-    const password = ref('')
-
+    const credentials: Ref<Credentials> = ref ( new Credentials )
 
     ////////////////////////// Hooks ////////////////////////////////
 
@@ -37,6 +44,35 @@
         viewMode.value = 'regMode'
     }
 
+    const signin = async () => {
+        await signIn(credentials.value)
+            .then(() => {
+
+                const isAuth = authentication().isAuthenticated()
+
+                if ( isAuth ){
+                    emit('authorized')
+                } else {
+                    credentials.value = new Credentials()
+                    switchToRegMode()
+                }
+            })
+    }
+
+    const regUser = async () => {
+        await register(credentials.value)
+            .then(()=>{
+
+                const isAuth = authentication().isAuthenticated()
+
+                if ( isAuth ){
+                    emit('authorized')
+                } else {
+                    // TODO: Check errors
+                }
+            })
+    }
+
 </script>
 
 <template>
@@ -45,23 +81,26 @@
             v-if="viewMode == 'regMode'"
             class="pi pi-angle-left"
             @click="switchToSignInMode"
-        ></i>
-        <p
-            v-if ="viewMode == 'signInMode'">
-               {{ t('sign_in_page.sign_in_info') }}
-        </p>
-        <p
-            v-if="viewMode == 'regMode'">
-                {{ t('sign_in_page.auth_fail') }}
-        </p>
+        >
+        </i>
 
+        <p v-if ="viewMode == 'signInMode'">
+
+            {{ t('sign_in_page.sign_in_info') }}
+
+        </p>
+        <p v-if="viewMode == 'regMode'">
+
+            {{ t('sign_in_page.auth_fail') }}
+
+        </p>
         <InputText
-            v-model="login"
+            v-model="credentials.username"
             :placeholder="t(PlaceholderData.login)"
         />
         <Password
             toggleMask
-            :modelValue="password"
+            v-model:modelValue="credentials.password"
             :placeholder="t(PlaceholderData.password)"
             :feedback="false"/>
 
@@ -69,12 +108,13 @@
             v-if ="viewMode == 'signInMode'"
             :label="t('sign_in_page.sign_in')"
             severity="success"
-            @click="switchToRegMode"/>
+            @click="signin"/>
 
         <Button
             v-if="viewMode == 'regMode'"
             :label="t('sign_in_page.registration')"
-            severity="danger" />
+            severity="danger" 
+            @click="regUser"/>
 
         <Divider
             align="center">

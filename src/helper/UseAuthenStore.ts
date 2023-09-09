@@ -3,12 +3,16 @@ import { RequestStatusStore }          from "@/store/RequestStatus"
 import { RequestStatus }               from "@/api/http/status";
 import { Authentication, Credentials } from "@/model/Authentication";
 
-export const singIn = (credentials: Credentials) => {
-    return store().singIn(credentials);
+export const signIn = (credentials: Credentials) => {
+    return store().signIn(credentials);
 }
 
-export const singOut = () => {
-    return store().singOut();
+export const register = ( credentials:Credentials ) => {
+    return store().register(credentials)
+}
+
+export const signOut = () => {
+    return store().signOut();
 }
 
 export const authentication = () : Authentication => {
