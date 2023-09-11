@@ -1,6 +1,12 @@
 export class Credentials {
-    username      : ''
-    password      : ''
+    username: ''
+    password: ''
+}
+
+export class RegisterData{
+    username       : ''
+    password       : ''
+    retype_password: ''
 }
 
 export class Authentication {

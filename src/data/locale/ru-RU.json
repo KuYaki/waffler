@@ -11,11 +11,14 @@
         "auth_fail"       : "Ошибка аутентификации, не стесняйтесь зарегистрировать новую учетную запись",
         "login"           : "Логин",
         "password"        : "Пароль",
+        "confirm_password": "Подтвердите пароль",
         "devider"         : "ИЛИ",
         "sign_in"         : "Войти",
         "registration"    : "Регистрация",
         "sign_in_google"  : "Войти через Google",
-        "sign_in_facebook": "Войти через Facebook"
+        "sign_in_facebook": "Войти через Facebook",
+        "log_out"         : "Выйти"
+
     },
     "add_token_page":{
         "info" : "Загрузите самые последние сообщения, чтобы проверить, поведение человека или канала",

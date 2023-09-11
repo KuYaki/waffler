@@ -6,8 +6,8 @@ class APIRoute {
     static SOURCE_SCORE:API  = '/source/score'
     static SOURCE_INFO:API   = '/source/info'
 
-    static LOGIN:API        = '/user/auth'
-    static REGISTRATION:API = '/user/register'
+    static LOGIN:API        = '/auth/login'
+    static REGISTRATION:API = '/auth/register'
     static LOGOUT:API       = '/logout'
 
     static USER_INFO:API = '/user/info'

@@ -13,7 +13,7 @@ export class http {
     apiClient:AxiosInstance
 
     constructor( ) {
-        this.apiClient = axios.create({baseURL: 'https://146.190.21.212'});
+        this.apiClient = axios.create({baseURL: 'https://testserver.waffler.app'});
     }
 
     request( isAuthentication:AUTHENTICATION = AUTHENTICATION.REQUARED ):AxiosInstance{

@@ -21,14 +21,13 @@ const props = defineProps({
 
 const emit = defineEmits<{
     ( e: 'sorted', idx: number): void,
+    ( e: 'openProfile'):void,
 }>();
 
 
 ///////////////////// Hooks /////////////////////////////
 
 onMounted(() => {
-
-
     cars.value = Array.from({ length: 100000 }).map((_, i) => Service.generate(i + 1));
 });
 
@@ -76,6 +75,7 @@ const loadCarsLazy = (event:any) => {
 
 const test = ( node:any ) => {
     alert(JSON.stringify(node.data))
+    emit('openProfile')
 }
 
 const sortByFields = (column:ColumnMainTable, idx:number) => {

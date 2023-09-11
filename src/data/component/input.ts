@@ -6,6 +6,8 @@ class PlaceholderData {
 
     password = 'sign_in_page.password'
 
+    confirmPassword = 'sign_in_page.confirm_password'
+
 }
 
 export default new PlaceholderData()

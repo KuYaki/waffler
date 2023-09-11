@@ -2,16 +2,14 @@
     import { ref, Ref, onMounted } from 'vue';
     import { t }                   from '@/util/locale';
 
-    import { Credentials }    from '@/model/Authentication';
+    import { Credentials, RegisterData }    from '@/model/Authentication';
     import { signIn, register, authentication } from "@/helper/UseAuthenStore"
 
+    import LoginSlot    from '@/views/dialog/signin/LoginSlot.vue';
+    import OAuthSlot    from '@/views/dialog/signin/OAuthSlot.vue';
+    import ProfileSlot  from '@/views/dialog/signin/ProfileSlot.vue';
+    import RegisterSlot from '@/views/dialog/signin/RegisterSlot.vue';
 
-    import PlaceholderData  from '@/data/component/input'
-
-    import InputText     from 'primevue/inputtext';
-    import Password      from 'primevue/password';
-    import Button        from 'primevue/button';
-    import Divider       from 'primevue/divider';
 
 
     ////////////////////////// Defines /////////////////////////////
@@ -23,116 +21,59 @@
 
     ////////////////////////// Vars ////////////////////////////////
 
-    let viewMode: Ref<'signInMode' | 'regMode'> = ref('signInMode')
+    let viewMode: Ref<'signInMode' | 'regMode' | 'authMode'> = ref('signInMode')
 
-    const credentials: Ref<Credentials> = ref ( new Credentials )
+
 
     ////////////////////////// Hooks ////////////////////////////////
 
     onMounted(()=>{
-        viewMode.value = 'signInMode'
+        if ( authentication().isAuthenticated() ) viewMode.value = 'authMode'
+        else viewMode.value = 'signInMode'
     })
 
 
     ////////////////////////// Functions ///////////////////////////
 
-    const switchToSignInMode = () => {
-        viewMode.value = 'signInMode'
-    }
+    ///////////////////////// Messages ////////////////////////////
 
-    const switchToRegMode = () => {
+    const toRegMode = () => {
         viewMode.value = 'regMode'
     }
 
-    const signin = async () => {
-        await signIn(credentials.value)
-            .then(() => {
-
-                const isAuth = authentication().isAuthenticated()
-
-                if ( isAuth ){
-                    emit('authorized')
-                } else {
-                    credentials.value = new Credentials()
-                    switchToRegMode()
-                }
-            })
+    const toAuthMode = () => {
+        viewMode.value = 'authMode'
     }
 
-    const regUser = async () => {
-        await register(credentials.value)
-            .then(()=>{
-
-                const isAuth = authentication().isAuthenticated()
-
-                if ( isAuth ){
-                    emit('authorized')
-                } else {
-                    // TODO: Check errors
-                }
-            })
+    const toSignInMode = () => {
+        viewMode.value = 'signInMode'
     }
+
 
 </script>
 
 <template>
-    <div class="sign_in">
-        <i
-            v-if="viewMode == 'regMode'"
-            class="pi pi-angle-left"
-            @click="switchToSignInMode"
-        >
-        </i>
+    <div class="auth_block">
 
-        <p v-if ="viewMode == 'signInMode'">
+        <LoginSlot v-if ="viewMode == 'signInMode'"
+            @switchToRegister="toRegMode"
+            @authorized="toAuthMode"/>
 
-            {{ t('sign_in_page.sign_in_info') }}
+        <RegisterSlot v-if="viewMode == 'regMode'"
+            @switchToSignIn="toSignInMode"
+            @authorized="toAuthMode"/>
 
-        </p>
-        <p v-if="viewMode == 'regMode'">
+        <OAuthSlot v-if="viewMode != 'authMode'"/>
 
-            {{ t('sign_in_page.auth_fail') }}
-
-        </p>
-        <InputText
-            v-model="credentials.username"
-            :placeholder="t(PlaceholderData.login)"
+        <ProfileSlot v-if = "viewMode == 'authMode'"
+            @signOut="toSignInMode"
         />
-        <Password
-            toggleMask
-            v-model:modelValue="credentials.password"
-            :placeholder="t(PlaceholderData.password)"
-            :feedback="false"/>
 
-        <Button
-            v-if ="viewMode == 'signInMode'"
-            :label="t('sign_in_page.sign_in')"
-            severity="success"
-            @click="signin"/>
-
-        <Button
-            v-if="viewMode == 'regMode'"
-            :label="t('sign_in_page.registration')"
-            severity="danger" 
-            @click="regUser"/>
-
-        <Divider
-            align="center">
-                <b>{{ t('sign_in_page.devider') }}</b>
-            </Divider>
-
-        <Button
-            :label="t('sign_in_page.sign_in_google')"
-            severity="help" />
-
-        <Button
-            :label="t('sign_in_page.sign_in_facebook')"
-            severity="info" />
     </div>
 </template>
 
 <style scoped>
-    .sign_in{
+    .auth_block{
         position       : relative;
         margin         : auto;
         display        : grid;
@@ -146,20 +87,6 @@
         font-size      : 1rem;
         font-weight    : normal;
         color          : var(--text-color);
-    }
-
-    i{
-        position : absolute;
-        left     : -30px;
-        top      : -10px;
-        font-size: 1.2rem;
-        padding  : 10px;
-        cursor   : pointer;
-    }
-
-    p{
-        max-width: 235px;
-        width:100%;
     }
 
 </style>

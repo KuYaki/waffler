@@ -11,11 +11,13 @@
         "auth_fail"       : "Authentication fail, feel free to register new account",
         "login"           : "Login",
         "password"        : "Password",
+        "confirm_password": "Confirm password",
         "devider"         : "OR",
         "sign_in"         : "Sign in",
         "registration"    : "Registration",
         "sign_in_google"  : "Sign in with Google",
-        "sign_in_facebook": "Sign in with Facebook"
+        "sign_in_facebook": "Sign in with Facebook",
+        "log_out"         : "Log out"
     },
     "add_token_page":{
         "info" : "Download most recent messages to check if the person or channel behaviuor",

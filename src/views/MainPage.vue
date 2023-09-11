@@ -93,6 +93,7 @@
         <MainPageTable
             :columns="columnsMainTable"
             @sorted="onSorted"
+            @open-profile="openProfileDlg"
         >
             <Button
                 icon="pi pi-plus"

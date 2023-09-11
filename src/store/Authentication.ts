@@ -2,7 +2,7 @@ import AuthenticationService from '@/service/Authentication'
 import { RequestStatus } from "@/api/http/status"
 
 import { defineStore } from 'pinia'
-import { Authentication, Credentials } from '@/model/Authentication'
+import { Authentication, Credentials, RegisterData } from '@/model/Authentication'
 import { AxiosError } from 'axios'
 
 import type { IResponse } from "@/api/service/interface";
@@ -38,12 +38,12 @@ export const AuthenticationStore = ( requestStatus: RequestStatus ) =>{
                     })
             },
 
-            async register ( credentials:Credentials ){
+            async register ( regData:RegisterData ){
                 requestStatus.resetStatusError()
 
-                await AuthenticationService.register(credentials)
+                await AuthenticationService.register(regData)
                     .then(( response: IResponse< Authentication > ) =>{
-                        this.authentication.signIn( credentials.username, response.data )
+                        this.authentication.signIn( regData.username, response.data )
 
                         console.log("AuthenticationStore:register", response)
                     }).catch(( e: AxiosError ) => {
