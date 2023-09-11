@@ -25,11 +25,13 @@
 
     ////////////////////////// Vars ////////////////////////////////
 
+    const username = ref('')
+
 
     ////////////////////////// Hooks ////////////////////////////////
 
     onMounted(()=>{
-
+        username.value = authentication().getUserName()
     })
 
 
@@ -46,7 +48,9 @@
 
 <template>
     <div class="profile_block">
-        <Profile />
+        <Profile
+            :username="username"
+        />
         <Button
             :label="t('sign_in_page.log_out')"
             severity="secondary"
@@ -57,9 +61,12 @@
 <style scoped>
 
     .profile_block{
-        width: 100%;
-        align-items: center;
-        display: flex;
+        width          : 100%;
+        align-items    : center;
+        display        : flex;
+        flex-wrap      : wrap;
+        row-gap        : 5px;
+        column-gap     : 20px;
         justify-content: space-between;
     }
 
