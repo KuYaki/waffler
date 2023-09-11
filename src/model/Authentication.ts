@@ -10,9 +10,9 @@ export class RegisterData{
 }
 
 export class Authentication {
-    userName    :string  = ''
-    access_token :string = ''
-    refresh_token:string = ''
+    userName     :string = localStorage['userName'] ? localStorage['userName'] : ''
+    access_token :string = localStorage['access_token'] ? localStorage['access_token'] : ''
+    refresh_token:string = localStorage['refresh_token'] ? localStorage['refresh_token'] : ''
 
     signIn( userName:string , data:Authentication ) {
         this.userName = userName
