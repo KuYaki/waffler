@@ -1,4 +1,4 @@
-class API extends String {}
+import { API } from "@/api/service/interface"
 
 class APIRoute {
 

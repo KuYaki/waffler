@@ -1,8 +1,8 @@
-import APIRoute                 from '@/api/api'
+import APIRoute                 from '@/global/api'
 
 import http, { AUTHENTICATION } from '@/api/http/http'
 
-import { Credentials }           from '@/model/Authentication'
+import { Credentials }          from '@/model/Authentication'
 
 
 class AuthService {

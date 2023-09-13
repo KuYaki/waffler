@@ -1,5 +1,7 @@
+export interface API extends String {}
+
 export interface IStatusResponse{
-    status: number;
+    status    : number;
     statusText: string;
 }
 
