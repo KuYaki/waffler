@@ -14,7 +14,7 @@ export const Store =<T extends Model>  ( storeID:API, requestStatus:RequestStatu
     return defineStore( storeID as string, {
 
         state: () => {
-            return { moedel : newModel() }
+            return { model : newModel() }
         },
 
         actions: {

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-    import { ref, computed, type Ref } from 'vue';
+    import { ref, computed, onMounted, type Ref } from 'vue';
+    import { storeToRefs } from "pinia";
+
 
     import { t }  from '@/util/locale';
+
+    import StoreCreator from '@/store/StoreCreator';
+    import APIRoute from '@/global/api';
 
     import PlaceholderData from '@/data/component/input'
 
@@ -20,8 +25,18 @@
     import { TDropdown } from './search_params/types';
     import { createMainTableColumns } from '@/model/MainTable'
 
+    import type { API } from '@/api/service/interface';
+
 
     //////////////////////// Vars ///////////////////////////
+
+    const StoreSlotID: API = APIRoute.SOURCE_SEARCH
+
+
+    const store = StoreCreator.create( APIRoute.SOURCE_SEARCH )
+
+    const { model } = storeToRefs( store )
+
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
@@ -32,8 +47,17 @@
 
     const sources   : Ref<TDropdown[]> = ref()
     const sourceList: Ref<TDropdown[]> = ref()
-    
+
     const sortedMainTableIdx = ref(0)
+
+
+    ////////////////////// Hooks //////////////////////
+
+    onMounted(async () => {
+      store.post(StoreSlotID);
+
+      console.log( 'STORE ', model.value.data.sources)
+    })
 
 
     ///////////////////// Function /////////////////////////
