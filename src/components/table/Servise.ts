@@ -6,10 +6,10 @@ export const Service = {
     generate(id:number) {
         return {
             id,
-            name: this.generateName(),
-            source: this.generateSouce(),
-            Waffler: this.generatePercent(),
-            Rasizm: this.generatePercent()
+            name         : this.generateName(),
+            source_type  : this.generateSouce(),
+            waffler_score: this.generatePercent(),
+            Rasizm       : this.generatePercent()
         };
     },
 

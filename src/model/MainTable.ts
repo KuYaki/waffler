@@ -19,7 +19,7 @@ export const createMainTableColumns = ( curProperty:TDropdown[], propertyList:TD
     let result : ColumnMainTable[] = []
 
     result.push( new ColumnMainTable('name', '30%', 'main_page.name' ))
-    result.push( new ColumnMainTable('source', '10%', 'main_page.source' ) )
+    result.push( new ColumnMainTable('source_type', '10%', 'main_page.source' ) )
 
     if ( curProperty.length == 0 ) {
 

@@ -6,15 +6,28 @@ import { DataState, type IModelData } from "@/api/model/interface";
 import type { API }        from "@/api/service/interface";
 import type { JSONObject } from "@/global/types";
 
+enum SourceType {
+    Telegram,
+    YouTube
+}
+
+class Source {
+    id           : number     = NaN
+    name         : string     = ''
+    source_type  : SourceType = 0
+    source_url   : string     = ""
+    waffler_score: number     = 1
+}
 
 
 class MainPageData implements IModelData {
-        query   : string = ''
-        limit   : number = 10
-        cursor  : number = 0
-        order   : string = 'abc'
+        query      : string    = ''
+        limit      : number    = 10
+        cursor     : number    = 0
+        order      : string    = 'abc'
+        source_type: SourceType = 0
 
-        sources:[] = []
+        sources:Array< Source > = []
 }
 
 export class MainPage extends Model {

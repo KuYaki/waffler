@@ -50,11 +50,16 @@
 
     const sortedMainTableIdx = ref(0)
 
+    const tableRows = ref([])
+
 
     ////////////////////// Hooks //////////////////////
 
     onMounted(async () => {
-      store.post(StoreSlotID);
+      store.post(StoreSlotID)
+        .then(()=> {
+            tableRows.value = tableRows.value.concat(model.value.data.sources)
+        })
 
       console.log( 'STORE ', model.value.data.sources)
     })
@@ -99,6 +104,14 @@
         sortedMainTableIdx.value = idx
     }
 
+    const load = () => {
+        console.log('loading')
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+    }
+
 </script>
 
 <template>
@@ -116,8 +129,10 @@
         />
         <MainPageTable
             :columns="columnsMainTable"
+            :data="model.data.sources"
             @sorted="onSorted"
             @open-profile="openProfileDlg"
+            @load-more="load"
         >
             <Button
                 icon="pi pi-plus"
