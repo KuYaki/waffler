@@ -1,17 +1,31 @@
 <script setup lang="ts">
+import { DataState } from '@/api/model/interface';
+import Skeleton from 'primevue/skeleton';
 
 
 const props = defineProps({
         text:{
             default:''
+        },
+        state:{
+            type: Number,
+            default:DataState.OK
         }
     })
 </script>
 
 <template>
-    <div class="row_cell">
+    <div
+        v-if="state == DataState.OK"
+        class="row_cell">
         {{ text }}
     </div>
+
+    <Skeleton
+        v-if="state == DataState.LOADING"
+        width="50%">
+
+    </Skeleton>
 </template>
 
 <style scoped>

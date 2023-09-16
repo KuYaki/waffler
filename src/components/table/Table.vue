@@ -21,7 +21,7 @@
 
     const onScroll = (event:any) =>{
         const el = event.target
-        if ( el.scrollHeight - el.scrollTop - el.clientHeight < 1 ){
+        if ( el.scrollHeight - el.scrollTop - el.clientHeight < 2 ){
             console.log('BOTTOM')
             emit('scroll_bottom')
         }
@@ -59,9 +59,9 @@
     }
 
     .row_block{
-        max-height: 60vh;
-        height: auto;
-        overflow: scroll;
+        /* max-height: 60vh; */
+        height    : 60vh;
+        overflow  : scroll;
     }
 
 </style>

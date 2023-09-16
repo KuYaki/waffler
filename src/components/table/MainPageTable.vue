@@ -16,6 +16,7 @@ import RowCell from './RowCell.vue';
 
 import { ColumnMainTable} from '@/model/MainTable'
 import { Source } from '@/model/MainPage'
+import { DataState } from '@/api/model/interface';
 
 ///////////////////// Defines ///////////////////////////
 
@@ -27,6 +28,10 @@ const props = defineProps({
     data:{
         type : Object as PropType<Array<Source>>,
         default:[]
+    },
+    state:{
+        type: Number,
+        default:DataState.OK
     }
 })
 
@@ -93,8 +98,8 @@ const sortByFields = ( idx:number) => {
                 >
                     <RowCell
                         v-for="column in columns"
+                        :state="state"
                         :text="row[column.field]"/>
-
                 </Row>
 
             </template>
