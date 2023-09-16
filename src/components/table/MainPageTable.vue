@@ -68,10 +68,7 @@ const test = ( node:any ) => {
     emit('openProfile')
 }
 
-const sortByFields = (column:ColumnMainTable, idx:number) => {
-
-    alert ("sort by " + column.field )
-
+const sortByFields = ( idx:number) => {
     emit('sorted', idx)
 }
 
@@ -82,17 +79,24 @@ const sortByFields = (column:ColumnMainTable, idx:number) => {
     <div class="main_table">
         <Table :column-style="gridColumns" @scroll_bottom="onLoad">
             <template v-slot:header>
-                <TableHeader :columns="columns"/>
+
+                <TableHeader
+                    @click="sortByFields"
+                    :columns="columns"/>
+
             </template>
 
             <template v-slot:row>
+
                 <Row v-for="(row, i) in data"
                     :column-style="gridColumns"
                 >
                     <RowCell
-                        v-for="col in columns"
-                        :text="row[col.field]"/>
+                        v-for="column in columns"
+                        :text="row[column.field]"/>
+
                 </Row>
+
             </template>
 
         </Table>

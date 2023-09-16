@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { t } from '@/util/locale';
     import { PropType } from 'vue';
+    import { Sorted } from '@/model/MainTable'
 
     /////////////////////// Defines ///////////////////////
 
@@ -12,14 +13,14 @@
     })
 
     const emit = defineEmits<{
-        ( e: 'column_click', idx: number): void,
+        ( e: 'click', idx: number): void,
 
     }>();
 
     ////////////////////// Messages //////////////////////
 
     const onClick = (idx:number) =>{
-        emit('column_click', idx)
+        emit('click', idx)
     }
 
 </script>
@@ -31,8 +32,9 @@
         @click="onClick(i)"
     >
             {{ t(column.label) }}
-            <i class="pi pi-arrow-up"></i>
-            <i class="pi pi-arrow-down"></i>
+
+            <i v-if="column.sorted == Sorted.UP"    class="pi pi-arrow-up"></i>
+            <i v-if="column.sorted == Sorted.DOWN"  class="pi pi-arrow-down"></i>
 
     </div>
 
@@ -42,9 +44,10 @@
     .header_cell{
         cursor     : pointer;
         padding    : 20px 5px;
+        min-width  : max-content;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-weight: bold;
-        font-size: 17px;
+        font-size  : 16px;
     }
 
 

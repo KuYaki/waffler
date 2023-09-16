@@ -17,16 +17,15 @@
     import SignInDlg     from '@/views/dialog/SignInDlg.vue'
     import ProfileDlg     from '@/views/dialog/ProfileDlg.vue';
 
-    // import InputText     from '@/components/input/InputText.vue';
     import InputText     from 'primevue/inputtext';
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
 
     import { TDropdown } from './search_params/types';
-    import { createMainTableColumns } from '@/model/MainTable'
+    import { createMainTableColumns, Sorted } from '@/model/MainTable'
 
     import type { API } from '@/api/service/interface';
-import { DataState } from '@/api/model/interface';
+    import { DataState } from '@/api/model/interface';
 
 
     //////////////////////// Vars ///////////////////////////
@@ -50,6 +49,7 @@ import { DataState } from '@/api/model/interface';
     const sourceList: Ref<TDropdown[]> = ref()
 
     const sortedMainTableIdx = ref(0)
+    const sortedColumnState  = ref (Sorted.NULL)
 
     const tableRows = ref([])
 
@@ -57,10 +57,10 @@ import { DataState } from '@/api/model/interface';
     ////////////////////// Hooks //////////////////////
 
     onMounted(async () => {
-      store.post(StoreSlotID)
-        .then(()=> {
-            tableRows.value = tableRows.value.concat(model.value.data.sources)
-        })
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
 
       console.log( 'STORE ', model.value.data.sources)
     })
@@ -71,7 +71,7 @@ import { DataState } from '@/api/model/interface';
 
     /////////////////////// Computed ///////////////////////
 
-    const columnsMainTable = computed(() => createMainTableColumns(properties.value, propertyList.value, sortedMainTableIdx.value  ))
+    const columnsMainTable = computed(() => createMainTableColumns(properties.value, propertyList.value, sortedMainTableIdx.value ))
 
 
     ///////////////////// Messages //////////////////////////

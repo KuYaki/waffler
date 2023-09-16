@@ -1,12 +1,18 @@
 import { TDropdown } from "@/views/search_params/types";
 
-export class ColumnMainTable {
-    field :string  = '';
-    width :string  = '';
-    label :string  = '';
-    sorted:boolean = false;
+export enum Sorted {
+    NULL,
+    UP,
+    DOWN
+}
 
-    constructor( field:string, width:string, label:string, sorted:boolean = false ) {
+export class ColumnMainTable {
+    field  :string  = '';
+    width  :string  = '';
+    label  :string  = '';
+    sorted: Sorted = null;
+
+    constructor( field:string, width:string, label:string, sorted:Sorted = Sorted.NULL ) {
         this.field = field
         this.width = width
         this.label = label
@@ -15,7 +21,14 @@ export class ColumnMainTable {
 }
 
 
-export const createMainTableColumns = ( curProperty:TDropdown[], propertyList:TDropdown[], sortedIdx:number ):ColumnMainTable[]=>{
+export const createMainTableColumns = (
+
+    curProperty:TDropdown[],
+    propertyList:TDropdown[],
+    sortedIdx:number
+
+):ColumnMainTable[] => {
+
     let result : ColumnMainTable[] = []
 
     result.push( new ColumnMainTable('name', '2fr', 'main_page.name' ))
@@ -31,7 +44,7 @@ export const createMainTableColumns = ( curProperty:TDropdown[], propertyList:TD
 
     }
 
-    result[sortedIdx].sorted = true
+    result[sortedIdx].sorted = Sorted.DOWN
 
     return result
 }
