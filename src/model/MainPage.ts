@@ -11,12 +11,13 @@ enum SourceType {
     YouTube
 }
 
-class Source {
-    id           : number     = NaN
-    name         : string     = ''
-    source_type  : SourceType = 0
-    source_url   : string     = ""
-    waffler_score: number     = 1
+export class Source {
+    id            : number     = NaN
+    name          : string     = ''
+    source_type   : SourceType = 0
+    source_url    : string     = ""
+    waffler_score : number      = 1
+    racizm_score  : number     = 0
 }
 
 

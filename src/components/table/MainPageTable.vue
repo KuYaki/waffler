@@ -6,15 +6,26 @@ import { t } from '@/util/locale'
 import DataTable from 'primevue/datatable';
 import Column    from 'primevue/column';
 import Skeleton  from 'primevue/skeleton';
+import Divider   from 'primevue/divider';
 
-import { ColumnMainTable } from '@/model/MainTable'
+import Table from './Table.vue';
+import TableHeader from './TableHeader.vue';
+import Row from './Row.vue';
+import RowCell from './RowCell.vue';
 
+
+import { ColumnMainTable} from '@/model/MainTable'
+import { Source } from '@/model/MainPage'
 
 ///////////////////// Defines ///////////////////////////
 
 const props = defineProps({
     columns :{
         type: Object as PropType<Array<ColumnMainTable>>,
+        default:[]
+    },
+    data:{
+        type : Object as PropType<Array<Source>>,
         default:[]
     }
 })
@@ -28,50 +39,23 @@ const emit = defineEmits<{
 ///////////////////// Hooks /////////////////////////////
 
 onMounted(() => {
-    cars.value = Array.from({ length: 100000 }).map((_, i) => Service.generate(i + 1));
+
 });
 
 
 //////////////////// Vars ///////////////////////////////
 
-const cars            = ref();
 
-const virtualCars     = ref(Array.from({ length: 100000 }));
-
-const lazyLoading     = ref(false);
-
-const loadLazyTimeout = ref();
-
-const { columns } = toRefs( props )
 
 /////////////////////Computed ///////////////////////////
-
+const gridColumns = computed(()=> {
+    let result = ''
+    props.columns.forEach( el => result = result + ' ' + el.width )
+    return result
+})
 
 
 //////////////////// Messages ///////////////////////////
-
-const loadCarsLazy = (event:any) => {
-    !lazyLoading.value && (lazyLoading.value = true);
-
-    if (loadLazyTimeout.value) {
-        clearTimeout(loadLazyTimeout.value);
-    }
-
-    //simulate remote connection with a timeout
-    loadLazyTimeout.value = setTimeout(() => {
-        let _virtualCars = [...virtualCars.value];
-        let { first, last } = event;
-
-        //load data of required page
-        const loadedCars = cars.value.slice(first, last);
-
-        //populate page of virtual cars
-        Array.prototype.splice.apply(_virtualCars, [...[first, last - first], ...loadedCars]);
-
-        virtualCars.value = _virtualCars;
-        lazyLoading.value = false;
-    }, Math.random() * 1000 + 250);
-};
 
 const test = ( node:any ) => {
     alert(JSON.stringify(node.data))
@@ -90,55 +74,30 @@ const sortByFields = (column:ColumnMainTable, idx:number) => {
 
 <template>
     <div class="main_table">
-        <DataTable
-            :value="virtualCars"
-            scrollable
-            scrollHeight="65vh"
-            @row-click="test"
-            tableStyle="max-width: 100%; "
-            :virtualScrollerOptions="{
-                lazy: true,
-                onLazyLoad: loadCarsLazy,
-                itemSize: 46,
-                delay: 200,
-                showLoader: true,
-                loading: lazyLoading,
-                numToleratedItems: 10
-            }">
+        {{ gridColumns }}
+        <Table :column-style="gridColumns">
+            <template v-slot:header>
+                <TableHeader :columns="columns"/>
+            </template>
+
+            <template v-slot:row>
+                <Row v-for="(row, i) in data"
+                    :column-style="gridColumns"
+                >
+                    <RowCell
+                        v-for="col in columns"
+                        :text="row[col.field]"/>
+                </Row>
+            </template>
+
+        </Table>
 
 
-            <Column
-                v-for="(column, i ) in columns"
-                :field  = column.field
-                :style = '{ width: column.width }' >
 
-                    <template #loading>
-                        <div>
-                            <Skeleton width="40%" height="1rem" />
-                        </div>
-                    </template>
-
-                    <template #header>
-                        <span
-                            class="column"
-                            @click="sortByFields(column, i)"
-                        >
-                            <i
-                                v-if="column.sorted"
-                                class="pi pi-arrow-down"
-                                style="font-size: 15px"></i>
-
-                            {{ t(column.label) }}
-                        </span>
-                     </template>
-            </Column>
-
-        </DataTable>
-
-        <div class="slot">
+        <!-- <div class="slot">
             <slot></slot>
 
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -154,10 +113,7 @@ const sortByFields = (column:ColumnMainTable, idx:number) => {
         right   : 30px;
     }
 
-    .column{
-        cursor: pointer;
-        width: max-content;
-    }
+
 
     @media (max-width: 500px) {
         .slot{

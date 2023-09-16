@@ -18,16 +18,16 @@ export class ColumnMainTable {
 export const createMainTableColumns = ( curProperty:TDropdown[], propertyList:TDropdown[], sortedIdx:number ):ColumnMainTable[]=>{
     let result : ColumnMainTable[] = []
 
-    result.push( new ColumnMainTable('name', '30%', 'main_page.name' ))
-    result.push( new ColumnMainTable('source_type', '10%', 'main_page.source' ) )
+    result.push( new ColumnMainTable('name', '2fr', 'main_page.name' ))
+    result.push( new ColumnMainTable('source_type', '1fr', 'main_page.source' ) )
 
     if ( curProperty.length == 0 ) {
 
-        propertyList.forEach( el => result.push( new ColumnMainTable(  el.key, '15%' , el.tableHeader ) ))
+        propertyList.forEach( el => result.push( new ColumnMainTable(  el.key, '1fr' , el.tableHeader ) ))
 
     } else {
 
-        curProperty.forEach( el => result.push( new ColumnMainTable(  el.key, '15%' , el.tableHeader ) ))
+        curProperty.forEach( el => result.push( new ColumnMainTable(  el.key, '1fr' , el.tableHeader ) ))
 
     }
 
