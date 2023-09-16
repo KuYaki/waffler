@@ -32,7 +32,8 @@ const props = defineProps({
 
 const emit = defineEmits<{
     ( e: 'sorted', idx: number): void,
-    ( e: 'openProfile'):void,
+    ( e: 'openProfile')        : void,
+    ( e: 'loadMore')           : void
 }>();
 
 
@@ -48,6 +49,7 @@ onMounted(() => {
 
 
 /////////////////////Computed ///////////////////////////
+
 const gridColumns = computed(()=> {
     let result = ''
     props.columns.forEach( el => result = result + ' ' + el.width )
@@ -56,6 +58,10 @@ const gridColumns = computed(()=> {
 
 
 //////////////////// Messages ///////////////////////////
+
+const onLoad = () =>{
+    emit('loadMore')
+}
 
 const test = ( node:any ) => {
     alert(JSON.stringify(node.data))
@@ -74,8 +80,7 @@ const sortByFields = (column:ColumnMainTable, idx:number) => {
 
 <template>
     <div class="main_table">
-        {{ gridColumns }}
-        <Table :column-style="gridColumns">
+        <Table :column-style="gridColumns" @scroll_bottom="onLoad">
             <template v-slot:header>
                 <TableHeader :columns="columns"/>
             </template>
@@ -94,10 +99,10 @@ const sortByFields = (column:ColumnMainTable, idx:number) => {
 
 
 
-        <!-- <div class="slot">
+        <div class="slot">
             <slot></slot>
 
-        </div> -->
+        </div>
     </div>
 </template>
 

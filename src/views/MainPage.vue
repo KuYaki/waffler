@@ -26,6 +26,7 @@
     import { createMainTableColumns } from '@/model/MainTable'
 
     import type { API } from '@/api/service/interface';
+import { DataState } from '@/api/model/interface';
 
 
     //////////////////////// Vars ///////////////////////////
@@ -104,10 +105,11 @@
         sortedMainTableIdx.value = idx
     }
 
-    const load = () => {
+    const loadMoreData = () => {
         console.log('loading')
         store.post(StoreSlotID)
             .then(()=> {
+                if( model.value.state == DataState.ERROR) return
                 tableRows.value = tableRows.value.concat(model.value.data.sources)
             })
     }
@@ -129,10 +131,10 @@
         />
         <MainPageTable
             :columns="columnsMainTable"
-            :data="model.data.sources"
+            :data="tableRows"
             @sorted="onSorted"
             @open-profile="openProfileDlg"
-            @load-more="load"
+            @load-more="loadMoreData"
         >
             <Button
                 icon="pi pi-plus"

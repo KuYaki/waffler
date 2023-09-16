@@ -22,13 +22,13 @@ export class Source {
 
 
 class MainPageData implements IModelData {
-        query      : string    = ''
-        limit      : number    = 10
-        cursor     : number    = 0
-        order      : string    = 'abc'
-        source_type: SourceType = 0
+    query      : string    = ''
+    limit      : number    = 15
+    cursor     : number    = 0
+    order      : string    = 'abc'
+    source_type: SourceType = 0
 
-        sources:Array< Source > = []
+    sources:Array< Source > = []
 }
 
 export class MainPage extends Model {
