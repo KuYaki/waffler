@@ -114,6 +114,17 @@
             })
     }
 
+    const onUpdateSearchString = (value:string) => {
+        model.value.data.query = value
+        model.value.data.cursor = 0
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = []
+                if( model.value.state == DataState.ERROR) return
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+    }
+
 </script>
 
 <template>
@@ -124,6 +135,8 @@
     <div class="main_page">
         <InputText
             :placeholder='t(PlaceholderData.mainSearch)'
+            :model-value="model.data.query"
+            @update:model-value="onUpdateSearchString"
         />
         <SearchParam
             @change-source="onUpdateSources"
@@ -132,6 +145,7 @@
         <MainPageTable
             :columns="columnsMainTable"
             :data="tableRows"
+            :state="model.state"
             @sorted="onSorted"
             @open-profile="openProfileDlg"
             @load-more="loadMoreData"
