@@ -9,10 +9,10 @@
     import { t } from '@/util/locale';
 
     // import InputText from '@/components/input/InputText.vue';
-    import InputText from 'primevue/inputtext';
-    import Dropdown from 'primevue/dropdown';
-    import Button   from 'primevue/button';
-    import Profile   from '@/components/avatar/Profile.vue'
+    import InputText     from 'primevue/inputtext';
+    import Dropdown      from 'primevue/dropdown';
+    import Button        from 'primevue/button';
+    import SourceProfile from '@/components/avatar/SourceProfile.vue';
 
 
     import type { API } from '@/api/service/interface';
@@ -75,7 +75,9 @@
             :placeholder="t('add_token_page.link')"
             v-model:modelValue="model.data.parse_url"
         />
-        <Profile/>
+        <SourceProfile
+            :source-type="model.data.parse_source_type"
+        />
         <Dropdown
             v-model="currentField"
             display="chip"

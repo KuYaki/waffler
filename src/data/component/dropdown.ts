@@ -6,8 +6,8 @@ class DropdownData {
     ]
 
     source = [
-        { id:0,  label: 'Telegram', key:'' },
-        { id:1,  label: 'YouTube' , key:'' },
+        { id:0,  label: 'Telegram', key:'', icon:'pi pi-telegram'},
+        { id:1,  label: 'YouTube' , key:'', icon:'pi pi-youtube'},
     ]
 
 }
