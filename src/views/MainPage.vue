@@ -37,6 +37,8 @@
 
     const { model } = storeToRefs( store )
 
+    const isPageMounted = ref(false)
+
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
@@ -53,15 +55,14 @@
     const tableRows = ref([])
 
 
+
     ////////////////////// Hooks //////////////////////
 
     onMounted(async () => {
-        store.post(StoreSlotID)
-            .then(()=> {
-                tableRows.value = tableRows.value.concat(model.value.data.sources)
-            })
+        await updateMainPage()
 
-      console.log( 'STORE ', model.value.data.sources)
+        isPageMounted.value=true
+        console.log( 'STORE ', model.value.data.sources)
     })
 
 
@@ -71,6 +72,20 @@
     /////////////////////// Computed ///////////////////////
 
     const columnsMainTable = computed(() => createMainTableColumns(scoreTypes.value, sortedMainTableIdx.value, sortedColumnState.value ))
+
+
+    ///////////////////// Function //////////////////////////
+
+    const updateMainPage = async () => {
+        model.value.data.cursor = 0
+
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = []
+                if( model.value.state == DataState.ERROR) return
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+    }
 
 
     ///////////////////// Messages //////////////////////////
@@ -101,14 +116,9 @@
 
         }
 
-        model.value.data.cursor = 0
-
-        store.post(StoreSlotID)
-            .then(()=> {
-                tableRows.value = []
-                if( model.value.state == DataState.ERROR) return
-                tableRows.value = tableRows.value.concat(model.value.data.sources)
-            })
+        if ( isPageMounted.value ) {
+            updateMainPage()
+        }
 
         sources.value    = curentsValues
         sourceList.value = list
@@ -129,13 +139,10 @@
 
         }
 
-        model.value.data.cursor = 0
-        store.post(StoreSlotID)
-            .then(()=> {
-                tableRows.value = []
-                if( model.value.state == DataState.ERROR) return
-                tableRows.value = tableRows.value.concat(model.value.data.sources)
-            })
+
+        if ( isPageMounted.value ) {
+            updateMainPage()
+        }
 
         sortedMainTableIdx.value = 2
 
@@ -152,19 +159,12 @@
             sortedColumnState.value = Sorted.UP
         }
 
-        model.value.data.cursor = 0
         model.value.data.order = columnsMainTable.value[ idx ].sortedKey as TOrderKey
-        store.post(StoreSlotID)
-            .then(()=> {
-                tableRows.value = []
-                if( model.value.state == DataState.ERROR) return
-                tableRows.value = tableRows.value.concat(model.value.data.sources)
-            })
+        updateMainPage()
 
     }
 
     const loadMoreData = () => {
-        console.log('loading')
         store.post(StoreSlotID)
             .then(()=> {
                 if( model.value.state == DataState.ERROR) return
@@ -174,13 +174,7 @@
 
     const onUpdateSearchString = (value:string) => {
         model.value.data.query = value
-        model.value.data.cursor = 0
-        store.post(StoreSlotID)
-            .then(()=> {
-                tableRows.value = []
-                if( model.value.state == DataState.ERROR) return
-                tableRows.value = tableRows.value.concat(model.value.data.sources)
-            })
+        updateMainPage()
     }
 
 </script>
