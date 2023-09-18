@@ -1,25 +1,69 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, onMounted, computed } from 'vue';
+    import { storeToRefs } from "pinia";
+
+    import StoreCreator   from '@/store/StoreCreator';
+    import APIRoute       from '@/global/api';
+    import DropdownData  from '@/data/component/dropdown'
 
     import { t } from '@/util/locale';
 
     // import InputText from '@/components/input/InputText.vue';
     import InputText from 'primevue/inputtext';
-    import Profile   from '@/components/avatar/Profile.vue'
     import Dropdown from 'primevue/dropdown';
     import Button   from 'primevue/button';
+    import Profile   from '@/components/avatar/Profile.vue'
 
-    const currentField = ref( { name: 'Waffler',  code: 'W' });
-    const fields = ref([
-        { name: 'Waffler',  code: 'W' },
-        { name: 'Racizm',   code: 'R' },
-    ]);
 
-    const loading = ref(false)
+    import type { API } from '@/api/service/interface';
+    import { DataState }     from "@/api/model/interface";
+
+
+    /////////////////////Defines /////////////////////////////
+
+    const emit = defineEmits<{
+        (e: 'parseCompleted'): void,
+    }>();
+
+
+    ///////////////////// Vars ///////////////////////////////
+
+    const StoreSlotID: API = APIRoute.SOURCE_SEARCH
+
+    const store = StoreCreator.create( StoreSlotID )
+
+    const { model } = storeToRefs( store )
+
+    const currentField = ref( );
+
+
+    ////////////////// Hooks ///////////////////////
+
+    onMounted(()=> {
+        model.value.setParseParams()
+
+        currentField.value = DropdownData.property.find(el => el.id == model.value.data.parse_score_type)
+    })
+
+
+    ////////////////// Computed ////////////////////
+
+    const isDisabledParse = computed( () => model.value.data.parse_url.length == 0 || model.value.data.parser!.token.length == 0 )
+
+
+    ///////////////// Messages /////////////////////
 
     const load = () =>{
-        loading.value = true
-        setTimeout(()=> loading.value = false , 2000)
+        store.post(APIRoute.SOURCE_PARSE)
+            .then(()=>{
+                if( model.value.state == DataState.ERROR) return
+
+                emit('parseCompleted')
+            })
+    }
+
+    const onChangeScore = () => {
+        model.value.data.parse_score_type = currentField.value.id
     }
 
 </script>
@@ -29,20 +73,24 @@
         <span>{{ t('add_token_page.info') }}</span>
         <InputText
             :placeholder="t('add_token_page.link')"
+            v-model:modelValue="model.data.parse_url"
         />
         <Profile/>
         <Dropdown
             v-model="currentField"
             display="chip"
-            :options="fields"
-            optionLabel="name"/>
+            :options="DropdownData.property"
+            @update:modelValue="onChangeScore"
+            optionLabel="label"/>
         <InputText
             :placeholder="t('add_token_page.token')"
+            v-model:modelValue="model.data.parser!.token"
         />
         <Button
             :label="t('add_token_page.parse')"
-            :loading="loading"
+            :loading="model.state == DataState.LOADING"
             @click="load"
+            :disabled="isDisabledParse"
             outlined />
     </div>
 </template>

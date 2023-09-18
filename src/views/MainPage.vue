@@ -6,7 +6,7 @@
     import { t }  from '@/util/locale';
 
     import StoreCreator from '@/store/StoreCreator';
-    import APIRoute from '@/global/api';
+    import APIRoute     from '@/global/api';
 
     import PlaceholderData from '@/data/component/input'
 
@@ -178,6 +178,17 @@
         updateMainPage()
     }
 
+    const onParse = () => {
+        model.value.data.query = model.value.data.parse_url
+
+        console.log(!model.value.data.score_type.includes(model.value.data.parse_score_type))
+
+
+        isAddTokenDlgOpen.value = false
+        updateMainPage()
+
+    }
+
 </script>
 
 <template>
@@ -220,7 +231,9 @@
                 width: '90vw',
                 maxWidth:'500px' }">
 
-            <AddTokenDlg/>
+            <AddTokenDlg
+                @parse-completed="onParse"
+            />
 
        </Dialog>
 

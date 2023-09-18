@@ -3,8 +3,9 @@
 
     import { t } from '@/util/locale';
 
-    import  DropdownData  from '@/data/component/dropdown'
-    import MultiSelect from "primevue/multiselect";
+    import DropdownData  from '@/data/component/dropdown'
+
+    import MultiSelect   from "primevue/multiselect";
 
     import type { TDropdown } from './types'
 

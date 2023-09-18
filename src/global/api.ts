@@ -5,6 +5,7 @@ class APIRoute {
     static SOURCE_SEARCH:API = '/source/search'
     static SOURCE_SCORE:API  = '/source/score'
     static SOURCE_INFO:API   = '/source/info'
+    static SOURCE_PARSE:API  = '/source/parse'
 
     static LOGIN:API        = '/auth/login'
     static REGISTRATION:API = '/auth/register'
