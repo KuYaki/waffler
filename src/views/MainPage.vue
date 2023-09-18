@@ -81,8 +81,8 @@
 
         store.post(StoreSlotID)
             .then(()=> {
-                tableRows.value = []
                 if( model.value.state == DataState.ERROR) return
+                tableRows.value = []
                 tableRows.value = tableRows.value.concat(model.value.data.sources)
             })
     }
@@ -168,6 +168,7 @@
         store.post(StoreSlotID)
             .then(()=> {
                 if( model.value.state == DataState.ERROR) return
+
                 tableRows.value = tableRows.value.concat(model.value.data.sources)
             })
     }

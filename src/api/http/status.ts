@@ -23,6 +23,10 @@ export class RequestStatus {
         return this.statusCode == 403;
     }
 
+    isServerError(): boolean {
+        return this.statusCode == 500;
+    }
+
     resetStatusError() {
         this.statusCode = NaN;
     }

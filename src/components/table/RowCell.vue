@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
     <div
-        v-if="state == DataState.OK"
+        v-if="state == DataState.OK || state == DataState.ERROR"
         class="row_cell">
         {{ text }}
     </div>
