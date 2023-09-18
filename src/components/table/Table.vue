@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import { PropType, computed } from 'vue';
-    import Divider from 'primevue/divider';
+    import { ref } from 'vue';
 
 
     ////////////////////// Defines ////////////////////
@@ -17,15 +16,22 @@
     }>();
 
 
+    //////////////////// Vars ////////////////////////
+
+    const isMakeEmit = ref( true )
+
+
     ///////////////////// Messages ///////////////////
 
     const onScroll = (event:any) =>{
         const el = event.target
-        if ( el.scrollHeight - el.scrollTop - el.clientHeight < 2 ){
+        const position = el.scrollHeight - el.scrollTop - el.clientHeight
+        if ( position < 2 && isMakeEmit.value ){
             console.log('BOTTOM')
             emit('scroll_bottom')
+            isMakeEmit.value = false
+            setTimeout(()=> isMakeEmit.value = true, 1000)
         }
-
     }
 
 </script>
