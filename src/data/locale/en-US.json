@@ -2,9 +2,10 @@
     "main_page":{
         "main_search": "Name or Link",
         "waffler"    : "Waffler",
-        "rasizm"     : "Rasizm",
+        "racizm"     : "Racizm",
         "name"       : "Name",
-        "source"     : "Source"
+        "source"     : "Source",
+        "score"      : "Properties"
     },
     "sign_in_page":{
         "sign_in_info"    : "Please sign in to save your preferences",

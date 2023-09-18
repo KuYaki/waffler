@@ -1,8 +1,8 @@
 class DropdownData {
 
     property = [
-        { id: 0, label: 'Waffler', tableHeader:'main_page.waffler', key:"waffler_score" },
-        { id: 1, label: 'Rasizm',  tableHeader:'main_page.rasizm' , key:"Rasizm"  },
+        { id: 0, label: 'Waffler', tableHeader:'main_page.waffler', key:"waffler_score" , sortedKey:'waffler'},
+        { id: 1, label: 'Racizm',  tableHeader:'main_page.racizm' , key:"racizm_score"  , sortedKey:'racizm'},
     ]
 
     source = [

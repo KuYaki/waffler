@@ -55,7 +55,7 @@
             display="chip"
             :options="sources"
             optionLabel="label"
-            placeholder="Sources"
+            :placeholder="t('main_page.source')"
             :maxSelectedLabels="2"
             @update:modelValue="onChangeSource" />
 
@@ -64,7 +64,7 @@
             display="chip"
             :options="properties"
             optionLabel="label"
-            placeholder="Properties"
+            :placeholder="t('main_page.score')"
             :maxSelectedLabels="2"
             @update:modelValue="onChangeProperties" />
 

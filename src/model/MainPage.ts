@@ -16,7 +16,7 @@ enum ScoreType {
     Racizm
 }
 
-type TOrderKey = "name_up" | "name_down" | "source_up" | "source_down" | "waffler_up" | "waffler_down" | "raсizm_up" | "racizm_down"
+export type TOrderKey = "name_up"| "name_down" | "source_up" | "source_down" | "waffler_up" | "waffler_down" | "raсizm_up" | "racizm_down"
 
 export class Source {
     id            : number     = NaN

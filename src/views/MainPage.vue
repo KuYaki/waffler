@@ -25,6 +25,7 @@
     import { createMainTableColumns, Sorted } from '@/model/MainTable'
 
     import type { API } from '@/api/service/interface';
+    import type { TOrderKey } from "@/model/MainPage";
     import { DataState } from '@/api/model/interface';
 
 
@@ -32,8 +33,7 @@
 
     const StoreSlotID: API = APIRoute.SOURCE_SEARCH
 
-
-    const store = StoreCreator.create( APIRoute.SOURCE_SEARCH )
+    const store = StoreCreator.create( StoreSlotID )
 
     const { model } = storeToRefs( store )
 
@@ -42,14 +42,13 @@
     const isSignInDlgOpen   = ref(false)
     const isProfileDlgOpen  = ref(false)
 
-    const properties: Ref<TDropdown[]> = ref([])
-    const propertyList: Ref<TDropdown[]> = ref([])
+    const scoreTypes: Ref<TDropdown[]> = ref([])
 
     const sources   : Ref<TDropdown[]> = ref()
     const sourceList: Ref<TDropdown[]> = ref()
 
     const sortedMainTableIdx = ref(0)
-    const sortedColumnState  = ref (Sorted.NULL)
+    const sortedColumnState  = ref (Sorted.DOWN)
 
     const tableRows = ref([])
 
@@ -71,7 +70,7 @@
 
     /////////////////////// Computed ///////////////////////
 
-    const columnsMainTable = computed(() => createMainTableColumns(properties.value, propertyList.value, sortedMainTableIdx.value ))
+    const columnsMainTable = computed(() => createMainTableColumns(scoreTypes.value, sortedMainTableIdx.value, sortedColumnState.value ))
 
 
     ///////////////////// Messages //////////////////////////
@@ -103,6 +102,7 @@
         }
 
         model.value.data.cursor = 0
+
         store.post(StoreSlotID)
             .then(()=> {
                 tableRows.value = []
@@ -119,10 +119,12 @@
 
         if ( curentsValues.length > 0 ){
 
+            scoreTypes.value   = curentsValues
             curentsValues.forEach(el => model.value.data.score_type.push(el.id))
 
         }else {
 
+            scoreTypes.value = list
             list.forEach(el => model.value.data.score_type.push(el.id))
 
         }
@@ -136,12 +138,29 @@
             })
 
         sortedMainTableIdx.value = 2
-        properties.value   = curentsValues
-        propertyList.value = list
+
     }
 
     const onSorted = ( idx:number ) => {
+        const curSortedState = columnsMainTable.value[ idx ].sorted
         sortedMainTableIdx.value = idx
+
+        if ( curSortedState == Sorted.NULL || curSortedState == Sorted.UP ){
+            sortedColumnState.value = Sorted.DOWN
+        }
+        else {
+            sortedColumnState.value = Sorted.UP
+        }
+
+        model.value.data.cursor = 0
+        model.value.data.order = columnsMainTable.value[ idx ].sortedKey as TOrderKey
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = []
+                if( model.value.state == DataState.ERROR) return
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+
     }
 
     const loadMoreData = () => {
