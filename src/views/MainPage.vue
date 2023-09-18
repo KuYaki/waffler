@@ -102,6 +102,14 @@
 
         }
 
+        model.value.data.cursor = 0
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = []
+                if( model.value.state == DataState.ERROR) return
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+
         sources.value    = curentsValues
         sourceList.value = list
     }
@@ -118,6 +126,15 @@
             list.forEach(el => model.value.data.score_type.push(el.id))
 
         }
+
+        model.value.data.cursor = 0
+        store.post(StoreSlotID)
+            .then(()=> {
+                tableRows.value = []
+                if( model.value.state == DataState.ERROR) return
+                tableRows.value = tableRows.value.concat(model.value.data.sources)
+            })
+
         sortedMainTableIdx.value = 2
         properties.value   = curentsValues
         propertyList.value = list
