@@ -30,7 +30,7 @@
             console.log('BOTTOM')
             emit('scroll_bottom')
             isMakeEmit.value = false
-            setTimeout(()=> isMakeEmit.value = true, 1000)
+            setTimeout(()=> isMakeEmit.value = true, 500)
         }
     }
 
