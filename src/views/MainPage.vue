@@ -90,12 +90,34 @@
 
 
     const onUpdateSources = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+        model.value.data.source_type = []
+
+        if ( curentsValues.length > 0 ){
+
+            curentsValues.forEach(el => model.value.data.source_type.push(el.id))
+
+        }else{
+
+            list.forEach(el => model.value.data.source_type.push(el.id))
+
+        }
 
         sources.value    = curentsValues
         sourceList.value = list
     }
 
     const onUpdateProperties = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+        model.value.data.score_type = []
+
+        if ( curentsValues.length > 0 ){
+
+            curentsValues.forEach(el => model.value.data.score_type.push(el.id))
+
+        }else {
+
+            list.forEach(el => model.value.data.score_type.push(el.id))
+
+        }
         sortedMainTableIdx.value = 2
         properties.value   = curentsValues
         propertyList.value = list

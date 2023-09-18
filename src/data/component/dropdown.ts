@@ -1,13 +1,13 @@
 class DropdownData {
 
     property = [
-        { label: 'Waffler', tableHeader:'main_page.waffler', key:"waffler_score" },
-        { label: 'Rasizm',  tableHeader:'main_page.rasizm' , key:"Rasizm"  },
+        { id: 0, label: 'Waffler', tableHeader:'main_page.waffler', key:"waffler_score" },
+        { id: 1, label: 'Rasizm',  tableHeader:'main_page.rasizm' , key:"Rasizm"  },
     ]
 
     source = [
-        { label: 'YouTube' , key:'' },
-        { label: 'Telegram', key:'' }
+        { id:0,  label: 'Telegram', key:'' },
+        { id:1,  label: 'YouTube' , key:'' },
     ]
 
 }
