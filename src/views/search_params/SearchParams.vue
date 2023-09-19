@@ -34,14 +34,6 @@
     }>();
 
 
-    //////////////////// Hooks //////////////////////////
-
-    // onMounted(()=>{
-    //     // onChangeSource()
-    //     // onChangeProperties()
-    // })
-
-
     //////////////////// Vars ////////////////////////////
 
     const  { curSources , curScores } = toRefs(props)

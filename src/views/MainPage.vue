@@ -177,13 +177,19 @@
 
     const onUpdateSearchString = (value:string) => {
         model.value.data.query = value
+
         updateMainPage()
     }
 
     const onParse = () => {
         model.value.data.query = model.value.data.parse_url
 
-        console.log(!model.value.data.score_type.includes(model.value.data.parse_score_type))
+        if ( scoreTypes.value.find(el => el.id == model.value.data.parse_score_type) == undefined ){
+
+            scoreTypes.value.push(DropdownData.property.find(el => el.id == model.value.data.parse_score_type))
+            selectedProperties.value.push(DropdownData.property.find(el => el.id == model.value.data.parse_score_type))
+
+        }
 
 
         isAddTokenDlgOpen.value = false
