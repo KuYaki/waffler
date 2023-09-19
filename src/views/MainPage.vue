@@ -50,7 +50,7 @@
     const selectedProperties:Ref<TDropdown[]> = ref([DropdownData.property[0]])
     const scoreTypes        :Ref<TDropdown[]> = ref([DropdownData.property[0]])
 
-    const sortedMainTableIdx = ref(0)
+    const sortedMainTableIdx = ref(2)
     const sortedColumnState  = ref (Sorted.DOWN)
 
     const tableRows = ref([])
