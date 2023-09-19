@@ -1,9 +1,7 @@
 <script setup lang="ts">
-    import { ref, onMounted, onUpdated, type Ref, computed } from 'vue';
+    import { PropType, toRefs } from 'vue';
 
     import { t } from '@/util/locale';
-
-    import DropdownData  from '@/data/component/dropdown'
 
     import MultiSelect   from "primevue/multiselect";
 
@@ -11,39 +9,52 @@
 
     //////////////////// Defines /////////////////////////
 
-    // const props = defineProps({})
+    const props = defineProps({
+        sources:{
+            type   : Object as PropType<TDropdown[]>,
+            default: []
+        },
+        scores:{
+            type: Object as PropType<TDropdown[]>,
+            default:[]
+        },
+        curSources:{
+            type: Object as PropType<TDropdown[]>,
+            default:[]
+        },
+        curScores:{
+            type: Object as PropType<TDropdown[]>,
+            default:[]
+        }
+    })
 
     const emit = defineEmits<{
-        ( e: 'changeSource',     currentValue:TDropdown[], list:TDropdown[]): void,
-        ( e: 'changeProperties', currentValue:TDropdown[], list:TDropdown[]): void,
+        ( e: 'update:curSources', currentValue:TDropdown[] ): void,
+        ( e: 'update:curScores' , currentValue:TDropdown[] ): void,
     }>();
 
 
     //////////////////// Hooks //////////////////////////
 
-    onMounted(()=>{
-        onChangeSource()
-        onChangeProperties()
-    })
+    // onMounted(()=>{
+    //     // onChangeSource()
+    //     // onChangeProperties()
+    // })
 
 
     //////////////////// Vars ////////////////////////////
 
-    const selectedSources   :Ref<TDropdown[]> = ref([])
-    const selectedProperties:Ref<TDropdown[]> = ref([DropdownData.property[0]])
-
-    const sources    = ref( DropdownData.source  )
-    const properties = ref( DropdownData.property )
+    const  { curSources , curScores } = toRefs(props)
 
 
     /////////////////// Messages ////////////////////////
 
-    const onChangeProperties = () => {
-        emit( 'changeProperties', selectedProperties.value, DropdownData.property )
+    const onChangeProperties = ( event:any ) => {
+        emit('update:curScores', event.value)
     }
 
-    const onChangeSource = () => {
-        emit( 'changeSource', selectedSources.value, DropdownData.source )
+    const onChangeSource = ( event:any ) => {
+        emit('update:curSources', event.value)
     }
 
 </script>
@@ -52,22 +63,22 @@
     <div class="params">
 
         <MultiSelect
-            v-model="selectedSources"
+            :modelValue="curSources"
             display="chip"
             :options="sources"
             optionLabel="label"
             :placeholder="t('main_page.source')"
             :maxSelectedLabels="2"
-            @update:modelValue="onChangeSource" />
+            @change="onChangeSource"/>
 
         <MultiSelect
-            v-model="selectedProperties"
+            :modelValue="curScores"
             display="chip"
-            :options="properties"
+            :options="scores"
             optionLabel="label"
             :placeholder="t('main_page.score')"
             :maxSelectedLabels="2"
-            @update:modelValue="onChangeProperties" />
+            @change="onChangeProperties" />
 
     </div>
 </template>

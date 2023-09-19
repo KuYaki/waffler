@@ -9,6 +9,7 @@
     import APIRoute     from '@/global/api';
 
     import PlaceholderData from '@/data/component/input'
+    import DropdownData    from '@/data/component/dropdown'
 
     import Navbar        from '@/views/navbar/Navbar.vue'
     import SearchParam   from '@/views/search_params/SearchParams.vue'
@@ -44,10 +45,9 @@
     const isSignInDlgOpen   = ref(false)
     const isProfileDlgOpen  = ref(false)
 
-    const scoreTypes: Ref<TDropdown[]> = ref([])
-
-    const sources   : Ref<TDropdown[]> = ref()
-    const sourceList: Ref<TDropdown[]> = ref()
+    const selectedSources   :Ref<TDropdown[]> = ref([])
+    const selectedProperties:Ref<TDropdown[]> = ref([DropdownData.property[0]])
+    const scoreTypes        :Ref<TDropdown[]> = ref([DropdownData.property[0]])
 
     const sortedMainTableIdx = ref(0)
     const sortedColumnState  = ref (Sorted.DOWN)
@@ -103,7 +103,8 @@
     }
 
 
-    const onUpdateSources = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+    const onUpdateSources = ( curentsValues:TDropdown[] ) => {
+
         model.value.data.source_type = []
 
         if ( curentsValues.length > 0 ){
@@ -112,7 +113,7 @@
 
         }else{
 
-            list.forEach(el => model.value.data.source_type.push(el.id))
+            DropdownData.source.forEach(el => model.value.data.source_type.push(el.id))
 
         }
 
@@ -120,11 +121,10 @@
             updateMainPage()
         }
 
-        sources.value    = curentsValues
-        sourceList.value = list
+        selectedSources.value = curentsValues
     }
 
-    const onUpdateProperties = ( curentsValues:TDropdown[], list:TDropdown[] ) => {
+    const onUpdateProperties = ( curentsValues:TDropdown[] ) => {
         model.value.data.score_type = []
 
         if ( curentsValues.length > 0 ){
@@ -134,8 +134,8 @@
 
         }else {
 
-            scoreTypes.value = list
-            list.forEach(el => model.value.data.score_type.push(el.id))
+            scoreTypes.value = DropdownData.property
+            DropdownData.property.forEach(el => model.value.data.score_type.push(el.id))
 
         }
 
@@ -144,6 +144,8 @@
             updateMainPage()
         }
 
+
+        selectedProperties.value = curentsValues
         sortedMainTableIdx.value = 2
 
     }
@@ -203,8 +205,12 @@
             @update:model-value="onUpdateSearchString"
         />
         <SearchParam
-            @change-source="onUpdateSources"
-            @change-properties="onUpdateProperties"
+            :sources="DropdownData.source"
+            :scores="DropdownData.property"
+            :curScores="selectedProperties"
+            :curSources="selectedSources"
+            @update:curSources="onUpdateSources"
+            @update:curScores="onUpdateProperties"
         />
         <MainPageTable
             :columns="columnsMainTable"
