@@ -5,7 +5,7 @@
         "racizm"     : "Racizm",
         "name"       : "Name",
         "source"     : "Source",
-        "score"      : "Properties"
+        "score"      : "Score"
     },
     "sign_in_page":{
         "sign_in_info"    : "Please sign in to save your preferences",

@@ -8,6 +8,10 @@
         columnStyle:{
             type: String,
             default:''
+        },
+        height:{
+            type:String,
+            default:'60vh'
         }
     })
 
@@ -66,7 +70,7 @@
 
     .row_block{
         /* max-height: 60vh; */
-        height    : 60vh;
+        height    : v-bind(height);
         overflow  : scroll;
     }
 

@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUpdated, computed, toRefs, type PropType } from 'vue';
-import { Service } from '@/components/table/Servise';
+import {  computed, type PropType } from 'vue';
 import { t } from '@/util/locale'
-
-import DataTable from 'primevue/datatable';
-import Column    from 'primevue/column';
-import Skeleton  from 'primevue/skeleton';
-import Divider   from 'primevue/divider';
 
 import Table from './Table.vue';
 import TableHeader from './TableHeader.vue';
@@ -14,15 +8,16 @@ import Row from './Row.vue';
 import RowCell from './RowCell.vue';
 
 
-import { ColumnMainTable} from '@/model/MainTable'
+import { TableColumn} from '@/model/MainTable'
 import { Source } from '@/model/MainPage'
 import { DataState } from '@/api/model/interface';
+
 
 ///////////////////// Defines ///////////////////////////
 
 const props = defineProps({
     columns :{
-        type: Object as PropType<Array<ColumnMainTable>>,
+        type: Object as PropType<Array<TableColumn>>,
         default:[]
     },
     data:{

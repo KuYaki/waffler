@@ -1,70 +1,92 @@
 <script setup lang="ts">
-    import DataTable from 'primevue/datatable';
-    import Column    from 'primevue/column';
+import {  computed, type PropType } from 'vue';
 
-    const products = [
-        {
-            id: '1000',
-            theme:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sunt deleniti quidem labore, repellat nihil ipsa aliquam ullam a?',
-            score:'10%'
-        },
-        {
-            id: '1001',
-            theme:' Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, unde!',
-            score:'4%'
-        },
-        {
-            id: '1002',
-            theme:'Lorem, ipsum dolor.',
-            score:'5%'
-        },
-        {
-            id: '1000',
-            theme:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sunt deleniti quidem labore, repellat nihil ipsa aliquam ullam a?',
-            score:'10%'
-        },
-        {
-            id: '1001',
-            theme:' Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, unde!',
-            score:'4%'
-        },
-        {
-            id: '1002',
-            theme:'Lorem, ipsum dolor.',
-            score:'5%'
-        },
-        {
-            id: '1000',
-            theme:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sunt deleniti quidem labore, repellat nihil ipsa aliquam ullam a?',
-            score:'10%'
-        },
-        {
-            id: '1001',
-            theme:' Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, unde!',
-            score:'4%'
-        },
-        {
-            id: '1002',
-            theme:'Lorem, ipsum dolor.',
-            score:'5%'
-        }
-    ];
+import Table from './Table.vue';
+import TableHeader from './TableHeader.vue';
+import Row from './Row.vue';
+import RowCell from './RowCell.vue';
+
+import { ProfileData } from './Servise';
+import { DataState } from '@/api/model/interface';
+import { Records } from '@/model/MainPage';
+
+
+
+///////////////////// Defines ///////////////////////////
+
+const props = defineProps({
+    columns :{
+        type: Object as PropType<Array<TableColumn>>,
+        default:[]
+    },
+    data:{
+        type : Object as PropType<Array<Records>>,
+        default:[]
+    },
+    state:{
+        type: Number,
+        default:DataState.OK
+    }
+})
+
+const emit = defineEmits<{
+    ( e: 'sorted'  , idx: number): void,
+    ( e: 'loadMore')             : void
+}>();
+
+
+/////////////////////Computed ///////////////////////////
+
+const gridColumns = computed(()=> {
+    let result = ''
+    props.columns.forEach( el => result = result + ' ' + el.width )
+    return result
+})
+
+
+//////////////////// Messages ///////////////////////////
+
+const onLoad = () =>{
+    emit('loadMore')
+}
+
+const sortByFields = ( idx:number) => {
+    emit('sorted', idx)
+}
 
 </script>
 
 <template>
 
-        <DataTable
-            :value="products"
-            removableSort
-            scrollable
-            scrollHeight="400px"
-            :rows="5"
-            tableStyle="min-width: 100%">
-            <Column field="theme" style="width: 75%"></Column>
-            <Column field="score" header="Score" sortable style="width: 25%"></Column>
-        </DataTable>
+    <div class="score_table">
+        <Table
+            :column-style="gridColumns"
+            :height="'300px'"
+            @scroll_bottom="onLoad">
+            <template v-slot:header>
 
+                <TableHeader
+                    @click="sortByFields"
+                    :columns="columns"/>
+
+            </template>
+
+            <template v-slot:row>
+
+                <Row v-for="(row, i) in data"
+                    :column-style="gridColumns"
+                    @click="onRowClick(i)"
+                >
+                    <RowCell
+                        v-for="column in columns"
+                        :state="state"
+                        :text="row[column.field]"/>
+                </Row>
+
+            </template>
+
+        </Table>
+    </div>
 </template>
 
 <style>

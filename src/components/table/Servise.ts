@@ -1,27 +1,52 @@
-export const Service = {
-    names: ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'],
-
-    source: ['YT','T', 'YT & T'],
-
-    generate(id:number) {
-        return {
-            id,
-            name         : this.generateName(),
-            source_type  : this.generateSouce(),
-            waffler_score: this.generatePercent(),
-            Rasizm       : this.generatePercent()
-        };
+export const ProfileData = [
+    {
+        "record_text": "Sokoke",
+        "score": 6,
+        "timestamp": "2023-09-19T13:54:41.630582759Z"
     },
-
-    generateName() {
-        return this.names[Math.floor(Math.random() * Math.floor(10))];
+    {
+        "record_text": "Korean Bobtail",
+        "score": 1,
+        "timestamp": "2023-09-19T13:54:41.630583037Z"
     },
-
-    generateSouce() {
-        return this.source[Math.floor(Math.random() * Math.floor(3))];
+    {
+        "record_text": "Dragon Li",
+        "score": 3,
+        "timestamp": "2023-09-19T13:54:41.630583688Z"
     },
-
-    generatePercent() {
-        return  Math.floor(Math.random() * Math.floor(100)) +'%';
+    {
+        "record_text": "Manx",
+        "score": 5,
+        "timestamp": "2023-09-19T13:54:41.63058433Z"
+    },
+    {
+        "record_text": "Lykoi",
+        "score": 10,
+        "timestamp": "2023-09-19T13:54:41.630584618Z"
+    },
+    {
+        "record_text": "Japanese Bobtail",
+        "score": 1,
+        "timestamp": "2023-09-19T13:54:41.63058489Z"
+    },
+    {
+        "record_text": "Persian",
+        "score": 3,
+        "timestamp": "2023-09-19T13:54:41.630585186Z"
+    },
+    {
+        "record_text": "Highlander",
+        "score": 7,
+        "timestamp": "2023-09-19T13:54:41.630585386Z"
+    },
+    {
+        "record_text": "Napoleon",
+        "score": 2,
+        "timestamp": "2023-09-19T13:54:41.630585669Z"
+    },
+    {
+        "record_text": "Asian Semi-longhair",
+        "score": 2,
+        "timestamp": "2023-09-19T13:54:41.630585942Z"
     }
-};
+]

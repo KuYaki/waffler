@@ -6,7 +6,7 @@ export enum Sorted {
     DOWN
 }
 
-export class ColumnMainTable {
+export class TableColumn {
     field     : string = '';
     width     : string = '';
     label     : string = '';
@@ -28,21 +28,43 @@ export class ColumnMainTable {
     }
 }
 
-
 export const createMainTableColumns = (
 
     scoreTypes:TDropdown[],
     sortedIdx:number,
     sorted:Sorted
 
-):ColumnMainTable[] => {
+):TableColumn[] => {
 
-    let result : ColumnMainTable[] = []
+    let result : TableColumn[] = []
 
-    result.push( new ColumnMainTable('name', '2fr', 'main_page.name', 'name' ))
-    result.push( new ColumnMainTable('source_type', '1fr', 'main_page.source', 'source' ) )
+    result.push( new TableColumn('name', '2fr', 'main_page.name', 'name' ))
+    result.push( new TableColumn('source_type', '1fr', 'main_page.source', 'source' ) )
 
-    scoreTypes.forEach( el => result.push( new ColumnMainTable(  el.key, '1fr' , el.tableHeader, el.sortedKey ) ))
+    scoreTypes.forEach( el => result.push( new TableColumn(  el.key, '1fr' , el.tableHeader, el.sortedKey ) ))
+
+    if ( sorted == Sorted.UP ) {
+        result[sortedIdx].sorted = Sorted.UP
+        result[sortedIdx].sortedKey += '_up'
+    }
+    if ( sorted == Sorted.DOWN) {
+        result[sortedIdx].sorted = Sorted.DOWN
+        result[sortedIdx].sortedKey += '_down'
+    }
+
+    return result
+}
+
+export const createProfileTableColumn = (
+
+    sortedIdx:number,
+    sorted:Sorted
+
+):TableColumn[] => {
+    let result : TableColumn[] = []
+
+    result.push( new TableColumn('record_text', '2fr', '',  'text' ))
+    result.push( new TableColumn('score',       '0.5fr', 'main_page.score','score' ))
 
     if ( sorted == Sorted.UP ) {
         result[sortedIdx].sorted = Sorted.UP
