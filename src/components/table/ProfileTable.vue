@@ -6,9 +6,9 @@ import TableHeader from './TableHeader.vue';
 import Row from './Row.vue';
 import RowCell from './RowCell.vue';
 
-import { ProfileData } from './Servise';
 import { DataState } from '@/api/model/interface';
 import { Records } from '@/model/MainPage';
+import { TableColumn } from '@/model/MainTable';
 
 
 
@@ -75,7 +75,6 @@ const sortByFields = ( idx:number) => {
 
                 <Row v-for="(row, i) in data"
                     :column-style="gridColumns"
-                    @click="onRowClick(i)"
                 >
                     <RowCell
                         v-for="column in columns"
