@@ -2,16 +2,21 @@
 import Divider from 'primevue/divider';
 
 const props = defineProps({
-        columnStyle:{
-            type: String,
-            default:''
-        }
-    })
+    columnStyle:{
+        type: String,
+        default:''
+    }
+})
+
+const emit = defineEmits<{
+    ( e: 'click'): void,
+}>();
+
 
 </script>
 
 <template>
-        <div class="row">
+        <div class="row" @click="emit('click')">
             <slot></slot>
         </div>
 

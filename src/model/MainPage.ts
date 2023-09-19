@@ -17,6 +17,7 @@ enum ScoreType {
 }
 
 export type TOrderKey = "name_up"| "name_down" | "source_up" | "source_down" | "waffler_up" | "waffler_down" | "raсizm_up" | "racizm_down"
+export type TScoreOrderKey = "score_up" | "score_down" | "text_up" | "text_down"
 
 export class Source {
     id            : number     = NaN
@@ -25,6 +26,12 @@ export class Source {
     source_url    : string     = ""
     waffler_score : number     = 1
     racizm_score  : number     = 0
+}
+
+export class Records {
+    record_text:string = ''
+    score      :number = NaN
+    timestamp  :string = ''
 }
 
 export class Parser {
@@ -48,6 +55,15 @@ class MainPageData implements IModelData {
     parse_score_type  : ScoreType  = 0
     parse_source_type : SourceType = 0
     parse_client_id   : string     = "2"
+
+
+    score_source_id  : number    = 0
+    score_score_type : ScoreType = 0
+    score_cursor     : number    = 0
+    score_limit      : number    = 10
+    score_order      : string    = "score_down"
+
+    records:Array< Records > = []
 
 
 }
@@ -74,6 +90,14 @@ export class MainPage extends Model {
                 parser    : this.data.parser
             }
 
+            case APIRoute.SOURCE_SCORE: return {
+                source_id : this.data.score_source_id,
+                score_type: this.data.score_score_type,
+                limit     : this.data.score_limit,
+                order     : this.data.score_order,
+                cursor    : this.data.score_cursor
+            }
+
         }
 
         console.error( "getPostRequestData", api);
@@ -85,7 +109,17 @@ export class MainPage extends Model {
             case APIRoute.SOURCE_SEARCH:
                 this.data.sources = data.sources
                 this.data.cursor  = data.cursor
+                break;
+
+            case APIRoute.SOURCE_SCORE:
+                this.data.score_cursor = data.cursor
+                this.data.records      = data.records
+                break;
         }
+    }
+
+    setScoreParams(){
+        if ( this.data.score_type.length > 0 ) this.data.score_score_type = this.data.score_type[0]
     }
 
     setParseParams(){

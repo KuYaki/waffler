@@ -36,21 +36,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-    ( e: 'sorted', idx: number): void,
-    ( e: 'openProfile')        : void,
-    ( e: 'loadMore')           : void
+    ( e: 'sorted'  , idx: number): void,
+    ( e: 'rowClick', idx: number): void,
+    ( e: 'loadMore')             : void
 }>();
-
-
-///////////////////// Hooks /////////////////////////////
-
-onMounted(() => {
-
-});
-
-
-//////////////////// Vars ///////////////////////////////
-
 
 
 /////////////////////Computed ///////////////////////////
@@ -68,9 +57,8 @@ const onLoad = () =>{
     emit('loadMore')
 }
 
-const test = ( node:any ) => {
-    alert(JSON.stringify(node.data))
-    emit('openProfile')
+const onRowClick = ( id:number ) => {
+    emit('rowClick', id)
 }
 
 const sortByFields = ( idx:number) => {
@@ -95,6 +83,7 @@ const sortByFields = ( idx:number) => {
 
                 <Row v-for="(row, i) in data"
                     :column-style="gridColumns"
+                    @click="onRowClick(i)"
                 >
                     <RowCell
                         v-for="column in columns"

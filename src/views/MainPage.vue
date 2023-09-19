@@ -28,6 +28,7 @@
     import type { API } from '@/api/service/interface';
     import type { TOrderKey } from "@/model/MainPage";
     import { DataState } from '@/api/model/interface';
+    import { Source } from '@/model/MainPage'
 
 
     //////////////////////// Vars ///////////////////////////
@@ -54,6 +55,7 @@
 
     const tableRows = ref([])
 
+    const currentSource:Ref<Source> = ref()
 
 
     ////////////////////// Hooks //////////////////////
@@ -64,9 +66,6 @@
         isPageMounted.value=true
         console.log( 'STORE ', model.value.data.sources)
     })
-
-
-    ///////////////////// Function /////////////////////////
 
 
     /////////////////////// Computed ///////////////////////
@@ -98,7 +97,8 @@
         isSignInDlgOpen.value = true
     }
 
-    const openProfileDlg = () => {
+    const openProfileDlg = ( rowIdx:number ) => {
+        currentSource.value = model.value.data.sources[rowIdx]
         isProfileDlgOpen.value = true
     }
 
@@ -223,7 +223,7 @@
             :data="tableRows"
             :state="model.state"
             @sorted="onSorted"
-            @open-profile="openProfileDlg"
+            @row-click="openProfileDlg"
             @load-more="loadMoreData"
         >
             <Button
@@ -258,7 +258,9 @@
                 width: '90vw',
                 maxWidth:'500px' }">
 
-            <ProfileDlg/>
+            <ProfileDlg
+                :profile="currentSource"
+            />
 
        </Dialog>
 

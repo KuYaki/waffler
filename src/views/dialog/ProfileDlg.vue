@@ -1,24 +1,59 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, PropType, onMounted } from 'vue';
+    import { storeToRefs } from "pinia";
+
 
     import { t } from '@/util/locale';
 
-    import DropdownData from '@/data/component/dropdown'
+    import { Source } from '@/model/MainPage';
 
-    import Profile   from '@/components/avatar/Profile.vue'
-    import Dropdown  from 'primevue/dropdown';
-    import Button    from 'primevue/button';
+    import DropdownData from '@/data/component/dropdown'
+    import StoreCreator from '@/store/StoreCreator';
+    import APIRoute     from '@/global/api';
+
+    import Profile      from '@/components/avatar/Profile.vue'
+    import Dropdown     from 'primevue/dropdown';
+    import Button       from 'primevue/button';
     import ProfileTable from '@/components/table/ProfileTable.vue';
 
+    import type { API } from '@/api/service/interface';
+
+
+
+    /////////////// Defines //////////////////////
+
+    const props = defineProps({
+        profile :{
+            type: Object as PropType<Source>,
+            default:{}
+        }
+    })
+
+    const emit = defineEmits<{
+    }>();
+
+
+    ////////////////// Vars //////////////////////////
+
+    const StoreSlotID: API = APIRoute.SOURCE_SEARCH
+
+    const store = StoreCreator.create( StoreSlotID )
+
+    const { model } = storeToRefs( store )
 
     const currentField = ref( DropdownData.property[0]);
 
-    const loading = ref(false)
+    ////////////////// Hooks ///////////////////////
 
-    const load = () =>{
-        loading.value = true
-        setTimeout(()=> loading.value = false , 2000)
-    }
+    onMounted(()=> {
+        model.value.setScoreParams()
+
+        model.value.data.score_source_id = props.profile.id
+
+        currentField.value = DropdownData.property.find(el => el.id == model.value.data.score_score_type)
+
+        store.post(APIRoute.SOURCE_SCORE)
+    })
 
 </script>
 
@@ -26,7 +61,7 @@
     <div class="profile_block">
         <div class="head">
 
-            <Profile />
+            <Profile :username="profile.name" />
 
             <Dropdown
                 v-model="currentField"
@@ -36,12 +71,10 @@
 
         </div>
 
-        <ProfileTable />
+        <!-- <ProfileTable /> -->
 
         <Button
             :label="t('profile_page.parse')"
-            :loading="loading"
-            @click="load"
             outlined />
     </div>
 </template>
