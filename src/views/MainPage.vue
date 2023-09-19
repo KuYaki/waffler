@@ -44,7 +44,7 @@
 
     const isAddTokenDlgOpen = ref(false)
     const isSignInDlgOpen   = ref(false)
-    const isProfileDlgOpen  = ref(true)
+    const isProfileDlgOpen  = ref(false)
 
     const selectedSources   :Ref<TDropdown[]> = ref([])
     const selectedProperties:Ref<TDropdown[]> = ref([DropdownData.property[0]])
