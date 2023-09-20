@@ -229,12 +229,8 @@
             @sorted="onSorted"
             @row-click="openProfileDlg"
             @load-more="loadMoreData"
+            @parse-more="openAddNewTokendDlg(true)"
         >
-            <Button
-                icon="pi pi-plus"
-                rounded
-                aria-label="Filter"
-                @click="openAddNewTokendDlg(true)" />
 
         </MainPageTable>
 

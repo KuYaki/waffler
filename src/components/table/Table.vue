@@ -12,6 +12,10 @@
         height:{
             type:String,
             default:'60vh'
+        },
+        isListEmpty:{
+            type:Boolean,
+            default:false
         }
     })
 
@@ -47,8 +51,15 @@
             <slot name = 'header'> </slot>
         </div>
 
-        <div class="row_block" @scroll="onScroll">
+        <div
+            v-if="!isListEmpty"
+            class="row_block"
+            @scroll="onScroll">
             <slot name = 'row'> </slot>
+        </div>
+
+        <div v-if="isListEmpty" class="empty_list">
+            <slot name = 'empty'> </slot>
         </div>
 
     </div>
@@ -72,6 +83,15 @@
         /* max-height: 60vh; */
         height    : v-bind(height);
         overflow  : scroll;
+    }
+
+    .empty_list{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 200px;
+
     }
 
 </style>

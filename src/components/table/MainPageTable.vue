@@ -6,6 +6,7 @@ import Table from './Table.vue';
 import TableHeader from './TableHeader.vue';
 import Row from './Row.vue';
 import RowCell from './RowCell.vue';
+import Button from 'primevue/button';
 
 
 import { TableColumn} from '@/model/MainTable'
@@ -34,6 +35,7 @@ const emit = defineEmits<{
     ( e: 'sorted'  , idx: number): void,
     ( e: 'rowClick', idx: number): void,
     ( e: 'loadMore')             : void
+    ( e: 'parseMore')            : void
 }>();
 
 
@@ -44,6 +46,8 @@ const gridColumns = computed(()=> {
     props.columns.forEach( el => result = result + ' ' + el.width )
     return result
 })
+
+const isListEmpty = computed(()=> props.data.length == 0)
 
 
 //////////////////// Messages ///////////////////////////
@@ -60,12 +64,21 @@ const sortByFields = ( idx:number) => {
     emit('sorted', idx)
 }
 
+const onParseMore = () =>{
+    emit('parseMore')
+}
+
 
 </script>
 
 <template>
+
     <div class="main_table">
-        <Table :column-style="gridColumns" @scroll_bottom="onLoad">
+        <Table
+            :isListEmpty = 'isListEmpty'
+            :column-style = "gridColumns"
+            @scroll_bottom = "onLoad">
+
             <template v-slot:header>
 
                 <TableHeader
@@ -74,9 +87,10 @@ const sortByFields = ( idx:number) => {
 
             </template>
 
-            <template v-slot:row>
+            <template v-slot:row >
 
-                <Row v-for="(row, i) in data"
+                <Row
+                    v-for="(row, i) in data"
                     :column-style="gridColumns"
                     @click="onRowClick(i)"
                 >
@@ -88,12 +102,25 @@ const sortByFields = ( idx:number) => {
 
             </template>
 
+            <template v-slot:empty >
+
+                <Button
+                    :label="t('profile_page.parse')"
+                    @click="onParseMore"
+                    outlined />
+
+            </template>
+
         </Table>
 
 
 
-        <div class="slot">
-            <slot></slot>
+        <div class="slot" v-if="!isListEmpty">
+            <Button
+                icon="pi pi-plus"
+                rounded
+                aria-label="Filter"
+                @click="onParseMore" />
 
         </div>
     </div>
