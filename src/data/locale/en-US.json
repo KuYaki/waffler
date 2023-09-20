@@ -27,6 +27,7 @@
         "parse": "Parse"
     },
     "profile_page":{
-        "parse":"Parse most recent"
+        "parse"   : "Parse most recent",
+        "empty_list": " List is empty"
     }
 }

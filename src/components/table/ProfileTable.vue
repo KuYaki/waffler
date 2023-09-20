@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {  computed, type PropType } from 'vue';
+import { t } from '@/util/locale'
+import { computed, type PropType } from 'vue';
+
 
 import Table from './Table.vue';
 import TableHeader from './TableHeader.vue';
@@ -43,6 +45,8 @@ const gridColumns = computed(()=> {
     return result
 })
 
+const isListEmpty = computed(()=> props.data.length == 0)
+
 
 //////////////////// Messages ///////////////////////////
 
@@ -60,6 +64,7 @@ const sortByFields = ( idx:number) => {
 
     <div class="score_table">
         <Table
+            :is-list-empty="isListEmpty"
             :column-style="gridColumns"
             :height="'300px'"
             @scroll_bottom="onLoad">
@@ -81,6 +86,12 @@ const sortByFields = ( idx:number) => {
                         :state="state"
                         :text="row[column.field]"/>
                 </Row>
+
+            </template>
+
+            <template v-slot:empty >
+
+                {{ t('profile_page.empty_list') }}
 
             </template>
 
