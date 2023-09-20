@@ -80,8 +80,8 @@
     }
 
     .row_block{
-        /* max-height: 60vh; */
-        height    : v-bind(height);
+        max-height: v-bind(height);
+        height    : min-content;
         overflow  : scroll;
     }
 
