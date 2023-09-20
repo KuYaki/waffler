@@ -17,7 +17,7 @@ enum ScoreType {
 }
 
 export type TOrderKey = "name_up"| "name_down" | "source_up" | "source_down" | "waffler_up" | "waffler_down" | "raсizm_up" | "racizm_down"
-export type TScoreOrderKey = "score_up" | "score_down" | "text_up" | "text_down"
+export type TScoreOrderKey = "score_up" | "score_down" | "record_text_up" | "record_text_down"
 
 export class Source {
     id            : number     = NaN
@@ -122,13 +122,14 @@ export class MainPage extends Model {
         if ( this.data.score_type.length > 0 ) this.data.score_score_type = this.data.score_type[0]
     }
 
-    setParseParams(){
+    setParseParams( isRouteFormMain:boolean ){
         if ( this.isURL(this.data.query) ) this.data.parse_url = this.data.query
         else this.data.parse_url = ''
 
         if ( this.data.source_type.length > 0 ) this.data.parse_source_type = this.data.source_type[0]
 
-        if ( this.data.score_type.length > 0 ) this.data.parse_score_type = this.data.score_type[0]
+        if ( this.data.score_type.length > 0 && isRouteFormMain ) this.data.parse_score_type = this.data.score_type[0]
+        else this.data.parse_score_type = this.data.score_score_type
 
     }
 

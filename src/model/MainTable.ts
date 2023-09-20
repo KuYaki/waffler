@@ -63,7 +63,7 @@ export const createProfileTableColumn = (
 ):TableColumn[] => {
     let result : TableColumn[] = []
 
-    result.push( new TableColumn('record_text', '2fr', '',  'text' ))
+    result.push( new TableColumn('record_text', '2fr'  , '',               'record_text' ))
     result.push( new TableColumn('score',       '0.5fr', 'main_page.score','score' ))
 
     if ( sorted == Sorted.UP ) {

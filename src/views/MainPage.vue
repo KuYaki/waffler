@@ -89,7 +89,10 @@
 
     ///////////////////// Messages //////////////////////////
 
-    const openAddNewTokendDlg = () =>{
+    const openAddNewTokendDlg = (isRouteFromMain:boolean) =>{
+
+        model.value.setParseParams(isRouteFromMain)
+
         isAddTokenDlgOpen.value = true
     }
 
@@ -193,6 +196,7 @@
 
 
         isAddTokenDlgOpen.value = false
+        isProfileDlgOpen.value = false
         updateMainPage()
 
     }
@@ -230,7 +234,7 @@
                 icon="pi pi-plus"
                 rounded
                 aria-label="Filter"
-                @click="openAddNewTokendDlg" />
+                @click="openAddNewTokendDlg(true)" />
 
         </MainPageTable>
 
@@ -260,6 +264,7 @@
 
             <ProfileDlg
                 :profile="currentSource"
+                @parse-more="openAddNewTokendDlg(false)"
             />
 
        </Dialog>

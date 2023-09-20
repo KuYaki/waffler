@@ -40,8 +40,6 @@
     ////////////////// Hooks ///////////////////////
 
     onMounted(()=> {
-        model.value.setParseParams()
-
         currentField.value = DropdownData.property.find(el => el.id == model.value.data.parse_score_type)
     })
 
