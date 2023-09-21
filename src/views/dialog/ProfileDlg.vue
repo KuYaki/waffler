@@ -16,6 +16,8 @@
     import Dropdown     from 'primevue/dropdown';
     import Button       from 'primevue/button';
     import ProfileTable from '@/components/table/ProfileTable.vue';
+    import SourceProfile from '@/components/avatar/SourceProfile.vue';
+
 
     import { Records }  from '@/model/MainPage';
     import { DataState } from '@/api/model/interface';
@@ -122,13 +124,21 @@
 
     }
 
+    const onOpenLink = () =>{
+
+        window.open( props.profile.source_url , '_blank' );
+    }
+
 </script>
 
 <template>
     <div class="profile_block">
         <div class="head">
 
-            <Profile :username="profile.name" />
+            <SourceProfile
+                :label       = "profile.name"
+                :source-type = "profile.source_type"
+                @click="onOpenLink"/>
 
             <Dropdown
                 v-model="currentScore"

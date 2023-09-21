@@ -9,8 +9,16 @@
         sourceType: {
             type   : Number,
             default: null
+        },
+        label: {
+            type: String,
+            default: 'John Doe'
         }
     })
+
+    const emit = defineEmits<{
+        (e: 'click'): void,
+    }>();
 
 
     //////////////// Computed ///////////////////////
@@ -19,31 +27,38 @@
 
     //TODO: ADDED IMAGE
     // #c4302b
-    // #2AABEE 
+    // #2AABEE
     const color =computed(() => {
         if (props.sourceType == 0) return '#2AABEE'
         else return '#c4302b'
     })
 
+    //////////////  Messages ////////////////
+
+    const onClick = () =>{
+        emit('click')
+    }
+
 </script>
 
 <template>
-    <div class="source_profile_block">
+    <div class="source_profile_block" @click="onClick">
         <i
             :style="{fontSize: '2rem', color:color}"
             :class="sourceProfile.icon">
         </i>
-        {{ sourceProfile.label }}
+        {{ label }}
     </div>
 
 </template>
 
 <style scoped>
     .source_profile_block{
-        display: flex;
+        display    : flex;
         align-items: center;
         font-weight: 700;
         font-size  : 20px;
+        cursor     : pointer;
     }
 
     i{
