@@ -44,6 +44,9 @@
   --maskbg: rgba(0, 0, 0, 0.4);
   --highlight-bg: #EFF6FF;
   --highlight-text-color: #1D4ED8;
+
+  --table-background : #fff;
+
   color-scheme: light;
 }
 

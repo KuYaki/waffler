@@ -76,13 +76,16 @@
     .header{
         display              : grid;
         grid-template-columns: v-bind(columnStyle);
-        margin-bottom        : 20px;
+        background           : var(--table-background);
+
     }
 
     .row_block{
-        max-height: v-bind(height);
-        height    : min-content;
-        overflow  : scroll;
+        max-height : v-bind(height);
+        height     : min-content;
+        overflow   : scroll;
+        background : var(--table-background);
+        padding-top: 20px;
     }
 
     .empty_list{

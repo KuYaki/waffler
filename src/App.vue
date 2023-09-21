@@ -22,4 +22,8 @@
         border-radius: 4px;
     }
 
+    ::-webkit-scrollbar-corner {
+        background: var(--table-background);
+    }
+
 </style>
