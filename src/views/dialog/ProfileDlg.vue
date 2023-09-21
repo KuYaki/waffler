@@ -179,4 +179,10 @@
         align-items: center;
     }
 
+    @media (max-width: 500px) {
+        .head{
+            grid-template-columns: 100%;
+        }
+    }
+
 </style>

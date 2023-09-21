@@ -68,6 +68,7 @@
         font-weight: 700;
         font-size  : 20px;
         cursor     : pointer;
+        min-width  : min-content;
     }
 
     i{
