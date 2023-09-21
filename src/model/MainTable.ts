@@ -64,11 +64,11 @@ export const createProfileTableColumn = (
 
     if ( sortedIdx == 0 ) {
         if ( sorted == Sorted.DOWN )
-            result.push( new TableColumn('record_text', '2fr' , 'profile_page.oldest', 'time' ))
-        if ( sorted == Sorted.UP )
             result.push( new TableColumn('record_text', '2fr' , 'profile_page.newest', 'time' ))
+        if ( sorted == Sorted.UP )
+            result.push( new TableColumn('record_text', '2fr' , 'profile_page.oldest', 'time' ))
     }
-    else result.push( new TableColumn('record_text', '2fr' , '', 'time' ))
+    else result.push( new TableColumn('record_text', '2fr' , 'profile_page.newest', 'time' ))
 
 
         result.push( new TableColumn('score', '0.5fr', 'main_page.score','score' ))
