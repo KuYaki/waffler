@@ -16,8 +16,8 @@ enum ScoreType {
     Racizm
 }
 
-export type TOrderKey = "name_up"| "name_down" | "source_up" | "source_down" | "waffler_up" | "waffler_down" | "raсizm_up" | "racizm_down"
-export type TScoreOrderKey = "score_up" | "score_down" | "record_text_up" | "record_text_down"
+export type TOrderKey = "name"| "name_desc" | "source" | "source_desc" | "waffler" | "waffler_desc" | "racism" | "racism_desc"
+export type TScoreOrderKey = "score" | "score_desc" | "time" | "time_desc"
 
 export class Source {
     id            : number     = NaN
@@ -44,7 +44,7 @@ class MainPageData implements IModelData {
     query       : string       = ''
     limit       : number       = 15
     cursor      : number       = 0
-    order       : TOrderKey    = 'waffler_down'
+    order       : TOrderKey    = 'waffler_desc'
     source_type : SourceType[] = [0,1]
     score_type  : ScoreType[]  = [0]
 
@@ -61,7 +61,7 @@ class MainPageData implements IModelData {
     score_score_type : ScoreType = 0
     score_cursor     : number    = 0
     score_limit      : number    = 10
-    score_order      : string    = "score_down"
+    score_order      : TScoreOrderKey    = "score"
 
     records:Array< Records > = []
 

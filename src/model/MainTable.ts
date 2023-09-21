@@ -45,11 +45,10 @@ export const createMainTableColumns = (
 
     if ( sorted == Sorted.UP ) {
         result[sortedIdx].sorted = Sorted.UP
-        result[sortedIdx].sortedKey += '_up'
+        result[sortedIdx].sortedKey += '_desc'
     }
     if ( sorted == Sorted.DOWN) {
         result[sortedIdx].sorted = Sorted.DOWN
-        result[sortedIdx].sortedKey += '_down'
     }
 
     return result
@@ -63,16 +62,23 @@ export const createProfileTableColumn = (
 ):TableColumn[] => {
     let result : TableColumn[] = []
 
-    result.push( new TableColumn('record_text', '2fr'  , '',               'record_text' ))
-    result.push( new TableColumn('score',       '0.5fr', 'main_page.score','score' ))
+    if ( sortedIdx == 0 ) {
+        if ( sorted == Sorted.DOWN )
+            result.push( new TableColumn('record_text', '2fr' , 'profile_page.oldest', 'time' ))
+        if ( sorted == Sorted.UP )
+            result.push( new TableColumn('record_text', '2fr' , 'profile_page.newest', 'time' ))
+    }
+    else result.push( new TableColumn('record_text', '2fr' , '', 'time' ))
+
+
+        result.push( new TableColumn('score', '0.5fr', 'main_page.score','score' ))
 
     if ( sorted == Sorted.UP ) {
         result[sortedIdx].sorted = Sorted.UP
-        result[sortedIdx].sortedKey += '_up'
+        result[sortedIdx].sortedKey += '_desc'
     }
     if ( sorted == Sorted.DOWN) {
         result[sortedIdx].sorted = Sorted.DOWN
-        result[sortedIdx].sortedKey += '_down'
     }
 
     return result

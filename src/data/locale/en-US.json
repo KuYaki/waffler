@@ -28,6 +28,8 @@
     },
     "profile_page":{
         "parse"   : "Parse most recent",
-        "empty_list": " List is empty"
+        "empty_list": " List is empty",
+        "newest"    : "Newest First",
+        "oldest"    : "Oldest First"
     }
 }
