@@ -36,7 +36,7 @@
     })
 
     const emit = defineEmits<{
-        (e:'parseMore'):void
+        ( e:'parseMore', link:string ):void
     }>();
 
 
@@ -118,9 +118,9 @@
         updateProfileTable()
     }
 
-    const onParseMore = () => {
+    const onParseMore = (link:string) => {
 
-        emit('parseMore')
+        emit('parseMore', link)
 
     }
 
@@ -159,7 +159,7 @@
 
         <Button
             :label="t('profile_page.parse')"
-            @click="onParseMore"
+            @click="onParseMore(profile.source_url)"
             outlined />
     </div>
 </template>

@@ -91,9 +91,11 @@
 
     ///////////////////// Messages //////////////////////////
 
-    const openAddNewTokendDlg = (isRouteFromMain:boolean) =>{
+    const openAddNewTokendDlg = (isRouteFromMain:boolean , link:string = '') =>{
 
         model.value.setParseParams(isRouteFromMain)
+
+        if(!isRouteFromMain) model.value.data.parse_url = link
 
         isAddTokenDlgOpen.value = true
     }
@@ -263,7 +265,7 @@
 
             <ProfileDlg
                 :profile="currentSource"
-                @parse-more="openAddNewTokendDlg(false)"
+                @parse-more=" link => openAddNewTokendDlg(false, link)"
             />
 
        </Dialog>
