@@ -72,6 +72,8 @@
 
     const columnsMainTable = computed(() => createMainTableColumns(scoreTypes.value, sortedMainTableIdx.value, sortedColumnState.value ))
 
+    const showStateInMainTable = computed(()=> isProfileDlgOpen.value || isAddTokenDlgOpen.value )
+
 
     ///////////////////// Function //////////////////////////
 
@@ -226,6 +228,7 @@
             :columns="columnsMainTable"
             :data="tableRows"
             :state="model.state"
+            :show-state="!showStateInMainTable"
             @sorted="onSorted"
             @row-click="openProfileDlg"
             @load-more="loadMoreData"

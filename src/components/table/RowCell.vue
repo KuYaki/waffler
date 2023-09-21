@@ -10,22 +10,27 @@ const props = defineProps({
         state:{
             type: Number,
             default:DataState.OK
+        },
+        showState:{
+            type:Boolean,
+            default:true
         }
     })
 </script>
 
 <template>
-    <div
-        v-if="state == DataState.OK || state == DataState.ERROR"
-        class="row_cell">
-        {{ text }}
-    </div>
 
     <Skeleton
-        v-if="state == DataState.LOADING"
+        v-if="state == DataState.LOADING && showState"
         width="50%">
 
     </Skeleton>
+
+    <div
+        v-else
+        class="row_cell">
+        {{ text }}
+    </div>
 </template>
 
 <style scoped>

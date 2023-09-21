@@ -28,6 +28,11 @@ const props = defineProps({
     state:{
         type: Number,
         default:DataState.OK
+    },
+    showState:{
+        type:Boolean,
+        default:true
+
     }
 })
 
@@ -97,6 +102,7 @@ const onParseMore = () =>{
                     <RowCell
                         v-for="column in columns"
                         :state="state"
+                        :show-state="showState"
                         :text="row[column.field]"/>
                 </Row>
 
