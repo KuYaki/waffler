@@ -41,6 +41,7 @@
 
     onMounted(()=> {
         currentField.value = DropdownData.property.find(el => el.id == model.value.data.parse_score_type)
+        onGetInfo()
     })
 
 
@@ -64,6 +65,14 @@
         model.value.data.parse_score_type = currentField.value.id
     }
 
+    const onGetInfo = () => {
+        model.value.data.name = ''
+
+        if( model.value.isURL( model.value.data.parse_url ) ){
+            store.post(APIRoute.SOURCE_INFO)
+        }
+    }
+
 </script>
 
 <template>
@@ -72,9 +81,11 @@
         <InputText
             :placeholder="t('add_token_page.link')"
             v-model:modelValue="model.data.parse_url"
+            @update:model-value="onGetInfo"
         />
         <SourceProfile
-            :source-type="model.data.parse_source_type"
+            :source-type="model.data.type"
+            :label="model.data.name"
         />
         <Dropdown
             v-model="currentField"

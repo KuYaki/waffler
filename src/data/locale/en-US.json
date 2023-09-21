@@ -21,10 +21,12 @@
         "log_out"         : "Sign out"
     },
     "add_token_page":{
-        "info" : "Download most recent messages to check if the person or channel behaviuor",
-        "link" : "Link",
-        "token": "GPT Token",
-        "parse": "Parse"
+        "info"     : "Download most recent messages to check if the person or channel behaviuor",
+        "link"     : "Link",
+        "token"    : "GPT Token",
+        "parse"    : "Parse",
+        "need_link": "Add a link to the source"
+
     },
     "profile_page":{
         "parse"   : "Parse most recent",

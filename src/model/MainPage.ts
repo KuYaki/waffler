@@ -57,13 +57,16 @@ class MainPageData implements IModelData {
     parse_client_id   : string     = "2"
 
 
-    score_source_id  : number    = 0
-    score_score_type : ScoreType = 0
-    score_cursor     : number    = 0
-    score_limit      : number    = 10
-    score_order      : TScoreOrderKey    = "score"
+    score_source_id  : number         = 0
+    score_score_type : ScoreType      = 0
+    score_cursor     : number         = 0
+    score_limit      : number         = 10
+    score_order      : TScoreOrderKey = "score"
 
     records:Array< Records > = []
+
+    name: string = ''
+    type: SourceType = 0
 
 
 }
@@ -98,6 +101,10 @@ export class MainPage extends Model {
                 cursor    : this.data.score_cursor
             }
 
+            case APIRoute.SOURCE_INFO: return {
+                source_url : this.data.parse_url
+            }
+
         }
 
         console.error( "getPostRequestData", api);
@@ -115,6 +122,11 @@ export class MainPage extends Model {
                 this.data.score_cursor = data.cursor
                 this.data.records      = data.records
                 break;
+
+            case APIRoute.SOURCE_INFO:
+                this.data.name = data.name
+                this.data.type = data.type
+                break
         }
     }
 
