@@ -45,10 +45,10 @@ export const createMainTableColumns = (
 
     if ( sorted == Sorted.UP ) {
         result[sortedIdx].sorted = Sorted.UP
-        result[sortedIdx].sortedKey += '_desc'
     }
     if ( sorted == Sorted.DOWN) {
         result[sortedIdx].sorted = Sorted.DOWN
+        result[sortedIdx].sortedKey += '_desc'
     }
 
     return result
@@ -75,10 +75,10 @@ export const createProfileTableColumn = (
 
     if ( sorted == Sorted.UP ) {
         result[sortedIdx].sorted = Sorted.UP
-        result[sortedIdx].sortedKey += '_desc'
     }
     if ( sorted == Sorted.DOWN) {
         result[sortedIdx].sorted = Sorted.DOWN
+        result[sortedIdx].sortedKey += '_desc'
     }
 
     return result

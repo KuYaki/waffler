@@ -48,7 +48,7 @@ class MainPageData implements IModelData {
     query       : string       = ''
     limit       : number       = 15
     cursor      : any          = new Cursor()
-    order       : TOrderKey    = 'waffler_desc'
+    order       : TOrderKey    = 'waffler'
     source_type : SourceType[] = [0,1]
     score_type  : ScoreType[]  = [0]
 
