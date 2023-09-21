@@ -28,7 +28,7 @@
     import type { API } from '@/api/service/interface';
     import type { TOrderKey } from "@/model/MainPage";
     import { DataState } from '@/api/model/interface';
-    import { Source } from '@/model/MainPage'
+    import { Source, Cursor } from '@/model/MainPage'
 
 
     //////////////////////// Vars ///////////////////////////
@@ -78,7 +78,7 @@
     ///////////////////// Function //////////////////////////
 
     const updateMainPage = async () => {
-        model.value.data.cursor = 0
+        model.value.data.cursor = new Cursor()
 
         store.post(StoreSlotID)
             .then(()=> {
@@ -105,7 +105,7 @@
     }
 
     const openProfileDlg = ( rowIdx:number ) => {
-        currentSource.value = model.value.data.sources[rowIdx]
+        currentSource.value = tableRows.value[rowIdx]
         isProfileDlgOpen.value = true
     }
 
@@ -174,6 +174,8 @@
     }
 
     const loadMoreData = () => {
+        if ( model.value.data.cursor == null ) return
+
         store.post(StoreSlotID)
             .then(()=> {
                 if( model.value.state == DataState.ERROR) return
@@ -231,6 +233,7 @@
             :data="tableRows"
             :state="model.state"
             :show-state="!showStateInMainTable"
+            :stop-load="model.data.cursor == null"
             @sorted="onSorted"
             @row-click="openProfileDlg"
             @load-more="loadMoreData"

@@ -39,11 +39,15 @@ export class Parser {
     token = ''
 }
 
+export class Cursor {
+    offset   :number = 0
+    partition:number = 0
+}
 
 class MainPageData implements IModelData {
     query       : string       = ''
     limit       : number       = 15
-    cursor      : number       = 0
+    cursor      : any          = new Cursor()
     order       : TOrderKey    = 'waffler_desc'
     source_type : SourceType[] = [0,1]
     score_type  : ScoreType[]  = [0]
@@ -59,7 +63,7 @@ class MainPageData implements IModelData {
 
     score_source_id  : number         = 0
     score_score_type : ScoreType      = 0
-    score_cursor     : number         = 0
+    score_cursor     : any            = new Cursor()
     score_limit      : number         = 10
     score_order      : TScoreOrderKey = "score"
 

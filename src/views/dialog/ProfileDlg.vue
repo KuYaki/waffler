@@ -5,7 +5,7 @@
 
     import { t } from '@/util/locale';
 
-    import { Source } from '@/model/MainPage';
+    import { Source, Cursor } from '@/model/MainPage';
     import { createProfileTableColumn, Sorted } from '@/model/MainTable';
 
     import DropdownData from '@/data/component/dropdown'
@@ -70,7 +70,7 @@
     //////////////// Function ////////////////////////
 
     const updateProfileTable = async ( ) => {
-        model.value.data.score_cursor = 0
+        model.value.data.score_cursor = new Cursor()
 
         store.post(APIRoute.SOURCE_SCORE)
             .then(()=> {
@@ -89,6 +89,7 @@
     /////////////// Messages ///////////////////////
 
     const loadMoreData = () => {
+        if(model.value.data.score_cursor == null) return
         store.post(APIRoute.SOURCE_SCORE)
             .then(()=> {
                 if( model.value.state == DataState.ERROR) return
