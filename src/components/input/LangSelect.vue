@@ -14,8 +14,8 @@
     const changeLang = () => {
 
         setLocale(currentLang.value)
-        hideLangList()
 
+        hideLangList()
     }
 
     // const toggleShowLang = () => showList.value = !showList.value
