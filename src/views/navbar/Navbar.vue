@@ -19,8 +19,8 @@
     <div class="navbar">
         <ToggleTheme/>
         <LangSelect/>
-        <Avatar
-            @click = "openSignInDlg"/>
+        <!-- <Avatar
+            @click = "openSignInDlg"/> -->
     </div>
 </template>
 
