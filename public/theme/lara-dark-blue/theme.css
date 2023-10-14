@@ -1076,7 +1076,7 @@
   background: #0b213f;
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-  background: #93C5FD;
+  background: #0b213f;
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
   background: rgba(255, 255, 255, 0.87);
