@@ -1,8 +1,25 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { usePrimeVue } from 'primevue/config';
 
     import InputSwitch from 'primevue/inputswitch';
+
+    /////////////// Hooks //////////////////
+
+    onMounted(()=>{
+        const theme = localStorage['theme']
+
+        if( !theme || theme == 'light' ) {
+            isDarkMode.value = false
+            setLightTheme()
+        }
+        else {
+            isDarkMode.value = true
+            setDarkTheme()
+        }
+
+    })
+
 
     /////////////// Vars ///////////////////
 
@@ -13,11 +30,26 @@
     const themeLink  = 'theme_link'
 
     let isDarkMode = ref(false)
+
     /////////////// Messages ///////////////
 
     const toggleTheme = () => {
-        if( isDarkMode.value ) primevue.changeTheme( lightTheme, darkTheme, themeLink )
-        else primevue.changeTheme(darkTheme, lightTheme, themeLink )
+        if( isDarkMode.value ) setDarkTheme()
+        else setLightTheme()
+    }
+
+
+    /////////////// Functions ///////////////
+
+    const setLightTheme = () => {
+        localStorage.setItem('theme', 'light')
+        primevue.changeTheme(darkTheme, lightTheme, themeLink )
+    }
+
+    const setDarkTheme = () => {
+        localStorage.setItem('theme', 'dark')
+        primevue.changeTheme( lightTheme, darkTheme, themeLink )
+
     }
 
 </script>
