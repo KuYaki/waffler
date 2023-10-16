@@ -1,8 +1,8 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
-    import ToggleTheme          from '@/components/input/ToggleTheme.vue';
-    import LangSelect           from '@/components/input/LangSelect.vue';
+    import ToggleTheme          from '@/components/custom/ToggleTheme.vue';
+    import LangSelect           from '@/components/custom/LangSelect.vue';
     import Avatar               from '@/components/avatar/Avatar.vue'
 
     const emit = defineEmits<{
@@ -17,8 +17,9 @@
 
 <template>
     <div class="navbar">
-        <ToggleTheme/>
-        <LangSelect/>
+
+        <ToggleTheme />
+        <LangSelect />
         <!-- <Avatar
             @click = "openSignInDlg"/> -->
     </div>

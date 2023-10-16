@@ -4,8 +4,8 @@
     import InputText            from '@/components/input/InputText.vue'
     import SourceDropdown       from '@/components/dropdown/SourceDropdown.vue';
     import SingleChoiceDropdown from '@/components/dropdown/SingleChoiceDropdown.vue'
-    import ToggleTheme          from '@/components/input/ToggleTheme.vue';
-    import LangSelect           from '@/components/input/LangSelect.vue';
+    import ToggleTheme          from '@/components/custom/ToggleTheme.vue';
+    import LangSelect           from '@/components/custom/LangSelect.vue';
     import Avatar               from '@/components/avatar/Avatar.vue'
     import SignInTab            from '@/views/tabs/SignInTab.vue'
     import Divider              from 'primevue/divider';
