@@ -4,45 +4,51 @@
 
     import Listbox from 'primevue/listbox';
     import Button from 'primevue/button';
+    import CountryFlag from '@/components/avatar/CountryFlag.vue'
     import Dropdown from 'primevue/dropdown';
 
     const currentLang = ref(getLocale())
+
     const langs = ref( ['RU','EN'] )
 
     let showList = ref(false)
 
-    const changeLang = () => {
+    const changeLang = (event:any) => {
 
-        setLocale(currentLang.value)
+        const curValue = event.value
+
+        if ( curValue != undefined ) {
+
+            setLocale(curValue)
+
+            currentLang.value = curValue
+        }
 
         hideLangList()
     }
 
     // const toggleShowLang = () => showList.value = !showList.value
-    const showLAngList = () =>showList.value = true
+    const showLAngList = () => showList.value = true
     const hideLangList   = () => showList.value = false
 
 </script>
 
 <template>
+
     <div
         class="lang_select"
         @mouseleave = hideLangList>
 
-        <Button
+        <CountryFlag
             @mouseover="showLAngList"
-            label="Primary"
-            text >
+            :lang = "currentLang"/>
 
-                <i class="pi pi-language" style="font-size: 25px"></i>
-
-        </Button>
         <!-- <transition name ='fade'> -->
         <span class="list" v-if="showList">
 
             <Listbox
                 :options="langs"
-                v-model="currentLang"
+                :modelValue="currentLang"
                 @mouseover = showLAngList
                 @change="changeLang"/>
 
@@ -57,14 +63,15 @@
     }
 
     .lang_select{
+        cursor  : pointer;
         position: relative;
-        padding: 0 5px;
+        padding : 0 5px;
     }
 
     .list {
         position: absolute;
-        top     : 50px;
-        left    : 8px;
+        top     : 30px;
+        left    : -8px;
         z-index: 1000;
     }
 
