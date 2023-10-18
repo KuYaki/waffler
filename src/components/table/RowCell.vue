@@ -30,7 +30,10 @@ const props = defineProps({
         v-else
         class="row_cell">
         {{ text }}
+        <slot></slot>
     </div>
+
+
 </template>
 
 <style scoped>

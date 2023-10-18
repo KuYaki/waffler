@@ -13,7 +13,7 @@
         },
         label: {
             type: String,
-            default: 'John Doe'
+            default: ''
         }
     })
 
@@ -26,7 +26,7 @@
 
     const sourceProfile = computed(() => DropdownData.source[props.sourceType])
 
-    const showProfile = computed(()=> props.label.length > 0)
+    // const showProfile = computed(()=> props.label.length > 0)
     //TODO: ADDED IMAGE
     // #c4302b
     // #2AABEE
@@ -45,7 +45,6 @@
 
 <template>
     <div
-        v-if="showProfile"
         class="source_profile_block"
         @click="onClick"
     >
@@ -55,9 +54,9 @@
         </i>
         {{ label }}
     </div>
-    <div v-else class="source_profile_block">
+    <!-- <div v-else class="source_profile_block">
         {{ t('add_token_page.need_link') }}
-    </div>
+    </div> -->
 
 </template>
 

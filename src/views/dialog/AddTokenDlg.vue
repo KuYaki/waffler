@@ -49,6 +49,8 @@
 
     const isDisabledParse = computed( () => model.value.data.parse_url.length == 0 || model.value.data.parser!.token.length == 0 )
 
+    const showAddTokeMsg = computed(()=> model.value.data.name.length > 0)
+
 
     ///////////////// Messages /////////////////////
 
@@ -84,9 +86,13 @@
             @update:model-value="onGetInfo"
         />
         <SourceProfile
+            v-if="showAddTokeMsg"
             :source-type="model.data.type"
             :label="model.data.name"
         />
+        <div v-else class="source_profile_block">
+            {{ t('add_token_page.need_link') }}
+        </div>
         <Dropdown
             v-model="currentField"
             display="chip"
@@ -112,6 +118,15 @@
         display: grid;
         grid-template-columns: 100%;
         row-gap: 10px;
+    }
+
+    .source_profile_block{
+        display    : flex;
+        align-items: center;
+        font-weight: 700;
+        font-size  : 20px;
+        cursor     : pointer;
+        min-width  : min-content;
     }
 
 </style>
