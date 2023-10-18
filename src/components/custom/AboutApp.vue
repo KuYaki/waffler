@@ -62,7 +62,7 @@
         :draggable="false"
         :modal="true"
         :dismissableMask="true"
-        header=""
+        header="Main Header"
         :position="'topleft'"
         :style="{
             width: '90vw',
