@@ -8,6 +8,7 @@ import Row from './Row.vue';
 import RowCell from './RowCell.vue';
 import Button from 'primevue/button';
 import SourceProfile from '../avatar/SourceProfile.vue';
+import ColoringPercent from '../custom/ColoringPercent.vue';
 
 
 import { TableColumn} from '@/model/MainTable'
@@ -102,13 +103,13 @@ const onParseMore = () =>{
                 >
                     <span v-for="column in columns">
                         <RowCell
-                            v-if="column.field != 'source_type'"
+                            v-if="column.field == 'name'"
                             :state="state"
                             :show-state="showState"
                             :text="row[column.field]"/>
 
                         <RowCell
-                            v-else
+                            v-else-if="column.field == 'source_type'"
                             :state="state"
                             :show-state="showState"
                             :text="''">
@@ -116,6 +117,16 @@ const onParseMore = () =>{
                             <SourceProfile
                                 :source-type="row[column.field]"
                             />
+
+                        </RowCell>
+
+                        <RowCell
+                            v-else
+                            :state="state"
+                            :show-state="showState"
+                            :text="''">
+
+                            <ColoringPercent :value="row[column.field]"/>
 
                         </RowCell>
 
