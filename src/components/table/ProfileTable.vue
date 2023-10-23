@@ -7,6 +7,7 @@ import Table from './Table.vue';
 import TableHeader from './TableHeader.vue';
 import Row from './Row.vue';
 import RowCell from './RowCell.vue';
+import ColoringPercent from '../custom/ColoringPercent.vue';
 
 import { DataState } from '@/api/model/interface';
 import { Records } from '@/model/MainPage';
@@ -81,10 +82,25 @@ const sortByFields = ( idx:number) => {
                 <Row v-for="(row, i) in data"
                     :column-style="gridColumns"
                 >
-                    <RowCell
-                        v-for="column in columns"
-                        :state="state"
-                        :text="row[column.field]"/>
+
+                    <span v-for="column in columns">
+
+                        <RowCell
+                            v-if="column.field == 'record_text'"
+                            :state="state"
+                            :text="row[column.field]"/>
+
+
+                        <RowCell
+                            v-else
+                            :state="state"
+                            :text="''">
+
+                            <ColoringPercent :value="row[column.field]"/>
+
+                        </RowCell>
+
+                    </span>
                 </Row>
 
             </template>
