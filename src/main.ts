@@ -7,6 +7,8 @@ import i18n from './util/locale';
 import './registerServiceWorker'
 import 'primeicons/primeicons.css'
 // import 'primeflex/primeflex.scss';
+import Tooltip from 'primevue/tooltip';
+
 
 
 const app = createApp(App)
@@ -16,5 +18,6 @@ app.use(i18n)
 app.use(router)
 app.use(pinia)
 app.use(PrimeVue)
+app.directive('tooltip', Tooltip);
 
 app.mount('#app')

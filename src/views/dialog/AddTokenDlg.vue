@@ -13,6 +13,7 @@
     import Dropdown      from 'primevue/dropdown';
     import Button        from 'primevue/button';
     import SourceProfile from '@/components/avatar/SourceProfile.vue';
+    import GPTToken from './profile/GPTToken.vue';
 
 
     import type { API } from '@/api/service/interface';
@@ -98,10 +99,10 @@
             display="chip"
             :options="DropdownData.property"
             @update:modelValue="onChangeScore"
-            optionLabel="label"/>
-        <InputText
-            :placeholder="t('add_token_page.token')"
-            v-model:modelValue="model.data.parser!.token"
+            optionLabel="label"
+        />
+        <GPTToken
+            v-model:value="model.data.parser!.token"
         />
         <Button
             :label="t('add_token_page.parse')"
