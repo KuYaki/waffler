@@ -34,5 +34,16 @@
         "empty_list": " List is empty",
         "newest"    : "Newest First",
         "oldest"    : "Oldest First"
+    },
+    "footer":{
+        "author"        : "Author",
+        "error_msg"     : "Please report the problem",
+        "policy_link"   : "Privacy policy",
+        "author_link"   : "©KuYaki.",
+        "error_msg_link": "Report a bug.",
+        "policy_start"  : "We store all your data locally on your computer and we are not interested in who you are, what you are and why you are, we do not synchronize anything and do not store anything. We use your requests without reference to your personal data. If you parse with your token, we forward it in a request to ",
+        "open_ai"       : "Open AI. ",
+        "policy_finish" : "If something leaks, no complaints against us. By using the site, you agree to this order of things, as well as the rules of use.",
+        "send_btn"      : "Send"
     }
 }

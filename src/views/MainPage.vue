@@ -16,7 +16,8 @@
     import MainPageTable from '@/components/table/MainPageTable.vue';
     import AddTokenDlg   from '@/views/dialog/AddTokenDlg.vue';
     import SignInDlg     from '@/views/dialog/SignInDlg.vue'
-    import ProfileDlg     from '@/views/dialog/ProfileDlg.vue';
+    import ProfileDlg    from '@/views/dialog/ProfileDlg.vue';
+    import Footer        from '@/views/footer/Footer.vue'
 
     import InputText     from 'primevue/inputtext';
     import Button        from 'primevue/button';
@@ -288,6 +289,8 @@
 
        </Dialog> -->
     </div>
+
+    <Footer />
 </template>
 
 <style scoped>
