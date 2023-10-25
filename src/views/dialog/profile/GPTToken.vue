@@ -4,6 +4,7 @@
 
     import InputText     from 'primevue/inputtext';
     import Checkbox      from 'primevue/checkbox';
+    import Button        from 'primevue/button';
 
 
     ///////////////// Defines ///////////////////
@@ -65,22 +66,36 @@
         localStorage.setItem('isSaveToken', JSON.stringify(isSaveToken.value) )
     }
 
+    const onOpenLink = ( ) => {
+        const openAILink = 'https://openai.com/pricing'
+        window.open( openAILink , '_blank' );
+    }
+
 </script>
 
 <template>
 
 <div class="gpt_block">
+    <Button
+        v-tooltip.right="t('add_token_page.token_info')"
+        icon="pi pi-question-circle"
+        severity="secondary"
+        text
+        @click="onOpenLink"
+    />
     <InputText
         :placeholder="t('add_token_page.token')"
         :modelValue="value"
         @input="onInput(($event.target as HTMLInputElement).value)"
     />
-    <Checkbox
-        v-tooltip.left="t('add_token_page.save_tooltip')"
-        :binary="true"
-        v-model="isSaveToken"
-        @change="onChange"
-    />
+    <div class="save_block">
+        <Checkbox
+            v-tooltip.left="t('add_token_page.save_tooltip')"
+            :binary="true"
+            v-model="isSaveToken"
+            @change="onChange"
+        />
+    </div>
 </div>
 
 
@@ -90,9 +105,17 @@
     .gpt_block{
         display              : grid;
         align-items          : center;
-        grid-template-columns: 9fr 1fr;
-        column-gap           : 15px;
+        grid-template-columns: 1fr 9fr 1fr;
+        column-gap           : 10px;
         width                : 100%;
+    }
+
+    .save_block{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 </style>

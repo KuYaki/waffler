@@ -26,8 +26,8 @@
         "token"       : "GPT Token",
         "parse"       : "Parse",
         "need_link"   : "Add a link to the source",
-        "save_tooltip": "Save. DO NOT click if this is not your computer!"
-
+        "save_tooltip": "Save. DO NOT click if this is not your computer!",
+        "token_info"  : "Find out where to get a token"
     },
     "profile_page":{
         "parse"   : "Parse most recent",
