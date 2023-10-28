@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import { computed, ref } from 'vue';
 
+    import { isURL } from '@/helper/CheckUrl';
+
     ///////////////// Defines ///////////////////
 
     const props = defineProps({
@@ -26,9 +28,16 @@
     /////////////// Messages //////////////////
 
     const onClick = () => {
-        if( props.value.length < chars ) return
+        if( isURL(props.value)){
 
-        isShowTrimValue.value = !isShowTrimValue.value
+            window.open(props.value, '_blank')
+
+        } else {
+
+            if( props.value.length < chars ) return
+
+            isShowTrimValue.value = !isShowTrimValue.value
+        }
     }
 
 
