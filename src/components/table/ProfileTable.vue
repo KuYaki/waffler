@@ -8,6 +8,7 @@ import TableHeader from './TableHeader.vue';
 import Row from './Row.vue';
 import RowCell from './RowCell.vue';
 import ColoringPercent from '../custom/ColoringPercent.vue';
+import TrimText from '../custom/TrimText.vue';
 
 import { DataState } from '@/api/model/interface';
 import { Records } from '@/model/MainPage';
@@ -69,6 +70,7 @@ const sortByFields = ( idx:number) => {
             :column-style="gridColumns"
             :height="'300px'"
             @scroll_bottom="onLoad">
+
             <template v-slot:header>
 
                 <TableHeader
@@ -88,8 +90,13 @@ const sortByFields = ( idx:number) => {
                         <RowCell
                             v-if="column.field == 'record_text'"
                             :state="state"
-                            :text="row[column.field]"/>
+                            :text="''">
 
+                                <TrimText
+                                    :value="row[column.field]"
+                                />
+
+                        </RowCell>
 
                         <RowCell
                             v-else
