@@ -44,4 +44,8 @@
 
 <style scoped>
 
+    .trim_text_block{
+        word-break: break-all;
+    }
+
 </style>
