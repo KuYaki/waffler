@@ -1,16 +1,28 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue';
 
+    import { t } from '@/util/locale';
+
+
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
-    import Card          from 'primevue/card';
+
+
+    //////////////// Defines ///////////////////
+
+    const emit = defineEmits<{
+        (e: 'openPolicy'): void,
+        (e: 'openAuthor'): void,
+    }>();
 
 
     //////////////// Vars //////////////////////
 
     let isInfoDlgOpen = ref( false )
 
-    let showPolicy = ref(false)
+
+    const gitUrl     = 'https://github.com/KuYaki/waffler_server'
+    const chatGPTUrl = 'https://chat.openai.com/'
 
 
     ////////////// Hooks ///////////////////////
@@ -29,14 +41,6 @@
         isInfoDlgOpen.value = true
     }
 
-    const showPolicyRules = () => {
-        showPolicy.value = true
-    }
-
-    const hidePolicyRules = () => {
-        showPolicy.value = false
-    }
-
 
     ///////////// Function /////////////////////
 
@@ -45,6 +49,20 @@
         const lang  = window.localStorage.getItem('language')
 
         return  theme == null && lang == null
+    }
+
+    const openLink = (url:string) =>{
+        window.open( url , '_blank' );
+    }
+
+    ///////////// onMessages ////////////////////
+
+    const onOpenPolicy = () => {
+        emit('openPolicy')
+    }
+
+    const onOpenAuthor = () => {
+        emit('openAuthor')
     }
 
 </script>
@@ -62,33 +80,39 @@
         :draggable="false"
         :modal="true"
         :dismissableMask="true"
-        header="Main Header"
+        :header="t('about_app.about_app')"
         :position="'topleft'"
         :style="{
             width: '90vw',
-            maxWidth:'500px' }"
-        @after-hide="hidePolicyRules">
+            maxWidth:'500px' }">
 
-            <Card>
-                <template #title> Some header </template>
-                <template #content>
-                    <div v-if = "!showPolicy">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis laudantium, non culpa temporibus voluptas illum dignissimos vel ratione eveniet repellat id, aut eius nam obcaecati. Tempore, ad ut consectetur illo cupiditate ea unde distinctio modi aliquam itaque suscipit doloribus quae.
-                        <span @click = showPolicyRules> link to policy</span>
-                    </div>
-                    <div v-if = "showPolicy">
-                        Policy!!! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, et voluptatibus corporis ipsam accusantium non veniam ipsum amet beatae?
-                    </div>
-                </template>
-            </Card>
+        <!--TODO: MAKE COMPONEN -->
+
+        <div class="about_app">
+            <span>{{ t('about_app.start_info') }}</span>
+            <span class="link" @click="openLink(gitUrl)">{{ t('about_app.git_link') }}</span>
+            <span>{{ t('about_app.close_bracket') }}</span>
+            <br>
+            <br>
+            <span>{{ t('about_app.gpt_info') }}</span>
+            <span class="link" @click="openLink(chatGPTUrl)">{{ t('about_app.ChatGPT') }}</span>
+            <span>{{ t('about_app.gpt_info_footer') }}</span>
+            <br>
+            <br>
+            <span>{{ t('about_app.author') }}</span>
+            <span class="link" @click="onOpenAuthor">{{ t('about_app.author_link') }}</span>
+            <br>
+            <br>
+            <span>{{ t('about_app.policy') }}</span>
+            <span class="link" @click="onOpenPolicy">{{ t('about_app.policy_link') }}</span>
+            <span>{{ t('about_app.policy_finish') }}</span>
+        </div>
+
     </Dialog>
 
 </template>
 
 <style scoped>
 
-span{
-    cursor: pointer;
-}
 
 </style>

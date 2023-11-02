@@ -27,9 +27,4 @@ const onOpenLink = () =>{
         margin     : auto;
         cursor     : default;
     }
-
-    .link{
-        cursor     : pointer;
-        font-weight: 700;
-    }
 </style>

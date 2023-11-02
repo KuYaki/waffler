@@ -58,6 +58,8 @@
 
     const currentSource:Ref<Source> = ref()
 
+    const footer = ref<InstanceType<typeof Footer> | null>(null)
+
 
     ////////////////////// Hooks //////////////////////
 
@@ -208,11 +210,21 @@
 
     }
 
+    const onOpenPolicyDlg = () => {
+        footer.value?.onOpenPolicyDlg()
+    }
+
+    const onOpenAuthorDlg = () => {
+        footer.value?.onOpenAuthorDlg()
+    }
+
 </script>
 
 <template>
     <Navbar
         @open-sign-in="openSignInDlgOpen"
+        @open-author="onOpenAuthorDlg"
+        @open-policy="onOpenPolicyDlg"
     />
 
     <div class="main_page">
@@ -290,7 +302,7 @@
        </Dialog> -->
     </div>
 
-    <Footer />
+    <Footer ref = 'footer' />
 </template>
 
 <style scoped>

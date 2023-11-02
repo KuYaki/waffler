@@ -61,6 +61,11 @@
     color          : var(--text-color);
 }
 
+.link{
+    cursor     : pointer;
+    font-weight: 700;
+}
+
 .custom-table-header{
     background-color: var(--gray-100);
 }

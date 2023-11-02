@@ -7,11 +7,24 @@
     import Avatar               from '@/components/avatar/Avatar.vue';
 
     const emit = defineEmits<{
-        (e:'openSignIn'):void
+        (e: 'openSignIn'): void
+        (e: 'openPolicy'): void,
+        (e: 'openAuthor'): void,
     }>();
+
+
+    //////////////// onMessage //////////////////
 
     const openSignInDlg = () =>{
         emit('openSignIn')
+    }
+
+    const onOpenPolicy = () => {
+        emit('openPolicy')
+    }
+
+    const onOpenAuthor = () => {
+        emit('openAuthor')
     }
 
 </script>
@@ -19,7 +32,10 @@
 <template>
     <div class="navbar">
 
-        <AboutApp />
+        <AboutApp
+            @open-author="onOpenAuthor"
+            @open-policy="onOpenPolicy"
+        />
 
         <div class="right_side">
             <ToggleTheme />

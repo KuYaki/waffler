@@ -29,6 +29,12 @@ const onOpenErrorMsgDlg= ()=>{
     isErrorMsgDlgOpen.value = true
 }
 
+defineExpose({
+    onOpenPolicyDlg,
+    onOpenAuthorDlg
+})
+
+
 </script>
 
 <template>

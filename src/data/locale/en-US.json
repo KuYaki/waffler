@@ -7,6 +7,20 @@
         "source"     : "Source",
         "score"      : "Score"
     },
+    "about_app":{
+        "about_app"      : "About project",
+        "start_info"     : "Here you can find out who contradicted himself and what other nonsense he said. We call people who often change their minds with the harmless word Waffler. The table shows all the channels of people and organizations that meet the search parameters, and provides the corresponding estimates of their waffle, calculated by neurons (see how exactly in ",
+        "git_link"       : "open source",
+        "close_bracket"  : ").",
+        "gpt_info"       : "If you haven't found the channel you were looking for, then you are the first one who is interested in it. Don’t worry, you can find out a little about it too, just create a request to download information through this channel. For analysis you can use ",
+        "ChatGPT"        : "ChatGPT",
+        "gpt_info_footer": " (according to your token) or something that we ourselves will pay for, but the result is always a mystery. And also, if you really need to learn a lot, then it’s not free (you’ll see the price in advance, nothing will be written off on its own).",
+        "author"         : "The vain website creator may have written something about himself ",
+        "author_link"    : "here",
+        "policy"         : "And look ",
+        "policy_link"    : "privacy policy",
+        "policy_finish"  : ", she's good too."
+    },
     "sign_in_page":{
         "sign_in_info"    : "Please sign in to save your preferences",
         "auth_fail"       : "Authentication fail, feel free to register new account",
