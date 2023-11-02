@@ -28,7 +28,7 @@
 <template>
     <div
         v-for=" ( column, i ) in columns"
-        class="header_cell custom-table-header"
+        class="header_cell custom-table-header text"
         @click="onClick(i)"
     >
             {{ t(column.label) }}
@@ -45,7 +45,6 @@
         cursor     : pointer;
         padding    : 20px 5px;
         min-width  : max-content;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         font-weight: bold;
         font-size  : 16px;
     }

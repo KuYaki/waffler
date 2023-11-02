@@ -56,7 +56,7 @@
 </script>
 
 <template>
-    <div class="sign_in">
+    <div class="sign_in text">
         <p>
 
             {{ t('sign_in_page.sign_in_info') }}
@@ -90,10 +90,6 @@
         width          : 100%;
         max-width      : max-content;
         padding        : 15px;
-        font-family    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size      : 1rem;
-        font-weight    : normal;
-        color          : var(--text-color);
     }
     p{
         max-width: 235px;

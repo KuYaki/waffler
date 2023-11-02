@@ -28,7 +28,7 @@ const props = defineProps({
 
     <div
         v-else
-        class="row_cell">
+        class="row_cell text">
         {{ text }}
         <slot></slot>
     </div>
@@ -46,7 +46,6 @@ const props = defineProps({
         width      : 100%;
         height     : 100%;
         font-size  : 15px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
 
 

@@ -55,7 +55,7 @@
 </script>
 
 <template>
-    <div class="register_block">
+    <div class="register_block text">
         <i
             class="pi pi-angle-left"
             @click="switchToSignInMode"
@@ -103,10 +103,6 @@
         width          : 100%;
         max-width      : max-content;
         padding        : 15px;
-        font-family    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size      : 1rem;
-        font-weight    : normal;
-        color          : var(--text-color);
     }
 
     i{

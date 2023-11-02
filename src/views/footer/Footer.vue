@@ -32,7 +32,7 @@ const onOpenErrorMsgDlg= ()=>{
 </script>
 
 <template>
-    <div class="footer_block">
+    <div class="footer_block text">
         <span @click="onOpenPolicyDlg" class="link policy">{{ t('footer.policy_link') }}</span>
         <span @click="onOpenAuthorDlg" class="link author">{{ t('footer.author_link') }}</span>
         <span @click="onOpenErrorMsgDlg" class="link error_msg">{{ t('footer.error_msg_link') }}</span>
@@ -84,10 +84,6 @@ const onOpenErrorMsgDlg= ()=>{
         flex-wrap      : wrap;
         width          : 100%;
         margin         : auto;
-        font-family    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size      : 1rem;
-        font-weight    : normal;
-        color          : var(--text-color);
         padding        : 10px;
     }
 

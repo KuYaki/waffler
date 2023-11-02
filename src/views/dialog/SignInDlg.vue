@@ -53,7 +53,7 @@
 </script>
 
 <template>
-    <div class="auth_block">
+    <div class="auth_block text">
 
         <LoginSlot v-if ="viewMode == 'signInMode'"
             @switchToRegister="toRegMode"
@@ -83,10 +83,6 @@
         width          : 100%;
         max-width      : max-content;
         padding        : 15px;
-        font-family    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size      : 1rem;
-        font-weight    : normal;
-        color          : var(--text-color);
     }
 
 </style>

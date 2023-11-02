@@ -12,7 +12,7 @@ const onOpenLink = () =>{
 </script>
 
 <template>
-    <div class="policy_block">
+    <div class="policy_block text">
         <span class="policy">{{ t('footer.policy_start') }}</span>
         <span class="policy link" @click="onOpenLink"> {{ t('footer.open_ai') }}</span>
         <span class="policy">{{ t('footer.policy_finish') }}</span>
@@ -25,10 +25,6 @@ const onOpenLink = () =>{
         align-items: center;
         width      : 100%;
         margin     : auto;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size  : 1rem;
-        font-weight: normal;
-        color      : var(--text-color);
         cursor     : default;
     }
 
