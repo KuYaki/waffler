@@ -11,8 +11,7 @@
 
 <style scoped>
     .author_block{
-        width: 45vw;
-        height: min-content;
+        width: 100%;
     }
 
     .author_block img{
