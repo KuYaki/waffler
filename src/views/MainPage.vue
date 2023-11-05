@@ -171,7 +171,8 @@
             sortedColumnState.value = Sorted.UP
         }
 
-        model.value.data.order = columnsMainTable.value[ idx ].sortedKey as TOrderKey
+        model.value.data.order = []
+        model.value.data.order.push( columnsMainTable.value[ idx ].sortedKey as TOrderKey )
         updateMainPage()
 
     }

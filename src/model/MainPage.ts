@@ -50,7 +50,7 @@ class MainPageData implements IModelData {
     query       : string       = ''
     limit       : number       = 15
     cursor      : any          = new Cursor()
-    order       : TOrderKey    = 'waffler'
+    order       : TOrderKey[]    = ['waffler']
     source_type : SourceType[] = [0,1]
     score_type  : ScoreType[]  = [0]
 
@@ -63,11 +63,11 @@ class MainPageData implements IModelData {
     parse_client_id   : string     = "2"
 
 
-    score_source_id  : number         = 0
-    score_score_type : ScoreType      = 0
-    score_cursor     : any            = new Cursor()
-    score_limit      : number         = 10
-    score_order      : TScoreOrderKey = "score"
+    score_source_id  : number           = 0
+    score_score_type : ScoreType        = 0
+    score_cursor     : any              = new Cursor()
+    score_limit      : number           = 10
+    score_order      : TScoreOrderKey[] = ["score"]
 
     records:Array< Records > = []
 

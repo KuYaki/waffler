@@ -108,7 +108,9 @@
             sortedColumnState.value = Sorted.UP
         }
 
-        model.value.data.score_order = columnProfileTable.value[ idx ].sortedKey as TScoreOrderKey
+        model.value.data.score_order = []
+        model.value.data.score_order.push( columnProfileTable.value[ idx ].sortedKey as TScoreOrderKey)
+
         updateProfileTable()
     }
 
