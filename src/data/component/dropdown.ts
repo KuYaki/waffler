@@ -10,6 +10,11 @@ class DropdownData {
         { id:1,  label: 'YouTube' , key:'', icon:'pi pi-youtube'},
     ]
 
+    tokens = [
+        { id:0,  label: 'ChatGPT',   key:''},
+        { id:1,  label: 'YakiModel', key:''},
+    ]
+
 }
 
 export default new DropdownData

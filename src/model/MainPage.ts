@@ -18,6 +18,11 @@ enum ScoreType {
     Racizm
 }
 
+export enum TokenType {
+    ChatGPT,
+    YakiModel
+}
+
 export type TOrderKey = "name"| "name_desc" | "source" | "source_desc" | "waffler" | "waffler_desc" | "racism" | "racism_desc"
 export type TScoreOrderKey = "score" | "score_desc" | "time" | "time_desc"
 
@@ -50,7 +55,7 @@ class MainPageData implements IModelData {
     query       : string       = ''
     limit       : number       = 15
     cursor      : any          = new Cursor()
-    order       : TOrderKey[]    = ['waffler']
+    order       : TOrderKey[]  = ['waffler']
     source_type : SourceType[] = [0,1]
     score_type  : ScoreType[]  = [0]
 
@@ -58,13 +63,14 @@ class MainPageData implements IModelData {
 
     parse_url         : string     = ''
     parser            : any        = new Parser()
-    parse_score_type  : ScoreType  = 0
-    parse_source_type : SourceType = 0
+    parse_token_type  : TokenType  = TokenType.ChatGPT
+    parse_score_type  : ScoreType  = ScoreType.Waffler
+    parse_source_type : SourceType = SourceType.Telegram
     parse_client_id   : string     = "2"
 
 
     score_source_id  : number           = 0
-    score_score_type : ScoreType        = 0
+    score_score_type : ScoreType        = ScoreType.Waffler
     score_cursor     : any              = new Cursor()
     score_limit      : number           = 10
     score_order      : TScoreOrderKey[] = ["score"]
@@ -72,7 +78,7 @@ class MainPageData implements IModelData {
     records:Array< Records > = []
 
     name: string = ''
-    type: SourceType = 0
+    type: SourceType = SourceType.Telegram
 
 
 }

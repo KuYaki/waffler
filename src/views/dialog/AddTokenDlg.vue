@@ -18,7 +18,7 @@
 
     import type { API } from '@/api/service/interface';
     import { DataState }     from "@/api/model/interface";
-
+    import { TokenType } from '@/model/MainPage'
 
     /////////////////////Defines /////////////////////////////
 
@@ -36,12 +36,22 @@
     const { model } = storeToRefs( store )
 
     const currentField = ref( );
+    const tokenType = ref()
 
 
     ////////////////// Hooks ///////////////////////
 
     onMounted(()=> {
         currentField.value = DropdownData.property.find(el => el.id == model.value.data.parse_score_type)
+    
+        if ( window.localStorage.getItem('token_type') == null) {
+            tokenType.value = DropdownData.tokens.find(el => el.id == model.value.data.parse_token_type )
+        }
+        else{
+            tokenType.value = DropdownData.tokens.find(el => el.id ==  JSON.parse(window.localStorage.getItem('token_type')) )
+            model.value.data.parse_token_type = tokenType.value.id
+        }
+
         onGetInfo()
     })
 
@@ -52,11 +62,13 @@
 
     const showAddTokeMsg = computed(()=> model.value.data.name.length > 0)
 
+    const isShowGPTToken = computed (()=> model.value.data.parse_token_type == TokenType.ChatGPT )
+
 
     ///////////////// Messages /////////////////////
 
     const load = () =>{
-        store.post(APIRoute.SOURCE_PARSE)
+        store.post( APIRoute.SOURCE_PARSE )
             .then(()=>{
                 if( model.value.state == DataState.ERROR) return
 
@@ -64,8 +76,13 @@
             })
     }
 
-    const onChangeScore = () => {
-        model.value.data.parse_score_type = currentField.value.id
+    const onChangeScore = ( value:any ) => {
+        model.value.data.parse_score_type = value.id
+    }
+
+    const onChangeTokenType = ( value:any ) =>{
+        model.value.data.parse_token_type = value.id
+        window.localStorage.setItem('token_type', value.id)
     }
 
     const onGetInfo = () => {
@@ -101,7 +118,15 @@
             @update:modelValue="onChangeScore"
             optionLabel="label"
         />
+        <Dropdown
+            v-model="tokenType"
+            display="chip"
+            :options="DropdownData.tokens"
+            @update:modelValue="onChangeTokenType"
+            optionLabel="label"
+        />
         <GPTToken
+            v-if="isShowGPTToken"
             v-model:value="model.data.parser!.token"
         />
         <Button
