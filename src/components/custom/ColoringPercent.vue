@@ -14,11 +14,16 @@
         else return '#db1414'
     })
 
+    const userValue = computed(()=> {
+        if (props.value == null) return 0
+        return props.value.toFixed(1)
+    })
+
 </script>
 
 <template>
     <div class="percent_block" :style="{ color: color }">
-        {{ value }}%
+        {{ userValue }}%
     </div>
 
 </template>
