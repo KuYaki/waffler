@@ -2,18 +2,18 @@
 import {  computed, type PropType } from 'vue';
 import { t } from '@/util/locale'
 
-import Table from './Table.vue';
-import TableHeader from './TableHeader.vue';
-import Row from './Row.vue';
-import RowCell from './RowCell.vue';
+import Table from '@/components/table/Table.vue';
+import TableHeader from '@/components/table/TableHeader.vue';
+import Row from '@/components/table/Row.vue';
+import RowCell from '@/components/table/RowCell.vue';
+import SourceProfile from '@/components/avatar/SourceProfile.vue';
+import ColoringPercent from '@/components/custom/ColoringPercent.vue';
 import Button from 'primevue/button';
-import SourceProfile from '../avatar/SourceProfile.vue';
-import ColoringPercent from '../custom/ColoringPercent.vue';
 
 
-import { TableColumn} from '@/model/MainTable'
-import { Source } from '@/model/MainPage'
-import { DataState } from '@/api/model/interface';
+import { TableColumn} from '@/model/Tables'
+import { Source }     from '@/model/MainPage'
+import { DataState }  from '@/api/model/interface';
 
 
 ///////////////////// Defines ///////////////////////////
@@ -181,4 +181,4 @@ const onParseMore = () =>{
         }
     }
 
-</style>
+</style>@/model/Tables

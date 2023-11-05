@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { t } from '@/util/locale';
     import { PropType } from 'vue';
-    import { Sorted } from '@/model/MainTable'
+    import { Sorted } from '@/model/Tables'
 
     /////////////////////// Defines ///////////////////////
 
@@ -50,4 +50,4 @@
     }
 
 
-</style>
+</style>@/model/Tables

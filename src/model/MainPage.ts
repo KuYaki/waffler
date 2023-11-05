@@ -1,5 +1,7 @@
 import APIRoute from "@/global/api";
 
+import { isURL } from "@/helper/CheckUrl";
+
 import { Model } from "@/api/model/model";
 
 import { DataState, type IModelData } from "@/api/model/interface";
@@ -139,7 +141,7 @@ export class MainPage extends Model {
     }
 
     setParseParams( isRouteFormMain:boolean ){
-        if ( this.isURL(this.data.query) ) this.data.parse_url = this.data.query
+        if ( isURL(this.data.query) ) this.data.parse_url = this.data.query
         else this.data.parse_url = ''
 
         if ( this.data.source_type.length > 0 ) this.data.parse_source_type = this.data.source_type[0]
@@ -149,17 +151,6 @@ export class MainPage extends Model {
 
     }
 
-    /// TODO : import form helper
-
-    isURL(str:string) {
-        const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-        return pattern.test(str);
-    }
 
 }
 

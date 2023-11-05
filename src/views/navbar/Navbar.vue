@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
-    import ToggleTheme          from '@/components/custom/ToggleTheme.vue';
-    import LangSelect           from '@/components/custom/LangSelect.vue';
-    import AboutApp             from '@/components/custom/AboutApp.vue';
+    import ToggleTheme          from '@/views/navbar/ToggleTheme.vue';
+    import LangSelect           from '@/views/navbar/LangSelect.vue';
+    import AboutApp             from '@/views/navbar/AboutApp.vue';
     import Avatar               from '@/components/avatar/Avatar.vue';
 
     const emit = defineEmits<{

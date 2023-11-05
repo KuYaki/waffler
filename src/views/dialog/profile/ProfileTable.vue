@@ -3,16 +3,16 @@ import { t } from '@/util/locale'
 import { computed, type PropType } from 'vue';
 
 
-import Table from './Table.vue';
-import TableHeader from './TableHeader.vue';
-import Row from './Row.vue';
-import RowCell from './RowCell.vue';
-import ColoringPercent from '../custom/ColoringPercent.vue';
-import TrimText from '../custom/TrimText.vue';
+import Table from '@/components/table/Table.vue';
+import TableHeader from '@/components/table/TableHeader.vue';
+import Row from '@/components/table/Row.vue';
+import RowCell from '@/components/table/RowCell.vue';
+import ColoringPercent from '@/components/custom/ColoringPercent.vue';
+import TrimText from '@/components/custom/TrimText.vue';
 
 import { DataState } from '@/api/model/interface';
 import { Records } from '@/model/MainPage';
-import { TableColumn } from '@/model/MainTable';
+import { TableColumn } from '@/model/Tables';
 
 
 
@@ -124,4 +124,4 @@ const sortByFields = ( idx:number) => {
 
 <style>
 
-</style>
+</style>@/model/Tables

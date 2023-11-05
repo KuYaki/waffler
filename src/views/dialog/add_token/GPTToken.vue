@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
     import { t }              from '@/util/locale';
+    import URL                from '@/global/urls';
 
     import InputText     from 'primevue/inputtext';
     import Checkbox      from 'primevue/checkbox';
@@ -67,8 +68,7 @@
     }
 
     const onOpenLink = ( ) => {
-        const openAILink = 'https://openai.com/pricing'
-        window.open( openAILink , '_blank' );
+        window.open( URL.OPEN_AI , '_blank' );
     }
 
 </script>

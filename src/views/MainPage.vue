@@ -12,8 +12,8 @@
     import DropdownData    from '@/data/component/dropdown'
 
     import Navbar        from '@/views/navbar/Navbar.vue'
-    import SearchParam   from '@/views/search_params/SearchParams.vue'
-    import MainPageTable from '@/components/table/MainPageTable.vue';
+    import SearchParam   from '@/views/main/search_params/SearchParams.vue'
+    import MainPageTable from '@/views/main/MainPageTable.vue'
     import AddTokenDlg   from '@/views/dialog/AddTokenDlg.vue';
     import SignInDlg     from '@/views/dialog/SignInDlg.vue'
     import ProfileDlg    from '@/views/dialog/ProfileDlg.vue';
@@ -23,8 +23,8 @@
     import Button        from 'primevue/button';
     import Dialog        from 'primevue/dialog';
 
-    import { TDropdown } from './search_params/types';
-    import { createMainTableColumns, Sorted } from '@/model/MainTable'
+    import { TDropdown } from '@/views/main/search_params/types';
+    import { createMainTableColumns, Sorted } from '@/model/Tables'
 
     import type { API } from '@/api/service/interface';
     import type { TOrderKey } from "@/model/MainPage";
@@ -315,4 +315,4 @@
         max-width            : 600px;
     }
 
-</style>
+</style>./main/search_params/types@/model/Tables

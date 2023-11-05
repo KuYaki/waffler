@@ -1,4 +1,4 @@
-import { TDropdown } from "@/views/search_params/types";
+import { TDropdown } from "@/views/main/search_params/types";
 
 export enum Sorted {
     NULL,

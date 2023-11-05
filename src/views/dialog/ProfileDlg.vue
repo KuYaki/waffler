@@ -6,16 +6,15 @@
     import { t } from '@/util/locale';
 
     import { Source, Cursor } from '@/model/MainPage';
-    import { createProfileTableColumn, Sorted } from '@/model/MainTable';
+    import { createProfileTableColumn, Sorted } from '@/model/Tables';
 
     import DropdownData from '@/data/component/dropdown'
     import StoreCreator from '@/store/StoreCreator';
     import APIRoute     from '@/global/api';
 
-    import Profile      from '@/components/avatar/Profile.vue'
-    import Dropdown     from 'primevue/dropdown';
-    import Button       from 'primevue/button';
-    import ProfileTable from '@/components/table/ProfileTable.vue';
+    import Dropdown      from 'primevue/dropdown';
+    import Button        from 'primevue/button';
+    import ProfileTable  from '@/views/dialog/profile/ProfileTable.vue';
     import SourceProfile from '@/components/avatar/SourceProfile.vue';
 
 
@@ -126,7 +125,6 @@
     }
 
     const onOpenLink = () =>{
-
         window.open( props.profile.source_url , '_blank' );
     }
 
@@ -185,4 +183,4 @@
         }
     }
 
-</style>
+</style>@/model/Tables

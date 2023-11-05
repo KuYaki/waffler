@@ -7,13 +7,13 @@
     import DropdownData  from '@/data/component/dropdown'
 
     import { t } from '@/util/locale';
+    import { isURL } from '@/helper/CheckUrl';
 
-    // import InputText from '@/components/input/InputText.vue';
     import InputText     from 'primevue/inputtext';
     import Dropdown      from 'primevue/dropdown';
     import Button        from 'primevue/button';
     import SourceProfile from '@/components/avatar/SourceProfile.vue';
-    import GPTToken from './profile/GPTToken.vue';
+    import GPTToken      from '@/views/dialog/add_token/GPTToken.vue';
 
 
     import type { API } from '@/api/service/interface';
@@ -71,7 +71,7 @@
     const onGetInfo = () => {
         model.value.data.name = ''
 
-        if( model.value.isURL( model.value.data.parse_url ) ){
+        if( isURL( model.value.data.parse_url ) ){
             store.post(APIRoute.SOURCE_INFO)
         }
     }
