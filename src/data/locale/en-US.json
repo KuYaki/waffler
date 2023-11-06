@@ -41,6 +41,7 @@
         "parse"       : "Parse",
         "need_link"   : "Add a link to the source",
         "save_tooltip": "Save. DO NOT click if this is not your computer!",
+        "msg_limit"   : "Maximum number of messages",
         "token_info"  : "Find out where to get a token"
     },
     "profile_page":{

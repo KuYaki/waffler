@@ -42,7 +42,7 @@ export class Records {
 }
 
 export class Parser {
-    type  = 'GPT'
+    type  = TokenType.ChatGPT
     token = ''
 }
 
@@ -63,10 +63,12 @@ class MainPageData implements IModelData {
 
     parse_url         : string     = ''
     parser            : any        = new Parser()
-    parse_token_type  : TokenType  = TokenType.ChatGPT
     parse_score_type  : ScoreType  = ScoreType.Waffler
     parse_source_type : SourceType = SourceType.Telegram
     parse_client_id   : string     = "2"
+    parse_limit       : number     = 0
+    currency          : string     = 'USDT'
+    price             : number     = 0
 
 
     score_source_id  : number           = 0
@@ -117,6 +119,14 @@ export class MainPage extends Model {
                 source_url : this.data.parse_url
             }
 
+            case APIRoute.SOURCE_PRICE : return {
+                source_url: this.data.parse_url,
+                score_type: this.data.parse_score_type,
+                parser    : this.data.parser,
+                limit     : this.data.parse_limit,
+                currency  : this.data.currency
+            }
+
         }
 
         console.error( "getPostRequestData", api);
@@ -138,6 +148,11 @@ export class MainPage extends Model {
             case APIRoute.SOURCE_INFO:
                 this.data.name = data.name
                 this.data.type = data.type
+                break
+
+            case APIRoute.SOURCE_PRICE:
+                this.data.price    = data.price
+                this.data.currency = data.currency
                 break
         }
     }

@@ -14,7 +14,7 @@
     import Button        from 'primevue/button';
     import SourceProfile from '@/components/avatar/SourceProfile.vue';
     import GPTToken      from '@/views/dialog/add_token/GPTToken.vue';
-
+    import Price         from '@/views/dialog/add_token/Price.vue';
 
     import type { API } from '@/api/service/interface';
     import { DataState }     from "@/api/model/interface";
@@ -45,11 +45,11 @@
         currentField.value = DropdownData.property.find(el => el.id == model.value.data.parse_score_type)
     
         if ( window.localStorage.getItem('token_type') == null) {
-            tokenType.value = DropdownData.tokens.find(el => el.id == model.value.data.parse_token_type )
+            tokenType.value = DropdownData.tokens.find(el => el.id == model.value.data.parser.type )
         }
         else{
             tokenType.value = DropdownData.tokens.find(el => el.id ==  JSON.parse(window.localStorage.getItem('token_type')) )
-            model.value.data.parse_token_type = tokenType.value.id
+            model.value.data.parser.type  = tokenType.value.id
         }
 
         onGetInfo()
@@ -62,7 +62,7 @@
 
     const showAddTokeMsg = computed(()=> model.value.data.name.length > 0)
 
-    const isShowGPTToken = computed (()=> model.value.data.parse_token_type == TokenType.ChatGPT )
+    const isShowGPTToken = computed (()=> model.value.data.parser.type == TokenType.ChatGPT )
 
 
     ///////////////// Messages /////////////////////
@@ -81,7 +81,7 @@
     }
 
     const onChangeTokenType = ( value:any ) =>{
-        model.value.data.parse_token_type = value.id
+        model.value.data.parser.type  = value.id
         window.localStorage.setItem('token_type', value.id)
     }
 
@@ -91,6 +91,12 @@
         if( isURL( model.value.data.parse_url ) ){
             store.post(APIRoute.SOURCE_INFO)
         }
+    }
+
+    const onUpdateLimit = ( value:number ) => {
+        model.value.data.parse_limit = value
+
+        store.post(APIRoute.SOURCE_PRICE)
     }
 
 </script>
@@ -117,6 +123,12 @@
             :options="DropdownData.property"
             @update:modelValue="onChangeScore"
             optionLabel="label"
+        />
+        <Price
+            :limit="model.data.parse_limit"
+            :price="model.data.price"
+            :currency="model.data.currency"
+            @update:limit="onUpdateLimit"
         />
         <Dropdown
             v-model="tokenType"
