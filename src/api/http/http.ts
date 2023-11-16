@@ -1,5 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios'
+import URL from '@/global/urls';
+
 
 import { authentication }   from "@/helper/UseAuthenStore"
 
@@ -13,7 +15,7 @@ export class http {
     apiClient:AxiosInstance
 
     constructor( ) {
-        this.apiClient = axios.create({baseURL: 'https://testserver.waffler.app'});
+        this.apiClient = axios.create({ baseURL: URL.TEST_SERVER });
     }
 
     request( isAuthentication:AUTHENTICATION = AUTHENTICATION.REQUARED ):AxiosInstance{
